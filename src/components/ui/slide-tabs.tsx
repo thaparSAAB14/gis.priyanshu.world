@@ -37,15 +37,27 @@ export const SlideTabs = () => {
       href: isProd ? "https://lab.priyanshu.world" : "/lab",
       match: (host, path) => host === "lab.priyanshu.world" ? true : path.startsWith("/lab")
     },
+    { 
+      label: "Connect", 
+      href: "mailto:hi@priyanshu.world",
+      match: () => false // Never active, it's a direct action
+    },
   ];
   
   const getIndex = (host: string, p: string) => {
-    return tabs.findIndex((tab) => tab.match(host, p));
+    const idx = tabs.findIndex((tab) => tab.match(host, p));
+    return idx === -1 ? 0 : idx;
   };
   
-  const initialIndex = pathname?.startsWith("/lab") ? 1 : 0;
-  const [selected, setSelected] = useState(initialIndex !== -1 ? initialIndex : 0);
+  const [selected, setSelected] = useState(0);
   const tabsRef = useRef<(HTMLLIElement | null)[]>([]);
+
+  // Correctly set initial active tab once hostname is known
+  useEffect(() => {
+    if (hostname) {
+      setSelected(getIndex(hostname, pathname || "/"));
+    }
+  }, [hostname, pathname]);
 
   useEffect(() => {
     if (!pathname) return;

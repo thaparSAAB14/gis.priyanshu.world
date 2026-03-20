@@ -1,0 +1,64 @@
+﻿/* =============================================
+   Custom Cursor - theme-aware, no mix-blend-mode
+   ============================================= */
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cursor-color, var(--accent-color));
+  box-shadow: 0 0 8px var(--cursor-color, var(--accent-color)),
+              0 0 16px var(--cursor-color, var(--accent-color));
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.custom-cursor-dot.hovering {
+  width: 12px;
+  height: 12px;
+  background: var(--cursor-hover-color, #ffffff);
+  box-shadow: 0 0 12px var(--cursor-hover-color, #ffffff),
+              0 0 24px var(--accent-color);
+}
+
+.custom-cursor-ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cursor-color, var(--accent-color));
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px);
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    border-color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.custom-cursor-ring.hovering {
+  width: 64px;
+  height: 64px;
+  border-color: var(--cursor-hover-color, #ffffff);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+}
