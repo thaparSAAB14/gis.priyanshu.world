@@ -8,12 +8,8 @@ import { usePathname } from "next/navigation";
 interface TabItem {
   label: string;
   href: string;
+  match: (hostname: string, pathname: string) => boolean;
 }
-
-const tabs: TabItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Lab", href: "/lab" },
-];
 
 export const SlideTabs = () => {
   const [position, setPosition] = useState({
@@ -21,27 +17,43 @@ export const SlideTabs = () => {
     width: 0,
     opacity: 0,
   });
+  const [hostname, setHostname] = useState("");
   const pathname = usePathname();
+
+  useEffect(() => {
+    setHostname(window.location.hostname);
+  }, []);
+
+  const isProd = hostname.includes("priyanshu.world");
+
+  const tabs: TabItem[] = [
+    { 
+      label: "Home", 
+      href: isProd ? "https://gis.priyanshu.world" : "/",
+      match: (host, path) => host === "lab.priyanshu.world" ? false : path === "/"
+    },
+    { 
+      label: "Lab", 
+      href: isProd ? "https://lab.priyanshu.world" : "/lab",
+      match: (host, path) => host === "lab.priyanshu.world" ? true : path.startsWith("/lab")
+    },
+  ];
   
-  const getIndex = (p: string) => {
-    return tabs.findIndex((tab) => {
-      if (tab.href === "/") return p === "/";
-      return p === tab.href || (p && p.startsWith(tab.href + "/"));
-    });
+  const getIndex = (host: string, p: string) => {
+    return tabs.findIndex((tab) => tab.match(host, p));
   };
   
-  const initialIndex = getIndex(pathname ?? "/");
+  const initialIndex = pathname?.startsWith("/lab") ? 1 : 0;
   const [selected, setSelected] = useState(initialIndex !== -1 ? initialIndex : 0);
   const tabsRef = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
     if (!pathname) return;
-    const idx = getIndex(pathname);
-    console.log("SlideTabs Pathname change:", pathname, "Evaluated to index:", idx);
+    const idx = getIndex(hostname, pathname);
     if (idx !== -1 && idx !== selected) {
       setSelected(idx);
     }
-  }, [pathname, selected]);
+  }, [pathname, hostname, selected]);
 
   useEffect(() => {
     const selectedTab = tabsRef.current[selected];
