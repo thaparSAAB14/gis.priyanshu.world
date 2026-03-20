@@ -7,6 +7,7 @@ import { CustomCursor } from "@/components/ui/custom-cursor";
 import { TerminalCursor } from "@/components/ui/terminal-cursor";
 import { ParticlesBackground } from "@/components/ui/particles-background";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const outfit = Outfit({
   variable: "--font-display",
@@ -45,6 +46,7 @@ export default function RootLayout({
           <CustomCursor />
           <TerminalCursor />
           <Analytics />
+          <SpeedInsights />
           <main className="flex-1 relative z-0">{children}</main>
         </ThemeProvider>
       </body>
