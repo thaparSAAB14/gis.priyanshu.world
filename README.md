@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Priyanshu - Geospatial Developer & Data Analyst
+> **Live Deployments:** [gis.priyanshu.world](https://gis.priyanshu.world) | [lab.priyanshu.world](https://lab.priyanshu.world)
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)](#)
+[![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](#)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](#)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)](#)
 
-First, run the development server:
+A highly optimized, hardware-accelerated dual-domain portfolio showcasing the intersection of full-stack web engineering and Geospatial Information Systems (GIS). 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Built natively on the Next.js App Router, this repository utilizes advanced domain-level Edge Proxy routing to seamlessly serve two completely distinct interactive web environments from the physical execution of a single codebase.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚡ Technical Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. `gis.priyanshu.world` (The Professional Viewport)
+A premium, glassmorphic portfolio utilizing heavily tailored **Framer Motion** physics and mathematical React cursor tracking specifically crafted to highlight spatial relationships and mapping logic.
+- Immersive smooth-scrolling Timeline configurations mapping my educational journey and academic workflows.
+- Native interactive 3D WebGL background elements mirroring topographic radar mapping systems.
+- Advanced semantic layout reacting flawlessly between Light and Dark mode states natively tied to OS preferences.
 
-## Learn More
+### 2. `lab.priyanshu.world` (The Sandbox Environment)
+An isolated sandbox for raw digital engineering and logic experiments, hidden from professional search index crawlers via custom Next.js `proxy.ts` edge-level resolution rewrites.
+- **Hardware Validated ASCII Engine:** A real-time `<canvas>` stream executing cross-origin video processing arrays inside the browser using pure mathematical matrix manipulation mapped natively to monospace character bounds.
+- **Mock Terminal Monitor:** Features a completely isolated React-state interval renderer spoofing continuous server-health logs and generating dynamic ASCII art structures based entirely on a heavily optimized tracking cycle.
+- **Isolated Cursor Topology:** Contains a modular tracking framework that overrides the standard interaction layer, physically rendering a 3D intersection crosshair strictly localized to the dashboard components.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Installation & Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/thaparSAAB14/gis.priyanshu.world.git
+   cd gis.priyanshu.world
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Navigate to `http://localhost:3000` to view the GIS branch, and `http://localhost:3000/lab` to access the experimental proxy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔒 Edge Proxy Routing (`src/proxy.ts`)
+This application mathematically resolves traffic bounds using native Vercel `host` headers. Incoming traffic mapped to the exact domain `lab.priyanshu.world` transparently resolves to the deeply nested `/lab` React components. It forcefully drops all cross-origin visitors looking for `/lab` exclusively on the primary `gis` domain straight into secure HTTP 307 redirects to preserve crawler mapping indexing. It simultaneously injects strict `X-Frame-Options` and `Strict-Transport-Security` headers to all responses exactly at the Edge.
