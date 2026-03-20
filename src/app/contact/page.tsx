@@ -5,6 +5,7 @@ import { SlideTabs } from "@/components/ui/slide-tabs";
 import { Copy, Mail, MapPin } from "lucide-react";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
+import { BackgroundPaths } from "@/components/ui/background-paths";
 import { motion } from "framer-motion";
 
 export default function ContactPage() {
@@ -18,12 +19,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden transition-colors duration-300 flex flex-col">
+    <BackgroundPaths className="transition-colors duration-300">
       <SlideTabs />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed -top-10 left-1/2 w-full h-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,var(--color-primary),transparent_50%)] opacity-10 blur-[30px] z-0"
-      />
 
       <main className="flex-1 flex flex-col items-center justify-center relative z-10 px-4 py-32 mt-16">
         <motion.div 
@@ -80,6 +77,6 @@ export default function ContactPage() {
       </main>
 
       <TapedFooter />
-    </div>
+    </BackgroundPaths>
   );
 }
