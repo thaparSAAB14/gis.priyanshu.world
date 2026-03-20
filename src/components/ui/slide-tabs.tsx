@@ -39,8 +39,8 @@ export const SlideTabs = () => {
     },
     { 
       label: "Connect", 
-      href: "mailto:hi@priyanshu.world",
-      match: () => false // Never active, it's a direct action
+      href: isProd ? "https://gis.priyanshu.world/contact" : "/contact",
+      match: (host, path) => path.startsWith("/contact")
     },
   ];
   

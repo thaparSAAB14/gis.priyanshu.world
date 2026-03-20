@@ -1,41 +1,84 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Moon, Sun } from "lucide-react";
+import { useState, useEffect } from "react"
+import { Moon, Sun } from "lucide-react"
+import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes";
 
-export function ThemeToggle() {
-  const { setTheme, theme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+interface ThemeToggleProps {
+  className?: string
+}
 
-  React.useEffect(() => {
+export function ThemeToggle({ className }: ThemeToggleProps) {
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return null; // Avoid hydration mismatch
+    return null;
   }
 
-  const isDark = resolvedTheme === "dark" || theme === "dark";
+  const isDark = resolvedTheme === "dark"
 
   return (
-    <button
+    <div
+      className={cn(
+        "fixed bottom-4 right-4 z-50 flex w-16 h-8 p-1 rounded-full cursor-pointer transition-all duration-300 shadow-md",
+        isDark 
+          ? "bg-zinc-950 border border-zinc-800" 
+          : "bg-white border border-zinc-200",
+        className
+      )}
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="fixed top-4 right-4 z-[500] p-3 rounded-full bg-card/30 border border-black/10 dark:border-white/20 backdrop-blur-md shadow-xl shadow-primary/10 hover:bg-black/5 dark:hover:bg-card/40 transition-all text-foreground dark:text-neutral-200"
+      role="button"
+      tabIndex={0}
       aria-label="Toggle theme"
     >
-      <div className="relative w-5 h-5 flex items-center justify-center">
-        <Sun
-          className={`absolute transition-all duration-300 ${
-            isDark ? "scale-0 rotate-90 opacity-0" : "scale-100 rotate-0 opacity-100"
-          }`}
-        />
-        <Moon
-          className={`absolute transition-all duration-300 ${
-            isDark ? "scale-100 rotate-0 opacity-100" : "scale-0 -rotate-90 opacity-0"
-          }`}
-        />
+      <div className="flex justify-between items-center w-full">
+        <div
+          className={cn(
+            "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300",
+            isDark 
+              ? "transform translate-x-0 bg-zinc-800" 
+              : "transform translate-x-8 bg-gray-200"
+          )}
+        >
+          {isDark ? (
+            <Moon 
+              className="w-4 h-4 text-white" 
+              strokeWidth={1.5}
+            />
+          ) : (
+            <Sun 
+              className="w-4 h-4 text-gray-700" 
+              strokeWidth={1.5}
+            />
+          )}
+        </div>
+        <div
+          className={cn(
+            "flex justify-center items-center w-6 h-6 rounded-full transition-transform duration-300",
+            isDark 
+              ? "bg-transparent" 
+              : "transform -translate-x-8"
+          )}
+        >
+          {isDark ? (
+            <Sun 
+              className="w-4 h-4 text-gray-500" 
+              strokeWidth={1.5}
+            />
+          ) : (
+            <Moon 
+              className="w-4 h-4 text-black" 
+              strokeWidth={1.5}
+            />
+          )}
+        </div>
       </div>
-    </button>
-  );
+    </div>
+  )
 }

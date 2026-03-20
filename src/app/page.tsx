@@ -7,6 +7,8 @@ import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Timeline } from "@/components/ui/timeline";
 import { Radar } from "@/components/ui/radar-effect";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import {
@@ -204,25 +206,18 @@ export default function Home() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.2, duration: 0.5 }}
-                    className="mt-10 flex flex-wrap justify-center gap-4"
+                    className="mt-10 flex flex-wrap justify-center items-center gap-6"
                   >
-                    <a
-                      href="mailto:hi@priyanshu.world"
-                      className="group relative flex items-center gap-3 px-8 py-4 bg-primary text-background font-mono text-sm font-bold rounded-full hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-95 overflow-hidden"
-                    >
-                      <Briefcase className="w-4 h-4" />
-                      HIRE ME
-                      <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-[-20deg]" />
+                    <a href="mailto:hi@priyanshu.world">
+                      <LiquidMetalButton label="HIRE ME" />
                     </a>
                     
                     <a
                       href="https://www.linkedin.com/in/priyanshu-624aa8368/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-8 py-4 bg-background border border-foreground/20 text-foreground font-mono text-sm font-bold rounded-full hover:bg-foreground/5 hover:border-primary/50 transition-all active:scale-95"
                     >
-                      <Mail className="w-4 h-4 text-primary" />
-                      CONNECT
+                      <ButtonWithIcon label="CONNECT" />
                     </a>
                   </motion.div>
                 </motion.div>
