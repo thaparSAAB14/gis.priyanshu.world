@@ -224,7 +224,7 @@ export default function LabPage() {
 
             <div className="flex-1 overflow-hidden relative flex flex-col">
               {!showVideo ? (
-                <div className="flex-1 bg-black/40 backdrop-blur-xl flex flex-col font-mono text-xs overflow-hidden shadow-2xl relative z-40">
+                <div className="flex-1 bg-foreground/5 backdrop-blur-xl flex flex-col font-mono text-xs overflow-hidden shadow-2xl relative z-40">
                   <div className="p-3 border-b border-foreground/10 bg-foreground/5 text-foreground/40 text-[10px] uppercase tracking-widest flex justify-between items-center">
                     <span className="hidden sm:inline">{">"} server_health_ctrl</span>
                     <span className="sm:hidden">{">"} logs</span>

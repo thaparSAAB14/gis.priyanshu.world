@@ -236,8 +236,8 @@ export const AsciiVideoPlayer = ({ onExit }: { onExit?: () => void }) => {
       />
       <canvas ref={processorCanvasRef} className="hidden" />
 
-      {/* Hardware Accelerated Output Display */}
-      <div className="flex-1 flex items-center justify-center overflow-hidden bg-black/90 rounded-xl shadow-inner border border-white/10 p-2 mx-2">
+      {/* Core Player Area */}
+      <div className="flex-1 flex items-center justify-center overflow-hidden bg-background/90 rounded-xl shadow-inner border border-foreground/10 p-2 mx-2">
         <canvas 
            ref={displayCanvasRef} 
            className="w-full h-full object-contain filter contrast-125 saturate-150 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"
