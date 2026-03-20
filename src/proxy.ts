@@ -31,6 +31,16 @@ export function proxy(request: NextRequest) {
     }
   }
 
+  /**
+   * 3. Root Domain Blackhole 
+   * The user deliberately requested the bare domain (and www) inherently fail
+   * resolving into the deeply-styled 404 interactive error component.
+   */
+  if (hostname === "priyanshu.world" || hostname === "www.priyanshu.world") {
+    url.pathname = "/void-404-unmapped";
+    return NextResponse.rewrite(url);
+  }
+
   // Inject Production Grade Sec Headers matching industry strict-origin requirements.
   const response = NextResponse.next();
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
