@@ -20,12 +20,30 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gis.priyanshu.world"),
   title: {
-    default: "Priyanshu | GIS Developer",
+    default: "Priyanshu | GIS Developer & Data Analyst",
     template: "%s | Priyanshu GIS",
   },
   description:
-    "A GIS student portfolio featuring mapping projects, spatial analysis, and geospatial storytelling.",
+    "A highly optimized geospatial developer portfolio exploring the intersection of spatial analysis, cartography, and full-stack web engineering.",
+  openGraph: {
+    title: "Priyanshu | GIS Developer & Data Analyst",
+    description: "Geospatial systems, spatial analysis, and the technology that connects us to our planet.",
+    url: "https://gis.priyanshu.world",
+    siteName: "Priyanshu Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Priyanshu | GIS Developer",
+    description: "Mapping the world with code and spatial intelligence.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
