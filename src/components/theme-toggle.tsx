@@ -26,7 +26,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   return (
     <div
       className={cn(
-        "fixed bottom-4 right-4 z-50 flex w-16 h-8 p-1 rounded-full cursor-pointer transition-all duration-300 shadow-md",
+        "fixed top-6 right-6 md:top-8 md:right-8 z-50 flex w-16 h-8 p-1 rounded-full cursor-pointer transition-all duration-300 shadow-md",
         isDark 
           ? "bg-zinc-950 border border-zinc-800" 
           : "bg-white border border-zinc-200",

@@ -3,14 +3,13 @@
 import React from "react";
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import { Copy, Mail, MapPin } from "lucide-react";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const [copied, setCopied] = React.useState(false);
-  const email = "hi@priyanshu.world";
+  const email = "connect@priyanshu.world";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -66,10 +65,10 @@ export default function ContactPage() {
 
             <div className="relative z-10 flex flex-wrap justify-center items-center gap-6">
               <a href={`mailto:${email}`}>
-                <LiquidMetalButton label="SEND EMAIL" />
+                <ButtonWithIcon label="SEND EMAIL" icon={Mail} className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20" />
               </a>
               <a href="https://www.linkedin.com/in/priyanshu-624aa8368/" target="_blank" rel="noopener noreferrer">
-                <ButtonWithIcon label="LINKEDIN" />
+                <ButtonWithIcon label="LINKEDIN" className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
               </a>
             </div>
           </div>

@@ -7,7 +7,6 @@ import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Timeline } from "@/components/ui/timeline";
 import { Radar } from "@/components/ui/radar-effect";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 
 import { SlideTabs } from "@/components/ui/slide-tabs";
@@ -208,8 +207,8 @@ export default function Home() {
                     transition={{ delay: 1.2, duration: 0.5 }}
                     className="mt-10 flex flex-wrap justify-center items-center gap-6"
                   >
-                    <a href="mailto:hi@priyanshu.world">
-                      <LiquidMetalButton label="HIRE ME" />
+                    <a href="mailto:connect@priyanshu.world">
+                      <ButtonWithIcon label="HIRE ME" icon={Briefcase} className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20" />
                     </a>
                     
                     <a
@@ -217,7 +216,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <ButtonWithIcon label="CONNECT" />
+                      <ButtonWithIcon label="CONNECT" className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
                     </a>
                   </motion.div>
                 </motion.div>
