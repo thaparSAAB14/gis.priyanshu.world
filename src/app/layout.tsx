@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { TerminalCursor } from "@/components/ui/terminal-cursor";
 import { ParticlesBackground } from "@/components/ui/particles-background";
+import { Analytics } from "@vercel/analytics/next";
 
 const outfit = Outfit({
   variable: "--font-display",
@@ -43,6 +44,7 @@ export default function RootLayout({
           <ThemeToggle />
           <CustomCursor />
           <TerminalCursor />
+          <Analytics />
           <main className="flex-1 relative z-0">{children}</main>
         </ThemeProvider>
       </body>
