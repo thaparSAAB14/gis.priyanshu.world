@@ -41,14 +41,8 @@ export function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  // Inject Production Grade Sec Headers matching industry strict-origin requirements.
-  const response = NextResponse.next();
-  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-  
-  return response;
+  // Security headers are now managed globally in next.config.ts
+  return NextResponse.next();
 }
 
 export const config = {
