@@ -22,27 +22,44 @@ const interTight = Inter_Tight({
 export const metadata: Metadata = {
   metadataBase: new URL("https://gis.priyanshu.world"),
   title: {
-    default: "Priyanshu | GIS Developer & Data Analyst",
-    template: "%s | Priyanshu GIS",
+    default: "Priyanshu | GIS Developer & Geospatial Data Analyst",
+    template: "%s | Priyanshu - GIS Developer",
   },
   description:
-    "A highly optimized geospatial developer portfolio exploring the intersection of spatial analysis, cartography, and full-stack web engineering.",
+    "Portfolio of Priyanshu, a GIS Developer and Data Analyst specializing in spatial analysis, web mapping, cartography, and full-stack web engineering. Building interactive maps and geospatial dashboards.",
+  keywords: [
+    "GIS", "Geospatial", "GIS Developer", "Data Analyst", "Spatial Analysis", 
+    "WebGIS", "Cartography", "Remote Sensing", "React", "Next.js", 
+    "Mapbox", "Leaflet", "Data Visualization", "Vancouver", "Earth Observation"
+  ],
+  authors: [{ name: "Priyanshu", url: "https://gis.priyanshu.world" }],
+  creator: "Priyanshu",
   openGraph: {
-    title: "Priyanshu | GIS Developer & Data Analyst",
-    description: "Geospatial systems, spatial analysis, and the technology that connects us to our planet.",
+    title: "Priyanshu | GIS Developer & Geospatial Data Analyst",
+    description: "Crafting interactive web maps, spatial analysis pipelines, and immersive geospatial dashboards. Merging software engineering with earth sciences.",
     url: "https://gis.priyanshu.world",
-    siteName: "Priyanshu Portfolio",
-    locale: "en_US",
+    siteName: "Priyanshu | GIS Portfolio",
+    locale: "en_CA",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Priyanshu | GIS Developer",
-    description: "Mapping the world with code and spatial intelligence.",
+    title: "Priyanshu | GIS Developer & Geospatial Analyst",
+    description: "Mapping the world with code. Exploring spatial intelligence, WebGIS, and Earth observation.",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://gis.priyanshu.world",
   },
 };
 

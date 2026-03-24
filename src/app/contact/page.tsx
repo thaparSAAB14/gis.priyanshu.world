@@ -7,6 +7,19 @@ import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 import { BackgroundPaths } from "@/components/ui/background-paths";
 import { motion } from "framer-motion";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Connect | Priyanshu GIS",
+  description: "Get in touch for opportunities in geospatial analysis, WebGIS development, cartography, and spatial engineering.",
+  openGraph: {
+    title: "Connect with Priyanshu | GIS Developer",
+    description: "Open for new opportunities in geospatial analysis, mapping, and web engineering.",
+    url: "https://gis.priyanshu.world/contact",
+    siteName: "Priyanshu GIS Portfolio",
+    type: "website",
+  },
+};
 
 export default function ContactPage() {
   const [copied, setCopied] = React.useState(false);
