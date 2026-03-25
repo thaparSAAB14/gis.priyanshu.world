@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -74,7 +75,10 @@ export const CustomCursor = () => {
         }
       `}</style>
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 rounded-full border border-primary/80 pointer-events-none z-[10000] flex items-center justify-center mix-blend-difference"
+        className={cn(
+          "fixed top-0 left-0 w-6 h-6 rounded-full border pointer-events-none z-[10000] flex items-center justify-center mix-blend-difference transition-colors duration-150",
+          isHovering ? "bg-primary/40 border-transparent" : "bg-transparent border-primary/80"
+        )}
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
@@ -82,8 +86,6 @@ export const CustomCursor = () => {
         }}
         animate={{
           scale: isHovering ? 1.6 : 1,
-          backgroundColor: isHovering ? "rgba(125, 206, 148, 0.4)" : "rgba(125, 206, 148, 0)",
-          borderColor: isHovering ? "rgba(125, 206, 148, 0)" : "rgba(125, 206, 148, 0.8)",
         }}
         transition={{ duration: 0.15 }}
       >

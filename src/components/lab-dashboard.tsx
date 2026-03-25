@@ -125,8 +125,8 @@ export function LabDashboard() {
           <p className="text-lg md:text-xl text-foreground/70 max-w-xl text-center mb-16">
             This tab is supposed to be packed with mind-blowing digital experiments. Instead, I got distracted and engineered a highly optimized sarcastic rendering terminal.
           </p>
-          <div data-terminal-cursor="true" className={cn("bg-card/20 backdrop-blur-3xl border border-foreground/10 rounded-2xl shadow-xl flex flex-col transition-all duration-500 overflow-hidden", showVideo ? "relative w-full max-w-5xl xl:max-w-6xl h-[70vh] min-h-[600px] lg:min-h-[800px] mt-8 z-30 ring-1 ring-foreground/20 shadow-primary/10" : "relative w-full max-w-3xl h-[450px] mt-8 z-20 ring-1 ring-foreground/5 hover:ring-foreground/20 transition-all shadow-black/20")}>
-            <div className="h-12 bg-foreground/5 border-b border-foreground/5 flex items-center px-4 justify-between">
+          <div data-terminal-cursor="true" className={cn("bg-background border border-foreground/40 rounded flex flex-col transition-all duration-500 overflow-hidden shadow-2xl", showVideo ? "relative w-full max-w-5xl xl:max-w-6xl h-[70vh] min-h-[600px] lg:min-h-[800px] mt-8 z-30" : "relative w-full max-w-3xl h-[450px] mt-8 z-20")}>
+            <div className="h-12 bg-foreground/5 border-b border-foreground/40 flex items-center px-4 justify-between">
               <div className="flex items-center gap-2 opacity-30"><div className="w-3 h-3 rounded-full bg-foreground" /><div className="w-3 h-3 rounded-full bg-foreground" /><div className="w-3 h-3 rounded-full bg-foreground" /></div>
               <span className="absolute left-1/2 -translate-x-1/2 font-mono text-[10px] text-foreground/40 uppercase tracking-[0.2em] font-medium hidden sm:block">simulated_productivity.exe</span>
               <div className="flex items-center gap-2">

@@ -92,10 +92,30 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 			new THREE.Float32BufferAttribute(positions, 3),
 		);
 
+		// Dynamic Token Extraction: Allows WebGL particle engine to inherit React/Tailwind wrappers in real-time
+		const getDynamicPrimaryColor = (isDarkContext: boolean) => {
+			let dynamicColor = isDarkContext ? 0x72e3ad : 0x1e6a45; // safety fallbacks
+			try {
+				const bodyStyle = getComputedStyle(containerRef.current!);
+				const rawPrimary = bodyStyle.getPropertyValue('--primary').trim();
+				if (rawPrimary) {
+					const color = new THREE.Color(rawPrimary);
+					if (!isDarkContext) {
+						// Mathematically darken by 50% for light mode contrast against white fog
+						color.lerp(new THREE.Color(0x000000), 0.5); 
+					}
+					dynamicColor = color.getHex();
+				}
+			} catch (e) {
+				// Silently fail to defaults if executing pre-DOM
+			}
+			return dynamicColor;
+		};
+
 		// Create material
 		const material = new THREE.PointsMaterial({
 			size: 8,
-			color: 0x72e3ad, // Default to Dark Mode Sleepy Lime Green
+			color: getDynamicPrimaryColor(resolvedTheme === 'dark'),
 			transparent: true,
 			opacity: 0.8,
 			sizeAttenuation: true,
@@ -220,7 +240,23 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 		if (!sceneRef.current) return;
 		const isDark = resolvedTheme === 'dark';
 		const targetFogColor = isDark ? 0x0a0a0a : 0xfcfcfc;
-		const targetDotColor = isDark ? 0x72e3ad : 0x1e6a45; // Darker Forest Green for massive visual contrast in light mode
+		
+		// Dynamic Token Extraction scoped to update hook
+		const getDynamicPrimaryColor = (isDarkContext: boolean) => {
+			let dynamicColor = isDarkContext ? 0x72e3ad : 0x1e6a45;
+			try {
+				const bodyStyle = getComputedStyle(containerRef.current!);
+				const rawPrimary = bodyStyle.getPropertyValue('--primary').trim();
+				if (rawPrimary) {
+					const color = new THREE.Color(rawPrimary);
+					if (!isDarkContext) color.lerp(new THREE.Color(0x000000), 0.5); 
+					dynamicColor = color.getHex();
+				}
+			} catch (e) {}
+			return dynamicColor;
+		};
+
+		const targetDotColor = getDynamicPrimaryColor(isDark);
 		
 		sceneRef.current.scene.fog = new THREE.Fog(targetFogColor, 2000, 6000);
 		sceneRef.current.renderer.setClearColor(sceneRef.current.scene.fog.color, 0);
