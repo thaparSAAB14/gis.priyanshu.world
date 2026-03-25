@@ -33,10 +33,11 @@ export function middleware(request: NextRequest) {
 
   /**
    * 3. Root Domain Auto-Routing 
-   * Anyone visiting the bare domain or www will be cleanly 301 redirected 
-   * to the primary GIS subdomain to prevent traffic loss.
+   * A catch-all net. If the hostname isn't explicitly the gis or lab subdomain,
+   * we aggressively bounce them to gis.priyanshu.world to ensure no traffic is lost
+   * and no one ever touches the blackhole unmapped space.
    */
-  if (hostname === "priyanshu.world" || hostname === "www.priyanshu.world") {
+  if (!hostname.includes("gis.priyanshu.world") && !hostname.includes("lab.priyanshu.world")) {
     return NextResponse.redirect(`https://gis.priyanshu.world${url.pathname}`);
   }
 
