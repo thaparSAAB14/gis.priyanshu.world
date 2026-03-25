@@ -135,18 +135,17 @@ export default function NotFound() {
           </span>
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-          <a href="https://gis.priyanshu.world">
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/30 bg-gradient-to-b from-card to-background hover:border-primary/30 hover:bg-primary/5 shadow-lg shadow-foreground/10 transition-all duration-300"
-            >
-              <Home className="w-4 h-4 text-primary " />
-              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                Go Home
-              </span>
-            </motion.div>
-          </a>
+          <motion.a
+            href="https://gis.priyanshu.world"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="group flex items-center gap-3 px-6 py-3 rounded-full border border-foreground/30 bg-gradient-to-b from-card to-background hover:border-primary/30 hover:bg-primary/5 shadow-lg shadow-foreground/10 transition-all duration-300"
+          >
+            <Home className="w-4 h-4 text-primary " />
+            <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+              Go Home
+            </span>
+          </motion.a>
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
