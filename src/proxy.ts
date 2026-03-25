@@ -32,13 +32,12 @@ export function proxy(request: NextRequest) {
   }
 
   /**
-   * 3. Root Domain Blackhole 
-   * The user deliberately requested the bare domain (and www) inherently fail
-   * resolving into the deeply-styled 404 interactive error component.
+   * 3. Root Domain Auto-Routing 
+   * Anyone visiting the bare domain or www will be cleanly 301 redirected 
+   * to the primary GIS subdomain to prevent traffic loss.
    */
   if (hostname === "priyanshu.world" || hostname === "www.priyanshu.world") {
-    url.pathname = "/void-404-unmapped";
-    return NextResponse.rewrite(url);
+    return NextResponse.redirect(`https://gis.priyanshu.world${url.pathname}`);
   }
 
   // Security headers are now managed globally in next.config.ts
