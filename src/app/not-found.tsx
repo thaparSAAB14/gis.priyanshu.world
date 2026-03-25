@@ -135,7 +135,7 @@ export default function NotFound() {
           </span>
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-          <Link href="/">
+          <a href="https://gis.priyanshu.world">
             <motion.div
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -146,7 +146,7 @@ export default function NotFound() {
                 Go Home
               </span>
             </motion.div>
-          </Link>
+          </a>
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
