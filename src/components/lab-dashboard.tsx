@@ -1,77 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { SlideTabs } from "@/components/ui/slide-tabs";
-import { AsciiVideoPlayer } from "@/components/ui/ascii-video-player";
+import React from "react";
+import { LampContainer } from "@/components/ui/lamp";
+import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
 import { FlaskConical, Sparkles, Beaker, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 import { DottedSurface } from "@/components/ui/dotted-surface";
-import { cn } from "@/lib/utils";
 
 export function LabDashboard() {
-  const [showVideo, setShowVideo] = useState(false);
-  const [logs, setLogs] = useState<string[]>([
-    "> boot sequence initiated.",
-    "> parsing portfolio files...",
-    "> WARNING: ego detected in repository.",
-    "> ignoring warnings. continuing execution."
-  ]);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const sarcasticLogs = [
-      "> compiling CSS... still compiling... why do you have so much CSS?",
-      "> rewriting your terrible code in Rust.",
-      "> AI agent is silently judging your component structure.",
-      "> simulating productivity...",
-      "> breaking production just to feel something.",
-      "> npm install... gathering 2,000,000 dependencies.",
-      "> analyzing user cursor movement... incredibly slow.",
-      "> WARNING: caffeine levels critically low.",
-      "> deploying to staging... staging is down.",
-      "> executing rm -rf node_modules just in case.",
-      "> formatting code... fixing 400 spacing errors.",
-      "> finding meaning in digital void... failed.",
-      "> pushing to prod on a Friday. bold move.",
-      "> 60FPS ASCII engine running perfectly. React tree crying.",
-      "> checking git status... 4,032 uncommitted changes.",
-      "> waiting for Vercel to build... maybe grab a coffee?",
-      "> implementing dark mode... oh wait, it's already dark."
-    ];
-
-    const asciiArts = [
-      "\n [ SYSTEM THINKING ]\n  .---.\n /     \\\n| () () |\n \\  ^  /\n  |||||\n",
-      "\n [ NEURAL UPLINK ACTIVE ]\n    /\\\n   /  \\\n  /____\\\n (______)\n",
-      "\n [ RESEARCHING STACKOVERFLOW ]\n   _____\n  |     |\n  |_|_|_|\n  |_____|\n > copy-pasting logic blocks...\n",
-      "\n [ TYPING AT 1200 WPM ]\n  _   _   _   _   _ \n / \\ / \\ / \\ / \\ / \\\n( H | A | C | K | I )\n \\_/ \\_/ \\_/ \\_/ \\_/\n",
-      "\n [ LOADING EXTERNAL MODULES ]\n [▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░] 85%\n > downloading 400MB of pure node modules.\n"
-    ];
-
-    const interval = setInterval(() => {
-      if (Math.random() > 0.4) {
-        setLogs(prev => {
-          const isArt = Math.random() > 0.85; 
-          const newLog = isArt 
-            ? asciiArts[Math.floor(Math.random() * asciiArts.length)]
-            : sarcasticLogs[Math.floor(Math.random() * sarcasticLogs.length)];
-            
-          return [...prev.slice(-14), newLog];
-        });
-      }
-    }, 3800);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        top: scrollContainerRef.current.scrollHeight,
-        behavior: "smooth"
-      });
-    }
-  }, [logs]);
-
   return (
     <div className="min-h-screen bg-background relative overflow-hidden transition-colors duration-300">
       <DottedSurface className="opacity-80 fixed pointer-events-none" />
@@ -80,9 +16,22 @@ export function LabDashboard() {
         className="pointer-events-none fixed -top-10 left-1/2 w-full h-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,var(--color-primary),transparent_50%)] opacity-10 blur-[30px] z-0"
       />
       <div className="pointer-events-none fixed inset-x-0 bottom-0 h-96 z-0 backdrop-blur-md [mask-image:linear-gradient(to_bottom,transparent,black_70%)]" />
-      <div className="relative z-10">
-        <SlideTabs />
-        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4">
+      
+      <div className="relative z-10 w-full flex flex-col">
+        {/* Lamp Top Navigation Header */}
+        <LampContainer>
+          <motion.h1
+            initial={{ opacity: 0.5, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
+            className="mt-8 bg-gradient-to-br from-foreground to-foreground/60 py-4 bg-clip-text text-center text-4xl font-display font-medium tracking-tight text-transparent md:text-7xl"
+          >
+            Digital <br /> Laboratory
+          </motion.h1>
+        </LampContainer>
+
+        {/* Existing Lab Hero Banner */}
+        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 -mt-32">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-card/5 rounded-full blur-3xl pointer-events-none" />
           <motion.div
@@ -117,54 +66,15 @@ export function LabDashboard() {
           </motion.div>
         </section>
 
-        <section className="relative w-full py-40 min-h-screen flex flex-col items-center justify-center z-20 px-4">
-          <div className="absolute inset-0 -z-10 bg-background/50 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent_0%,black_15%,black_85%,transparent_100%)] pointer-events-none" />
-          <h2 className="text-4xl md:text-6xl font-bold text-foreground font-display text-center mb-6 tracking-tight">
-            I swear I&apos;m <span className="text-primary italic">cooking</span>.
-          </h2>
-          <p className="text-lg md:text-xl text-foreground/70 max-w-xl text-center mb-16">
-            This tab is supposed to be packed with mind-blowing digital experiments. Instead, I got distracted and engineered a highly optimized sarcastic rendering terminal.
-          </p>
-          <div data-terminal-cursor="true" className={cn("bg-card/20 backdrop-blur-2xl border border-foreground/30 rounded-xl flex flex-col transition-all duration-500 overflow-hidden shadow-2xl ring-1 ring-white/10 dark:ring-white/5", showVideo ? "relative w-full max-w-5xl xl:max-w-6xl h-[70vh] min-h-[600px] lg:min-h-[800px] mt-8 z-30" : "relative w-full max-w-3xl h-[450px] mt-8 z-20")}>
-            <div className="h-12 bg-foreground/10 border-b border-foreground/20 flex items-center px-4 justify-between backdrop-blur-md">
-              <div className="flex items-center gap-2 opacity-40"><div className="w-3 h-3 rounded-full bg-foreground" /><div className="w-3 h-3 rounded-full bg-foreground" /><div className="w-3 h-3 rounded-full bg-foreground" /></div>
-              <span className="absolute left-1/2 -translate-x-1/2 font-mono text-[10px] text-foreground/40 uppercase tracking-[0.2em] font-medium hidden sm:block">simulated_productivity.exe</span>
-              <div className="flex items-center gap-2">
-                <button onClick={() => setShowVideo(!showVideo)} className={cn("px-4 py-1.5 font-mono text-[10px] rounded-md transition-all border font-bold tracking-widest shadow-sm", showVideo ? "bg-primary/10 text-primary border-primary/30" : "text-foreground/50 border-transparent hover:bg-foreground/5 hover:text-foreground")}>
-                  {showVideo ? "[ CLOSE ASCII ENGINE ]" : "[ LAUNCH ASCII ENGINE ]"}
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 overflow-hidden relative flex flex-col">
-              {!showVideo ? (
-                <div className="flex-1 bg-foreground/5 backdrop-blur-xl flex flex-col font-mono text-xs overflow-hidden shadow-2xl relative z-40">
-                  <div className="p-3 border-b border-foreground/10 bg-foreground/5 text-foreground/40 text-[10px] uppercase tracking-widest flex justify-between items-center">
-                    <span className="hidden sm:inline">{">"} server_health_ctrl</span><span className="sm:hidden">{">"} logs</span>
-                    <span className="animate-pulse text-primary font-bold shadow-primary drop-shadow-[0_0_5px_var(--color-primary)]">• LIVE</span>
-                  </div>
-                  <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4 flex flex-col gap-3 !scrollbar-thin !scrollbar-thumb-foreground/10">
-                    {logs.map((log, i) => (
-                      <motion.div key={`${i}-${Math.random()}`} initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className={cn("font-mono tracking-tight", log.includes("\n") ? "whitespace-pre text-[10px] leading-tight opacity-70" : "leading-relaxed", log.includes("WARNING") || log.includes("ERROR") || log.includes("failed") || log.includes("down") ? "text-red-400/90" : log.includes("SUCCESS") || log.includes("[") ? "text-primary" : "text-foreground/60")}>
-                        {log}
-                      </motion.div>
-                    ))}
-                  </div>
-                  <div className="p-3 border-t border-foreground/10 bg-foreground/5 text-foreground/30 text-[10px] flex items-center gap-2">
-                    <span className="animate-pulse font-bold text-foreground/50">_</span><span className="truncate">waiting for user competence...</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex-1 overflow-hidden relative transition-all duration-500 bg-background/50">
-                  <AsciiVideoPlayer onExit={() => setShowVideo(false)} />
-                </div>
-              )}
-            </div>
-          </div>
+        {/* New Smooth Scroll Iframe Component replacing the Terminal */}
+        <section className="relative w-full z-20 top-[-70px]">
+          <SmoothScrollHero iframeSrc="https://atmolens.priyanshu.world" />
         </section>
 
-        <footer className="py-12 px-4 border-t border-foreground/40">
+        <footer className="py-12 px-4 border-t border-foreground/40 mt-32 relative z-30">
           <div className="max-w-5xl mx-auto flex flex-col items-center gap-4">
-            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" /><p className="text-sm text-foreground/70 ">made by <span className="text-primary font-medium">Priyanshu</span> <span className="italic text-foreground/70 ">with intentions</span></p>
+            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            <p className="text-sm text-foreground/70 ">made by <span className="text-primary font-medium">Priyanshu</span> <span className="italic text-foreground/70 ">with intentions</span></p>
           </div>
         </footer>
       </div>
