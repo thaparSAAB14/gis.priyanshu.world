@@ -36,11 +36,11 @@ export default function Home() {
             <span className="text-primary font-medium text-lg">Geospatial Research Assistant</span>
           </p>
           <ul className="text-foreground/70 text-xs md:text-sm font-normal mb-8 list-none space-y-3">
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">■</span> Collaborating with faculty on an academic book project involving geographic and spatial analysis.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">■</span> Developing custom GIS maps, figures, and spatial visualizations to support scholarly content.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">■</span> Supporting research through geospatial data sourcing, cleaning, integration, and visualization.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">■</span> Translating complex geographic concepts into clear, publication-quality spatial representations.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">■</span> Gaining exposure to academic research standards, documentation, and publication workflows.</li>
+            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Collaborating with faculty on an academic book project involving geographic and spatial analysis.</li>
+            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Developing custom GIS maps, figures, and spatial visualizations to support scholarly content.</li>
+            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Supporting research through geospatial data sourcing, cleaning, integration, and visualization.</li>
+            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Translating complex geographic concepts into clear, publication-quality spatial representations.</li>
+            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Gaining exposure to academic research standards, documentation, and publication workflows.</li>
           </ul>
           <div className="flex flex-wrap gap-2 mb-6">
             {["Academic Research", "Map Design", "Spatial Visualization", "Data Sourcing"].map((tag) => (
@@ -57,13 +57,13 @@ export default function Home() {
       content: (
         <div>
           <p className="text-foreground text-xs md:text-sm font-normal mb-4">
-            <span className="text-foreground font-medium text-lg">GIS Analyst</span> <span className="opacity-50">— Academic Projects & Applied Labs</span>
+            <span className="text-foreground font-medium text-lg">GIS Analyst</span> <span className="opacity-50">&mdash; Academic Projects & Applied Labs</span>
           </p>
           <ul className="text-foreground/70 text-xs md:text-sm font-normal mb-6 list-none space-y-3">
-            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">■</span> Designed and analyzed spatial datasets using QGIS and ArcGIS, managing vector and raster data, projections, and attribute tables for academic GIS labs.</li>
-            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">■</span> Performed spatial analysis and geoprocessing, including overlay analysis, buffering, querying, classification, and thematic mapping.</li>
-            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">■</span> Produced professional, publication-ready maps using cartographic design principles to support geographic analysis and scenario modeling.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">■</span> Developed a survey-driven, auto-updating GIS map as part of a course-based project, linking data collection to dynamic spatial visualization.</li>
+            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">&bull;</span> Designed and analyzed spatial datasets using QGIS and ArcGIS, managing vector and raster data, projections, and attribute tables for academic GIS labs.</li>
+            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">&bull;</span> Performed spatial analysis and geoprocessing, including overlay analysis, buffering, querying, classification, and thematic mapping.</li>
+            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">&bull;</span> Produced professional, publication-ready maps using cartographic design principles to support geographic analysis and scenario modeling.</li>
+            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Developed a survey-driven, auto-updating GIS map as part of a course-based project, linking data collection to dynamic spatial visualization.</li>
           </ul>
           <div className="mb-8">
             <a 
@@ -130,7 +130,7 @@ export default function Home() {
                 <h1 className="text-4xl font-semibold text-foreground font-display">
                   Mapping the World with Code <br />
                   <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent">
-                    GIS × Dev
+                    GIS &times; Dev
                   </span>
                 </h1>
                 <p className="mt-4 pb-16 md:pb-24 text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto">
@@ -183,9 +183,9 @@ export default function Home() {
                       <div className="w-px h-4 bg-neutral-300 "></div>
 
                       <p className="text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap">
-                        <span className="text-primary font-bold">LAT:</span> 49.28° N 
+                        <span className="text-primary font-bold">LAT:</span> 49.28&deg; N 
                         <span className="mx-2 text-neutral-300 ">|</span> 
-                        <span className="text-primary font-bold">LON:</span> 123.12° W
+                        <span className="text-primary font-bold">LON:</span> 123.12&deg; W
                       </p>
                     </div>
                   </div>
@@ -197,7 +197,7 @@ export default function Home() {
                     transition={{ delay: 1, duration: 1 }}
                     className="text-[10px] md:text-xs font-mono text-foreground/70 mt-6 tracking-widest uppercase"
                   >
-                    <span className="text-primary mr-2 animate-pulse">►</span>
+                    <span className="text-primary mr-2 animate-pulse">&gt;</span>
                     exploring --spatial-data
                   </motion.p>
 
@@ -330,3 +330,4 @@ export default function Home() {
     </div>
   );
 }
+

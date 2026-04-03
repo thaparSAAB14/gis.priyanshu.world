@@ -10,7 +10,7 @@ import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
 export function LabDashboard() {
   return (
-    <div className="min-h-screen bg-transparent relative transition-colors duration-300">
+    <div className="relative min-h-screen overflow-x-clip bg-transparent transition-colors duration-300">
       <SlideTabs />
       
       {/* Fluid Bg Particle Element */}
@@ -23,14 +23,14 @@ export function LabDashboard() {
       
       <div className="relative z-10 w-full flex flex-col items-center">
         {/* Existing Lab Hero Banner */}
-        <section className="relative w-full h-screen flex flex-col items-center justify-center -mt-8 px-4">
+        <section className="relative flex min-h-[100svh] w-full flex-col items-center justify-center px-4 pb-20 pt-28">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-card/5 rounded-full blur-3xl pointer-events-none" />
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative z-10 flex flex-col items-center text-center"
+            className="relative z-10 flex max-w-3xl flex-col items-center text-center"
           >
             <div className="flex items-center gap-3 mb-6">
               <motion.div
@@ -46,10 +46,12 @@ export function LabDashboard() {
             <p className="text-lg md:text-xl text-foreground/70 max-w-lg mb-8">
               A showcase of my digital experiments, creative coding, and everything else I build online just to show off.
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-4 text-foreground/70">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-foreground/70">
               <div className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">experimental</span></div>
-              <div className="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-800" /><div className="flex items-center gap-2"><Beaker className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">prototypes</span></div>
-              <div className="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-800" /><div className="flex items-center gap-2"><Cpu className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">creative</span></div>
+              <div className="hidden h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-800 sm:block" />
+              <div className="flex items-center gap-2"><Beaker className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">prototypes</span></div>
+              <div className="hidden h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-800 sm:block" />
+              <div className="flex items-center gap-2"><Cpu className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">creative</span></div>
             </div>
           </motion.div>
           

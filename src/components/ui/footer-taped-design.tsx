@@ -84,8 +84,8 @@ export const Component = () => {
       </div>
       
       <div className="mt-8 mb-4 px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-foreground/70 text-center md:text-left">
-        <p className="whitespace-nowrap flex items-center gap-1 flex-wrap justify-center">
-          ©{currentYear} made/developed by <span className="text-primary font-medium">Priyanshu</span> "with intentions".
+        <p className="flex flex-wrap items-center justify-center gap-1 leading-relaxed md:justify-start">
+          &copy;{currentYear} made and developed by <span className="text-primary font-medium">Priyanshu</span> with intention.
         </p>
 
         <div className="flex gap-4 items-center">
@@ -112,3 +112,4 @@ export const Component = () => {
     </footer>
   );
 };
+

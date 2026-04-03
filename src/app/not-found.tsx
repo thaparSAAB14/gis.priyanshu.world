@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Home, ArrowLeft } from "lucide-react";
+import { Home, ArrowLeft, Globe } from "lucide-react";
 
 const Page = () => (
   <div className="w-full h-full bg-white dark:bg-neutral-100 rounded-xl border border-neutral-200 dark:border-neutral-300 p-4 shadow-sm">
@@ -68,11 +67,11 @@ export default function NotFound() {
           Lost in{" "}
           <span className="relative inline-flex items-center gap-2 px-4 py-1 rounded-2xl bg-primary/10 border border-primary/20 text-primary ">
             Space
-            <span className="inline-block text-2xl">🌍</span>
+            <Globe className="h-5 w-5" />
           </span>
         </h2>
         <p className="mt-4 text-lg text-foreground/70 font-mono">
-          error 404 — coordinates not found
+          error 404 &mdash; coordinates not found
         </p>
       </div>
 
@@ -162,3 +161,4 @@ export default function NotFound() {
     </div>
   );
 }
+

@@ -113,7 +113,7 @@ const SmoothScrollHeroBackground: React.FC<{
 
 	return (
 		<motion.div
-			className="sticky top-0 h-[100dvh] w-full bg-background flex items-center justify-center p-4 md:p-12 overflow-hidden pointer-events-none z-30"
+			className="pointer-events-none sticky top-0 z-30 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-background p-3 md:p-12"
 			style={{
 				clipPath,
 				willChange: "transform, clip-path",
@@ -139,9 +139,10 @@ const SmoothScrollHeroBackground: React.FC<{
 					translateX: "0%", 
 					translateY: "0%",
 					opacity: isHovered ? 1 : 0,
-					scale: isHovered ? 1 : 0
+					scale: isHovered ? 1 : 0,
+					boxShadow: "0 0 60px rgba(30, 157, 241, 0.45)",
 				}}
-				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] shadow-[0_0_60px_rgba(var(--color-primary-rgb),0.7)] flex items-center gap-3 backdrop-blur-xl border border-white/30 font-bold"
+				className="pointer-events-none absolute z-[100] flex items-center gap-3 rounded-full border border-white/30 bg-primary px-5 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-primary-foreground backdrop-blur-xl"
 			>
 				Visit
 				<motion.div
@@ -157,32 +158,32 @@ const SmoothScrollHeroBackground: React.FC<{
 				href="https://atmolens.priyanshu.world"
 				target="_blank"
 				rel="noopener noreferrer"
-				className="w-full h-full relative rounded-[3.5rem] overflow-hidden bg-card border border-white/10 shadow-3xl pointer-events-auto group/browser cursor-none"
+				className="group/browser relative h-full w-full cursor-none overflow-hidden rounded-[2rem] border border-white/10 bg-card shadow-3xl pointer-events-auto md:rounded-[3.5rem]"
 				style={{
 					scale,
 					transformOrigin: "center center"
 				}}
 			>
 				{/* Top Mock Window Bar */}
-				<div className="absolute top-0 left-0 w-full h-14 bg-background/60 backdrop-blur-2xl border-b border-white/5 flex items-center px-8 gap-3 z-20">
+				<div className="absolute top-0 left-0 z-20 flex h-12 w-full items-center gap-2 border-b border-white/5 bg-background/60 px-4 backdrop-blur-2xl md:h-14 md:gap-3 md:px-8">
 					<div className="flex gap-2">
 						<div className="w-3 h-3 rounded-full bg-[#FF5F56] opacity-80" />
 						<div className="w-3 h-3 rounded-full bg-[#FFBD2E] opacity-80" />
 						<div className="w-3 h-3 rounded-full bg-[#27C93F] opacity-80" />
 					</div>
-					<div className="ml-8 flex-1 h-8 bg-foreground/[0.04] rounded-xl border border-foreground/[0.08] flex items-center justify-center px-6">
+					<div className="ml-2 flex h-7 flex-1 items-center justify-center rounded-xl border border-foreground/[0.08] bg-foreground/[0.04] px-3 md:ml-8 md:h-8 md:px-6">
 						<div className="flex items-center gap-2.5 opacity-50">
 							<Globe className="w-3.5 h-3.5 text-primary" />
-							<span className="font-mono text-[9px] truncate tracking-[0.2em] uppercase font-bold text-foreground/70">{iframeSrc}</span>
+							<span className="truncate font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-foreground/70 md:text-[9px]">{iframeSrc}</span>
 						</div>
 					</div>
-					<div className="w-24" />
+					<div className="hidden w-24 md:block" />
 				</div>
 
 				<iframe 
 					ref={iframeRef}
 					src={finalIframeSrc} 
-					className="w-full h-full pt-14 border-none pointer-events-none group-hover/browser:scale-[1.01] transition-transform duration-1000"
+					className="h-full w-full border-none pt-12 transition-transform duration-1000 group-hover/browser:scale-[1.01] pointer-events-none md:pt-14"
 					title="Project Interactive Window"
 					loading="lazy"
 				/>
@@ -192,7 +193,7 @@ const SmoothScrollHeroBackground: React.FC<{
 
 				{/* AtmoLens Showcase Container with Signature font */}
 				<motion.div 
-					className="absolute z-40 p-2 rounded-[3rem] border border-white/10 overflow-hidden shadow-3xl max-w-[340px] md:max-w-md pointer-events-none select-none"
+					className="absolute z-40 max-w-[min(90vw,340px)] overflow-hidden rounded-[2rem] border border-white/10 p-2 shadow-3xl pointer-events-none select-none md:max-w-md md:rounded-[3rem]"
 					style={{
 						left: showcaseLeft,
 						top: showcaseTop,
@@ -214,7 +215,7 @@ const SmoothScrollHeroBackground: React.FC<{
 						}}
 					/>
 					
-					<div className="relative z-10 p-9 md:p-11 bg-gradient-to-br from-white/[0.12] to-transparent rounded-[2.8rem] border border-white/10">
+					<div className="relative z-10 rounded-[1.8rem] border border-white/10 bg-gradient-to-br from-white/[0.12] to-transparent p-7 md:rounded-[2.8rem] md:p-11">
 						<div className="flex flex-col gap-1.5 mb-7">
 							<div className="flex items-center gap-3.5">
 								<motion.div 
@@ -233,19 +234,19 @@ const SmoothScrollHeroBackground: React.FC<{
 							</span>
 						</div>
 						
-						<h2 className="text-4xl md:text-6xl font-black text-foreground font-display mb-5 tracking-tighter leading-[0.8] uppercase">
+						<h2 className="mb-5 font-display text-3xl font-black uppercase leading-[0.8] tracking-tighter text-foreground md:text-6xl">
 							Atmo<br />
-							<span className="text-white/30 italic font-medium">Intelligence</span>
+							<span className="font-medium italic text-foreground/35">Intelligence</span>
 						</h2>
 						
 						<p className="text-sm md:text-base text-foreground/60 leading-relaxed font-body mb-10 max-w-[280px]">
 							Premium geospatial prototype mapping high-fidelity weather vectors and atmospheric datasets via custom GLSL shaders.
 						</p>
 						
-						<div className="flex items-center gap-8 border-t border-white/10 pt-9">
+						<div className="flex flex-wrap items-center gap-5 border-t border-white/10 pt-7 md:gap-8 md:pt-9">
                            <div className="flex flex-col gap-1.5">
                                <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Tech Stack</span>
-                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">GLSL • GIS • TILE</span>
+                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">GLSL &middot; GIS &middot; Tile</span>
                            </div>
                            <div className="w-[1px] h-10 bg-white/10" />
                            <div className="flex flex-col gap-1.5">
@@ -283,3 +284,4 @@ const SmoothScrollHero: React.FC<ISmoothScrollHeroProps> = ({
 };
 
 export default SmoothScrollHero;
+

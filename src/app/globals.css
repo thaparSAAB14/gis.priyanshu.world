@@ -165,6 +165,28 @@ body {
   color: var(--foreground);
 }
 
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+  }
+
+  .font-signature {
+    font-family: var(--font-signature), cursive;
+  }
+
+  .font-body {
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  .shadow-3xl {
+    box-shadow: 0 30px 90px rgba(15, 20, 25, 0.16);
+  }
+
+  .dark .shadow-3xl {
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+  }
+}
+
 ::selection {
   background: var(--primary);
   color: var(--primary-foreground);
