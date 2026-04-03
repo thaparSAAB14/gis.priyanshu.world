@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter_Tight, Outfit } from "next/font/google";
+import { Inter_Tight, Outfit, Caveat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -16,6 +16,11 @@ const outfit = Outfit({
 
 const interTight = Inter_Tight({
   variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const signature = Caveat({
+  variable: "--font-signature",
   subsets: ["latin"],
 });
 
@@ -71,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${interTight.variable} h-full antialiased`}
+      className={`${outfit.variable} ${interTight.variable} ${signature.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">

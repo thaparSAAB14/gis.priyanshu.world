@@ -47,11 +47,13 @@ const SmoothScrollHeroBackground: React.FC<{
 
 	const [isHovered, setIsHovered] = React.useState(false);
 	
-	// Mouse tracking for custom cursor
+	// Fast-tracking mouse for the custom cursor label
 	const mouseX = useMotionValue(0);
 	const mouseY = useMotionValue(0);
-	const cursorX = useSpring(mouseX, { stiffness: 450, damping: 45 });
-	const cursorY = useSpring(mouseY, { stiffness: 450, damping: 45 });
+	
+	// High-stiffness spring for cursor to prevent "drifting", keep it close to tip
+	const cursorX = useSpring(mouseX, { stiffness: 1000, damping: 50 });
+	const cursorY = useSpring(mouseY, { stiffness: 1000, damping: 50 });
 
 	const handleMouseMove = (e: React.MouseEvent) => {
 		const rect = e.currentTarget.getBoundingClientRect();
@@ -95,31 +97,31 @@ const SmoothScrollHeroBackground: React.FC<{
 		>
 			{/* Persistent Noise Texture for Atmosphere */}
 			<div 
-				className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay z-0"
+				className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay z-0"
 				style={{
 					backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
-					backgroundSize: "180px 180px",
+					backgroundSize: "150px 150px",
 				}}
 			/>
 
-			{/* Custom 'Visit' Cursor with Pulse Effect */}
+			{/* Custom 'Visit' Cursor with Pulse Effect - Shifted to stay near but not under tip */}
 			<motion.div 
 				style={{ 
 					x: cursorX, 
 					y: cursorY, 
-					translateX: "-50%", 
+					translateX: "24px",  // Shifted right of pointer tip
 					translateY: "-50%",
 					opacity: isHovered ? 1 : 0,
 					scale: isHovered ? 1 : 0
 				}}
-				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] shadow-[0_0_40px_rgba(var(--color-primary-rgb),0.5)] flex items-center gap-3 backdrop-blur-md border border-white/20 font-bold"
+				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-full font-mono text-[9px] uppercase tracking-[0.25em] shadow-[0_0_50px_rgba(var(--color-primary-rgb),0.6)] flex items-center gap-3 backdrop-blur-md border border-white/20 font-bold"
 			>
-				Visit Project
+				Visit
 				<motion.div
 					animate={{ x: [0, 4, 0] }}
 					transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
 				>
-					<ArrowUpRight className="w-4 h-4" />
+					<ArrowUpRight className="w-3.5 h-3.5 font-bold" />
 				</motion.div>
 			</motion.div>
 
@@ -158,11 +160,11 @@ const SmoothScrollHeroBackground: React.FC<{
 				/>
 				
 				{/* Iframe overlay for visual polish */}
-				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/30)] opacity-60" />
+				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-60" />
 
-				{/* AtmoLens Project Intro with Grain Background Overlay */}
+				{/* AtmoLens Showcase Container with Signature font */}
 				<motion.div 
-					className="absolute z-40 p-1.5 rounded-[2.8rem] border border-white/10 overflow-hidden shadow-3xl max-w-[340px] md:max-w-lg pointer-events-none select-none"
+					className="absolute z-40 p-2 rounded-[3rem] border border-white/10 overflow-hidden shadow-3xl max-w-[340px] md:max-w-md pointer-events-none select-none"
 					style={{
 						left: showcaseLeft,
 						top: showcaseTop,
@@ -174,49 +176,53 @@ const SmoothScrollHeroBackground: React.FC<{
 						opacity: showcaseOpacity
 					}}
 				>
-					{/* Grain Background */}
+					{/* Grainy Scrapbook Background */}
 					<div 
-						className="absolute inset-0 bg-card/60 backdrop-blur-3xl"
+						className="absolute inset-0 bg-card/70 backdrop-blur-3xl"
 						style={{
 							backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
-							backgroundSize: "140px 140px",
-							opacity: 0.5
+							backgroundSize: "120px 120px",
+							opacity: 0.6
 						}}
 					/>
 					
-					<div className="relative z-10 p-8 md:p-10 bg-gradient-to-br from-white/[0.08] to-transparent rounded-[2.5rem] border border-white/5">
-						<div className="flex items-center gap-4 mb-6">
-							<motion.div 
-								animate={{ rotate: 360 }}
-								transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-								className="p-2.5 rounded-2xl bg-primary/20 border border-primary/30"
-							>
-								<Sparkles className="w-6 h-6 text-primary" />
-							</motion.div>
-							<div className="flex flex-col">
-								<h3 className="text-[10px] font-mono text-primary uppercase tracking-[0.3em] font-black underline decoration-primary/30">Protocol: AtmoLens-99</h3>
-								<span className="text-[10px] font-mono text-foreground/40 uppercase tracking-[0.15em] font-bold">Atmospheric Intelligence</span>
+					<div className="relative z-10 p-8 md:p-10 bg-gradient-to-br from-white/[0.08] to-transparent rounded-[2.8rem] border border-white/5">
+						<div className="flex flex-col gap-2 mb-6">
+							<div className="flex items-center gap-3">
+								<motion.div 
+									animate={{ rotate: 360 }}
+									transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+									className="p-2 rounded-xl bg-primary/20 border border-primary/30 shadow-lg shadow-primary/20"
+								>
+									<Sparkles className="w-5 h-5 text-primary" />
+								</motion.div>
+								<h3 className="text-[10px] font-mono text-primary uppercase tracking-[0.3em] font-black">Lab-System: Protocol</h3>
 							</div>
+							
+							{/* Signature Font Title */}
+							<span className="font-signature text-3xl md:text-5xl text-primary leading-none -mt-1 ml-1 opacity-90 block">
+								Cartographix
+							</span>
 						</div>
 						
-						<h2 className="text-4xl md:text-6xl font-black text-foreground font-display mb-6 tracking-tighter leading-[0.8] uppercase italic">
+						<h2 className="text-3xl md:text-5xl font-black text-foreground font-display mb-4 tracking-tighter leading-[0.85] uppercase">
 							Atmo<br />
-							<span className="text-primary not-italic">Lens</span>
+							<span className="text-white/40 italic">Intelligence</span>
 						</h2>
 						
-						<p className="text-sm md:text-base text-foreground/50 leading-relaxed font-body mb-10 max-w-sm">
-							Next-gen atmospheric visualization engine mapping complex GIS datasets in a high-fidelity WebGL environment.
+						<p className="text-sm text-foreground/50 leading-relaxed font-body mb-8 max-w-[280px]">
+							Custom geospatial prototype visualizing high-resolution weather datasets with interactive GLSL mapping layers.
 						</p>
 						
-						<div className="flex items-center gap-8 border-t border-white/10 pt-8">
+						<div className="flex items-center gap-6 border-t border-white/10 pt-8">
                            <div className="flex flex-col gap-1">
-                               <span className="text-[9px] font-mono uppercase text-foreground/30 tracking-[0.2em] font-bold">Technology</span>
-                               <span className="text-[11px] font-bold text-foreground/70 tracking-tight tracking-wider">GLSL • GIS • TILE</span>
+                               <span className="text-[9px] font-mono uppercase text-foreground/30 tracking-[0.2em] font-bold">Tech</span>
+                               <span className="text-[10px] font-bold text-foreground/70 tracking-tight">GLSL • GIS • SVG</span>
                            </div>
-                           <div className="w-[1px] h-10 bg-white/10" />
+                           <div className="w-[1px] h-8 bg-white/10" />
                            <div className="flex flex-col gap-1">
-                               <span className="text-[9px] font-mono uppercase text-foreground/30 tracking-[0.2em] font-bold">Category</span>
-                               <span className="text-[11px] font-bold text-foreground/70 tracking-tight tracking-wider">Geospatial AI</span>
+                               <span className="text-[9px] font-mono uppercase text-foreground/30 tracking-[0.2em] font-bold">Concept</span>
+                               <span className="text-[10px] font-bold text-foreground/70 tracking-tight">Spatial AI</span>
                            </div>
                         </div>
 					</div>
