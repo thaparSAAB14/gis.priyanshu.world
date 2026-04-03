@@ -10,7 +10,7 @@ import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
 export function LabDashboard() {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-transparent relative transition-colors duration-300">
       <SlideTabs />
       
       {/* Fluid Bg Particle Element */}
@@ -21,9 +21,9 @@ export function LabDashboard() {
       />
       <div className="pointer-events-none fixed inset-x-0 bottom-0 h-96 z-0 backdrop-blur-md [mask-image:linear-gradient(to_bottom,transparent,black_70%)]" />
       
-      <div className="relative z-10 w-full flex flex-col pt-24 text-center">
+      <div className="relative z-10 w-full flex flex-col items-center">
         {/* Existing Lab Hero Banner */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:-mt-32">
+        <section className="relative w-full h-screen flex flex-col items-center justify-center -mt-8 px-4">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-card/5 rounded-full blur-3xl pointer-events-none" />
           <motion.div
@@ -60,7 +60,7 @@ export function LabDashboard() {
         </section>
 
         {/* New Smooth Scroll Iframe Component replacing the Terminal */}
-        <section className="relative w-full z-20 top-[-100px]">
+        <section className="relative w-full z-20">
           <SmoothScrollHero iframeSrc="https://atmolens.priyanshu.world" />
         </section>
 

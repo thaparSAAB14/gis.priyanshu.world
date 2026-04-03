@@ -61,7 +61,7 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 
 	return (
 		<motion.div
-			className="sticky top-0 h-screen w-full bg-background flex items-center justify-center p-4 md:p-12 overflow-hidden"
+			className="sticky top-0 h-screen w-full bg-transparent flex items-center justify-center p-4 md:p-12 overflow-hidden pointer-events-none"
 			style={{
 				clipPath,
 				willChange: "transform, opacity, clip-path",
@@ -69,7 +69,7 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 		>
 			{/* Scaled animated container holding the iframe */}
 			<motion.div
-				className="w-full h-full relative rounded-2xl overflow-hidden bg-card border border-border shadow-2xl"
+				className="w-full h-full relative rounded-2xl overflow-hidden bg-card border border-border shadow-2xl pointer-events-auto"
 				style={{
 					scale,
 					transformOrigin: "center center"
@@ -88,13 +88,39 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 
 				<iframe 
 					src={iframeSrc} 
-					className="w-full h-full pt-12 border-none"
+					className="w-full h-full pt-12 border-none pointer-events-none"
 					title="Project Interactive Window"
 					loading="lazy"
 				/>
 				
-				{/* Anti-hijack overlay prevents accidental scrolling inside iframe while main generic container is scrolling scaled down */}
+				{/* Anti-hijack overlay prevents accidental scrolling inside iframe */}
 				<div className="absolute inset-x-0 bottom-0 top-12 z-0 pointer-events-none" />
+
+				{/* Cartographix Project Intro with Grain Background Overlay */}
+				<motion.div 
+					className="absolute bottom-6 md:bottom-12 left-6 md:left-12 z-40 p-6 rounded-2xl border border-foreground/10 overflow-hidden pointer-events-none shadow-2xl max-w-[320px] md:max-w-md"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-10%" }}
+					transition={{ duration: 0.8, delay: 0.2 }}
+				>
+					{/* Grain Background */}
+					<div 
+						className="absolute inset-0 bg-background/60 backdrop-blur-3xl"
+						style={{
+							backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
+							backgroundSize: "100px 100px",
+							opacity: 0.5
+						}}
+					/>
+					<div className="relative z-10">
+						<h3 className="text-sm font-mono text-primary mb-2 uppercase tracking-widest bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">Project Showcase</h3>
+						<h2 className="text-3xl md:text-4xl font-bold text-foreground font-display mb-3">Cartographix</h2>
+						<p className="text-sm text-foreground/70 leading-relaxed">
+							High-performance spatial data rendering and interactive WebGL experiences deployed on the edge.
+						</p>
+					</div>
+				</motion.div>
 			</motion.div>
 		</motion.div>
 	);
