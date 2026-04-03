@@ -131,24 +131,24 @@ const SmoothScrollHeroBackground: React.FC<{
 				}}
 			/>
 
-			{/* Custom 'Visit' Cursor with Pulse Effect - Shifted to stay near but not under tip */}
+			{/* Custom 'Visit' Cursor with Pulse Effect - Overlapping the pointer tip */}
 			<motion.div 
 				style={{ 
 					x: cursorX, 
 					y: cursorY, 
-					translateX: "12px",  // Closer to pointer tip
-					translateY: "-50%",
+					translateX: "0%", 
+					translateY: "0%",
 					opacity: isHovered ? 1 : 0,
 					scale: isHovered ? 1 : 0
 				}}
-				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-full font-mono text-[9px] uppercase tracking-[0.25em] shadow-[0_0_50px_rgba(var(--color-primary-rgb),0.6)] flex items-center gap-3 backdrop-blur-md border border-white/20 font-bold"
+				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] shadow-[0_0_60px_rgba(var(--color-primary-rgb),0.7)] flex items-center gap-3 backdrop-blur-xl border border-white/30 font-bold"
 			>
 				Visit
 				<motion.div
 					animate={{ x: [0, 4, 0] }}
 					transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
 				>
-					<ArrowUpRight className="w-3.5 h-3.5 font-bold" />
+					<ArrowUpRight className="w-4 h-4 font-black" />
 				</motion.div>
 			</motion.div>
 
@@ -214,43 +214,43 @@ const SmoothScrollHeroBackground: React.FC<{
 						}}
 					/>
 					
-					<div className="relative z-10 p-8 md:p-10 bg-gradient-to-br from-white/[0.08] to-transparent rounded-[2.8rem] border border-white/5">
-						<div className="flex flex-col gap-2 mb-6">
-							<div className="flex items-center gap-3">
+					<div className="relative z-10 p-9 md:p-11 bg-gradient-to-br from-white/[0.12] to-transparent rounded-[2.8rem] border border-white/10">
+						<div className="flex flex-col gap-1.5 mb-7">
+							<div className="flex items-center gap-3.5">
 								<motion.div 
 									animate={{ rotate: 360 }}
-									transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-									className="p-2 rounded-xl bg-primary/20 border border-primary/30 shadow-lg shadow-primary/20"
+									transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+									className="p-2.5 rounded-2xl bg-primary/25 border border-primary/40 shadow-xl shadow-primary/20"
 								>
 									<Sparkles className="w-5 h-5 text-primary" />
 								</motion.div>
-								<h3 className="text-[10px] font-mono text-primary uppercase tracking-[0.3em] font-black">Lab-System: Protocol</h3>
+								<h3 className="text-[11px] font-mono text-primary/80 uppercase tracking-[0.4em] font-black">Lab-System: Protocol</h3>
 							</div>
 							
-							{/* Signature Font Title */}
-							<span className="font-signature text-3xl md:text-5xl text-primary leading-none -mt-1 ml-1 opacity-90 block">
+							{/* Signature Font Title - Refined position */}
+							<span className="font-signature text-4xl md:text-6xl text-primary leading-tight -mt-4 -ml-2 opacity-100 block drop-shadow-sm select-none">
 								Cartographix
 							</span>
 						</div>
 						
-						<h2 className="text-3xl md:text-5xl font-black text-foreground font-display mb-4 tracking-tighter leading-[0.85] uppercase">
+						<h2 className="text-4xl md:text-6xl font-black text-foreground font-display mb-5 tracking-tighter leading-[0.8] uppercase">
 							Atmo<br />
-							<span className="text-white/40 italic">Intelligence</span>
+							<span className="text-white/30 italic font-medium">Intelligence</span>
 						</h2>
 						
-						<p className="text-sm text-foreground/50 leading-relaxed font-body mb-8 max-w-[280px]">
-							Custom geospatial prototype visualizing high-resolution weather datasets with interactive GLSL mapping layers.
+						<p className="text-sm md:text-base text-foreground/60 leading-relaxed font-body mb-10 max-w-[280px]">
+							Premium geospatial prototype mapping high-fidelity weather vectors and atmospheric datasets via custom GLSL shaders.
 						</p>
 						
-						<div className="flex items-center gap-6 border-t border-white/10 pt-8">
-                           <div className="flex flex-col gap-1">
-                               <span className="text-[9px] font-mono uppercase text-foreground/30 tracking-[0.2em] font-bold">Tech</span>
-                               <span className="text-[10px] font-bold text-foreground/70 tracking-tight">GLSL • GIS • SVG</span>
+						<div className="flex items-center gap-8 border-t border-white/10 pt-9">
+                           <div className="flex flex-col gap-1.5">
+                               <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Tech Stack</span>
+                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">GLSL • GIS • TILE</span>
                            </div>
-                           <div className="w-[1px] h-8 bg-white/10" />
-                           <div className="flex flex-col gap-1">
-                               <span className="text-[9px] font-mono uppercase text-foreground/30 tracking-[0.2em] font-bold">Concept</span>
-                               <span className="text-[10px] font-bold text-foreground/70 tracking-tight">Spatial AI</span>
+                           <div className="w-[1px] h-10 bg-white/10" />
+                           <div className="flex flex-col gap-1.5">
+                               <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Domain</span>
+                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">Spatial AI</span>
                            </div>
                         </div>
 					</div>
