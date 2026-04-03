@@ -4,6 +4,7 @@ import * as React from "react";
 import {
 	motion,
 	useMotionTemplate,
+	useReducedMotion,
 	useScroll,
 	useTransform,
 	useMotionValue,
@@ -11,6 +12,17 @@ import {
 } from "framer-motion";
 import { ArrowUpRight, Globe, Sparkles } from "lucide-react";
 import { useTheme } from "next-themes";
+
+interface IShowcaseContent {
+	accentTitle: string;
+	cursorLabel?: string;
+	description: string;
+	domain: string;
+	eyebrow: string;
+	handwrittenLabel: string;
+	techStack: string;
+	title: string;
+}
 
 interface ISmoothScrollHeroProps {
 	/**
@@ -27,13 +39,15 @@ interface ISmoothScrollHeroProps {
 	 * @default 25
 	 */
 	initialClipPercentage?: number;
+	showcase: IShowcaseContent;
 }
 
 const SmoothScrollHeroBackground: React.FC<{
 	containerRef: React.RefObject<HTMLDivElement | null>;
 	iframeSrc: string;
 	initialClipPercentage: number;
-}> = ({ containerRef, iframeSrc, initialClipPercentage }) => {
+	showcase: IShowcaseContent;
+}> = ({ containerRef, iframeSrc, initialClipPercentage, showcase }) => {
 	const { scrollYProgress: rawScrollProgress } = useScroll({
 		target: containerRef as React.RefObject<HTMLElement>,
 		offset: ["start start", "end end"],
@@ -45,6 +59,7 @@ const SmoothScrollHeroBackground: React.FC<{
 		damping: 30,
 		restDelta: 0.001
 	});
+	const prefersReducedMotion = useReducedMotion();
 
 	// Synchronize iframe theme with the current site theme
 	const { resolvedTheme, theme } = useTheme();
@@ -57,10 +72,18 @@ const SmoothScrollHeroBackground: React.FC<{
 			const url = new URL(iframeSrc);
 			url.searchParams.set("theme", currentTheme);
 			return url.toString();
-		} catch (e) {
+		} catch {
 			return iframeSrc;
 		}
 	}, [iframeSrc, currentTheme]);
+	const displayUrl = React.useMemo(() => {
+		try {
+			return new URL(iframeSrc).hostname;
+		} catch {
+			return iframeSrc.replace(/^https?:\/\//, "");
+		}
+	}, [iframeSrc]);
+	const cursorLabel = showcase.cursorLabel ?? "Open Project";
 
 	// Broadcast theme changes to iframe via postMessage for live updates
 	React.useEffect(() => {
@@ -92,24 +115,28 @@ const SmoothScrollHeroBackground: React.FC<{
 	const clipPadding = useTransform(
 		scrollYProgress,
 		[0, 1],
-		[initialClipPercentage, 0],
+		[prefersReducedMotion ? 8 : initialClipPercentage, 0],
 	);
 	// Smooth rounded corners via inset
 	const clipPath = useMotionTemplate`inset(${clipPadding}% ${clipPadding}% ${clipPadding}% ${clipPadding}% round 3.5rem)`;
 
 	// Scale animation for mock window
-	const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1]);
+	const scale = useTransform(scrollYProgress, [0, 1], [prefersReducedMotion ? 1.03 : 1.12, 1]);
 
 	// Showcase Panel dynamic animations (True Center to Bottom-Left Corner)
-	const showcaseLeft = useTransform(scrollYProgress, [0, 0.45, 0.95], ["50%", "50%", "3rem"]);
+	const showcaseLeft = useTransform(scrollYProgress, [0, 0.45, 0.95], ["50%", "50%", "1.5rem"]);
 	const showcaseTop = useTransform(scrollYProgress, [0, 0.45, 0.95], ["50%", "50%", "auto"]);
-	const showcaseBottom = useTransform(scrollYProgress, [0, 0.45, 0.95], ["auto", "auto", "3rem"]);
+	const showcaseBottom = useTransform(scrollYProgress, [0, 0.45, 0.95], ["auto", "auto", "1.5rem"]);
 	const showcaseX = useTransform(scrollYProgress, [0, 0.45, 0.95], ["-50%", "-50%", "0%"]);
 	const showcaseY = useTransform(scrollYProgress, [0, 0.45, 0.95], ["-50%", "-50%", "0%"]); 
 	
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.45, 0.95], [1.15, 1.15, 1]);
-	const showcaseBlur = useTransform(scrollYProgress, [0, 0.1, 0.5], ["blur(12px)", "blur(20px)", "blur(30px)"]);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [1, 1, 1, 0.8]);
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.45, 0.95], [prefersReducedMotion ? 1.02 : 1.08, prefersReducedMotion ? 1.02 : 1.08, 1]);
+	const showcaseBlur = useTransform(
+		scrollYProgress,
+		[0, 0.1, 0.5],
+		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(12px)"] : ["blur(10px)", "blur(18px)", "blur(28px)"],
+	);
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [1, 1, 1, 0.92]);
 
 	return (
 		<motion.div
@@ -144,7 +171,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				}}
 				className="pointer-events-none absolute z-[100] flex items-center gap-3 rounded-full border border-white/30 bg-primary px-5 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-primary-foreground backdrop-blur-xl"
 			>
-				Visit
+				{cursorLabel}
 				<motion.div
 					animate={{ x: [0, 4, 0] }}
 					transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
@@ -158,7 +185,8 @@ const SmoothScrollHeroBackground: React.FC<{
 				href="https://atmolens.priyanshu.world"
 				target="_blank"
 				rel="noopener noreferrer"
-				className="group/browser relative h-full w-full cursor-none overflow-hidden rounded-[2rem] border border-white/10 bg-card shadow-3xl pointer-events-auto md:rounded-[3.5rem]"
+				aria-label={`Open ${displayUrl} in a new tab`}
+				className="group/browser relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 bg-card shadow-3xl pointer-events-auto md:cursor-none md:rounded-[3.5rem]"
 				style={{
 					scale,
 					transformOrigin: "center center"
@@ -174,7 +202,7 @@ const SmoothScrollHeroBackground: React.FC<{
 					<div className="ml-2 flex h-7 flex-1 items-center justify-center rounded-xl border border-foreground/[0.08] bg-foreground/[0.04] px-3 md:ml-8 md:h-8 md:px-6">
 						<div className="flex items-center gap-2.5 opacity-50">
 							<Globe className="w-3.5 h-3.5 text-primary" />
-							<span className="truncate font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-foreground/70 md:text-[9px]">{iframeSrc}</span>
+							<span className="truncate font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-foreground/70 md:text-[9px]">{displayUrl}</span>
 						</div>
 					</div>
 					<div className="hidden w-24 md:block" />
@@ -189,7 +217,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				/>
 				
 				{/* Iframe overlay for visual polish */}
-				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-60" />
+				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-45" />
 
 				{/* AtmoLens Showcase Container with Signature font */}
 				<motion.div 
@@ -225,34 +253,34 @@ const SmoothScrollHeroBackground: React.FC<{
 								>
 									<Sparkles className="w-5 h-5 text-primary" />
 								</motion.div>
-								<h3 className="text-[11px] font-mono text-primary/80 uppercase tracking-[0.4em] font-black">Lab-System: Protocol</h3>
+								<h3 className="text-[11px] font-mono text-primary/80 uppercase tracking-[0.4em] font-black">{showcase.eyebrow}</h3>
 							</div>
 							
 							{/* Signature Font Title - Refined position */}
 							<span className="font-signature text-4xl md:text-6xl text-primary leading-tight -mt-4 -ml-2 opacity-100 block drop-shadow-sm select-none">
-								Cartographix
+								{showcase.handwrittenLabel}
 							</span>
 						</div>
 						
 						<h2 className="mb-5 font-display text-3xl font-black uppercase leading-[0.8] tracking-tighter text-foreground md:text-6xl">
-							Atmo<br />
-							<span className="font-medium italic text-foreground/35">Intelligence</span>
+							{showcase.title}<br />
+							<span className="font-medium italic text-foreground/35">{showcase.accentTitle}</span>
 						</h2>
 						
 						<p className="text-sm md:text-base text-foreground/60 leading-relaxed font-body mb-10 max-w-[280px]">
-							Premium geospatial prototype mapping high-fidelity weather vectors and atmospheric datasets via custom GLSL shaders.
+							{showcase.description}
 						</p>
 						
 						<div className="flex flex-wrap items-center gap-5 border-t border-white/10 pt-7 md:gap-8 md:pt-9">
                            <div className="flex flex-col gap-1.5">
                                <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Tech Stack</span>
-                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">GLSL &middot; GIS &middot; Tile</span>
+                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">{showcase.techStack}</span>
                            </div>
                            <div className="w-[1px] h-10 bg-white/10" />
                            <div className="flex flex-col gap-1.5">
                                <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Domain</span>
-                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">Spatial AI</span>
-                           </div>
+                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">{showcase.domain}</span>
+                            </div>
                         </div>
 					</div>
 				</motion.div>
@@ -265,6 +293,7 @@ const SmoothScrollHero: React.FC<ISmoothScrollHeroProps> = ({
 	scrollHeight = 1500,
 	iframeSrc,
 	initialClipPercentage = 25,
+	showcase,
 }) => {
 	const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -278,6 +307,7 @@ const SmoothScrollHero: React.FC<ISmoothScrollHeroProps> = ({
 				containerRef={containerRef}
 				iframeSrc={iframeSrc}
 				initialClipPercentage={initialClipPercentage}
+				showcase={showcase}
 			/>
 		</div>
 	);

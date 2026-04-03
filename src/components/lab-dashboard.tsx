@@ -32,38 +32,58 @@ export function LabDashboard() {
             transition={{ duration: 0.8 }}
             className="relative z-10 flex max-w-3xl flex-col items-center text-center"
           >
-            <div className="flex items-center gap-3 mb-6">
+            <div className="mb-6 flex items-center gap-3 rounded-full border border-primary/20 bg-background/60 px-4 py-2 backdrop-blur-xl">
               <motion.div
-                whileHover={{ scale: 1.15, rotate: 180 }}
-                className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 shadow-xl shadow-primary/10 cursor-pointer"
+                whileHover={{ scale: 1.12, rotate: 90 }}
+                className="rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 p-2 shadow-xl shadow-primary/10"
               >
-                <FlaskConical className="w-8 h-8 text-primary" />
+                <FlaskConical className="h-5 w-5 text-primary" />
               </motion.div>
+              <span className="text-[11px] font-mono uppercase tracking-[0.28em] text-foreground/60">
+                Experimental Sandbox
+              </span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display text-foreground mb-4 leading-none tracking-tight">
-              The <span className="bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent">Lab</span>
+            <h1 className="mb-4 text-5xl font-bold leading-none tracking-tight text-foreground md:text-7xl lg:text-8xl">
+              The{" "}
+              <span className="bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent">
+                Lab
+              </span>
             </h1>
-            <p className="text-lg md:text-xl text-foreground/70 max-w-lg mb-8">
-              A showcase of my digital experiments, creative coding, and everything else I build online just to show off.
+            <p className="mb-8 max-w-2xl text-lg text-foreground/70 md:text-xl">
+              A running archive of creative code, interface studies, and geospatial experiments built to test ideas in public.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-foreground/70">
-              <div className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">experimental</span></div>
+              <div className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">creative code</span></div>
               <div className="hidden h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-800 sm:block" />
               <div className="flex items-center gap-2"><Beaker className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">prototypes</span></div>
               <div className="hidden h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-800 sm:block" />
-              <div className="flex items-center gap-2"><Cpu className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">creative</span></div>
+              <div className="flex items-center gap-2"><Cpu className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">geospatial ui</span></div>
             </div>
           </motion.div>
           
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 0.5 }} className="absolute bottom-16 flex flex-col items-center gap-2">
-            <p className="text-[10px] font-mono text-foreground/50 tracking-[0.2em] uppercase">scroll to engage protocol</p>
+            <p className="text-[10px] font-mono text-foreground/50 tracking-[0.2em] uppercase">scroll to enter the featured build</p>
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-px h-12 bg-gradient-to-b from-primary/80 to-transparent" />
           </motion.div>
         </section>
 
-        {/* New Smooth Scroll Iframe Component replacing the Terminal */}
         <section className="relative w-full z-20">
-          <SmoothScrollHero iframeSrc="https://atmolens.priyanshu.world" />
+          <SmoothScrollHero
+            iframeSrc="https://atmolens.priyanshu.world"
+            scrollHeight={1350}
+            initialClipPercentage={18}
+            showcase={{
+              eyebrow: "Featured Build",
+              handwrittenLabel: "AtmoLens",
+              title: "Atmospheric",
+              accentTitle: "intelligence",
+              description:
+                "A geospatial interface study that turns weather fields and atmospheric layers into a cinematic, shader-driven mapping experience.",
+              techStack: "GLSL / GIS / Weather Tiles",
+              domain: "Climate Mapping",
+              cursorLabel: "Open Build",
+            }}
+          />
         </section>
 
         <TapedFooter />

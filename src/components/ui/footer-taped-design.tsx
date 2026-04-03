@@ -1,6 +1,4 @@
 "use client";
-
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Linkedin, Github } from "lucide-react";
 
@@ -44,7 +42,7 @@ export const Component = () => {
               Priyanshu Portfolio
             </Link>
             <p className="text-foreground/70 font-medium text-sm w-full">
-              Experimental geographic projects and systems built with passion.
+              Experimental geographic projects and systems built with care.
             </p>
           </div>
 
@@ -85,7 +83,7 @@ export const Component = () => {
       
       <div className="mt-8 mb-4 px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-foreground/70 text-center md:text-left">
         <p className="flex flex-wrap items-center justify-center gap-1 leading-relaxed md:justify-start">
-          &copy;{currentYear} made and developed by <span className="text-primary font-medium">Priyanshu</span> with intention.
+          &copy;{currentYear} made and developed by <span className="text-primary font-medium">Priyanshu</span> with intention and care.
         </p>
 
         <div className="flex gap-4 items-center">
