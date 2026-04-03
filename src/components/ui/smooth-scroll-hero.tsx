@@ -160,24 +160,24 @@ const SmoothScrollHeroBackground: React.FC<{
 
 			{/* Custom 'Visit' Cursor with Pulse Effect - Overlapping the pointer tip */}
 			<motion.div 
+				aria-hidden="true"
 				style={{ 
 					x: cursorX, 
 					y: cursorY, 
-					translateX: "0%", 
-					translateY: "0%",
+					translateX: "1rem", 
+					translateY: "-50%",
 					opacity: isHovered ? 1 : 0,
-					scale: isHovered ? 1 : 0,
-					boxShadow: "0 0 60px rgba(30, 157, 241, 0.45)",
+					scale: isHovered ? 1 : 0.92,
+					boxShadow: "0 24px 70px rgba(30, 157, 241, 0.28)",
 				}}
-				className="pointer-events-none absolute z-[100] flex items-center gap-3 rounded-full border border-white/30 bg-primary px-5 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-primary-foreground backdrop-blur-xl"
+				className="pointer-events-none absolute z-[100] hidden items-center gap-2 rounded-full border border-primary/25 bg-background/80 p-1 pr-1.5 text-foreground backdrop-blur-2xl md:flex"
 			>
-				{cursorLabel}
-				<motion.div
-					animate={{ x: [0, 4, 0] }}
-					transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-				>
-					<ArrowUpRight className="w-4 h-4 font-black" />
-				</motion.div>
+				<span className="rounded-full bg-primary px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-primary/20">
+					{cursorLabel}
+				</span>
+				<span className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/8 bg-foreground/[0.04] text-primary">
+					<ArrowUpRight className="h-3.5 w-3.5" />
+				</span>
 			</motion.div>
 
 			{/* Scaled animated container holding the iframe */}
@@ -186,7 +186,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label={`Open ${displayUrl} in a new tab`}
-				className="group/browser relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 bg-card shadow-3xl pointer-events-auto md:cursor-none md:rounded-[3.5rem]"
+				className="group/browser relative h-full w-full overflow-hidden rounded-[2rem] border border-white/10 bg-card shadow-3xl pointer-events-auto transition-[box-shadow,border-color] duration-500 hover:border-primary/25 hover:shadow-[0_32px_120px_rgba(30,157,241,0.18)] md:cursor-none md:rounded-[3.5rem]"
 				style={{
 					scale,
 					transformOrigin: "center center"
@@ -217,7 +217,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				/>
 				
 				{/* Iframe overlay for visual polish */}
-				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-45" />
+				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-45 transition-opacity duration-500 group-hover/browser:opacity-25" />
 
 				{/* AtmoLens Showcase Container with Signature font */}
 				<motion.div 
@@ -270,6 +270,23 @@ const SmoothScrollHeroBackground: React.FC<{
 						<p className="text-sm md:text-base text-foreground/60 leading-relaxed font-body mb-10 max-w-[280px]">
 							{showcase.description}
 						</p>
+
+						<div className="mb-8 flex items-center gap-3 rounded-[1.4rem] border border-white/10 bg-foreground/[0.03] p-3 transition-colors duration-500 group-hover/browser:border-primary/20 group-hover/browser:bg-primary/[0.06]">
+							<div className="min-w-0 flex-1">
+								<p className="mb-1 text-[10px] font-mono font-bold uppercase tracking-[0.24em] text-foreground/40">
+									Launch
+								</p>
+								<p className="truncate text-sm font-medium text-foreground/68">
+									{displayUrl}
+								</p>
+							</div>
+							<div className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-primary/25 transition-transform duration-500 group-hover/browser:-translate-y-0.5">
+								{cursorLabel}
+								<span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/15">
+									<ArrowUpRight className="h-3.5 w-3.5" />
+								</span>
+							</div>
+						</div>
 						
 						<div className="flex flex-wrap items-center gap-5 border-t border-white/10 pt-7 md:gap-8 md:pt-9">
                            <div className="flex flex-col gap-1.5">
