@@ -8,7 +8,7 @@ import {
 	useMotionValue,
 	useSpring,
 } from "framer-motion";
-import { ArrowUpRight, Globe, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, Globe, Sparkles } from "lucide-react";
 
 interface ISmoothScrollHeroProps {
 	/**
@@ -25,29 +25,25 @@ interface ISmoothScrollHeroProps {
 	 * @default 25
 	 */
 	initialClipPercentage?: number;
-	/**
-	 * Final clip path percentage
-	 * @default 75
-	 */
-	finalClipPercentage?: number;
 }
 
-interface ISmoothScrollHeroBackgroundProps extends ISmoothScrollHeroProps {}
+const SmoothScrollHeroBackground: React.FC<{
+	containerRef: React.RefObject<HTMLDivElement | null>;
+	iframeSrc: string;
+	initialClipPercentage: number;
+}> = ({ containerRef, iframeSrc, initialClipPercentage }) => {
+	const { scrollYProgress } = useScroll({
+		target: containerRef as React.RefObject<HTMLElement>,
+		offset: ["start start", "end end"],
+	});
 
-const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = ({
-	scrollHeight = 1500,
-	iframeSrc,
-	initialClipPercentage = 25,
-	finalClipPercentage = 75,
-}) => {
-	const { scrollY } = useScroll();
 	const [isHovered, setIsHovered] = React.useState(false);
 	
 	// Mouse tracking for custom cursor
 	const mouseX = useMotionValue(0);
 	const mouseY = useMotionValue(0);
-	const cursorX = useSpring(mouseX, { stiffness: 250, damping: 25 });
-	const cursorY = useSpring(mouseY, { stiffness: 250, damping: 25 });
+	const cursorX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+	const cursorY = useSpring(mouseY, { stiffness: 300, damping: 30 });
 
 	const handleMouseMove = (e: React.MouseEvent) => {
 		const rect = e.currentTarget.getBoundingClientRect();
@@ -55,40 +51,31 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 		mouseY.set(e.clientY - rect.top);
 	};
 
-	// Clip path animation
-	const clipStart = useTransform(
-		scrollY,
-		[0, scrollHeight],
+	// Clip path animation using local progress
+	const clipPadding = useTransform(
+		scrollYProgress,
+		[0, 1],
 		[initialClipPercentage, 0],
 	);
-	const clipEnd = useTransform(
-		scrollY,
-		[0, scrollHeight],
-		[finalClipPercentage, 100],
-	);
-	const clipPath = useMotionTemplate`polygon(${clipStart}% ${clipStart}%, ${clipEnd}% ${clipStart}%, ${clipEnd}% ${clipEnd}%, ${clipStart}% ${clipEnd}%)`;
+	const clipPath = useMotionTemplate`inset(${clipPadding}% ${clipPadding}% ${clipPadding}% ${clipPadding}% round 3rem)`;
 
 	// Scale animation for mock window
-	const scale = useTransform(
-		scrollY,
-		[0, scrollHeight + 500],
-		[1.7, 1],
-	);
+	const scale = useTransform(scrollYProgress, [0, 1], [1.7, 1]);
 
 	// Showcase Panel dynamic animations (Center to Corner)
-	const showcaseLeft = useTransform(scrollY, [0, 600, scrollHeight], ["50%", "50%", "1.5rem"]);
-	const showcaseBottom = useTransform(scrollY, [0, 600, scrollHeight], ["50%", "50%", "1.5rem"]);
-	const showcaseX = useTransform(scrollY, [0, 600, scrollHeight], ["-50%", "-50%", "0%"]);
-	const showcaseY = useTransform(scrollY, [0, 600, scrollHeight], ["50%", "50%", "0%"]); 
-	const showcaseScale = useTransform(scrollY, [0, 600, scrollHeight], [1.3, 1.3, 1]);
-	const showcaseBlur = useTransform(scrollY, [0, 600], ["blur(12px)", "blur(20px)"]);
+	const showcaseLeft = useTransform(scrollYProgress, [0, 0.4, 0.8], ["50%", "50%", "2rem"]);
+	const showcaseBottom = useTransform(scrollYProgress, [0, 0.4, 0.8], ["50%", "50%", "2rem"]);
+	const showcaseX = useTransform(scrollYProgress, [0, 0.4, 0.8], ["-50%", "-50%", "0%"]);
+	const showcaseY = useTransform(scrollYProgress, [0, 0.4, 0.8], ["50%", "50%", "0%"]); 
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.4, 0.8], [1.3, 1.3, 1]);
+	const showcaseBlur = useTransform(scrollYProgress, [0, 0.4], ["blur(12px)", "blur(20px)"]);
 
 	return (
 		<motion.div
 			className="sticky top-0 h-screen w-full bg-transparent flex items-center justify-center p-4 md:p-12 overflow-hidden pointer-events-none"
 			style={{
 				clipPath,
-				willChange: "transform, opacity, clip-path",
+				willChange: "transform, clip-path",
 			}}
 			onMouseMove={handleMouseMove}
 			onMouseEnter={() => setIsHovered(true)}
@@ -115,14 +102,14 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 				href="https://atmolens.priyanshu.world"
 				target="_blank"
 				rel="noopener noreferrer"
-				className="w-full h-full relative rounded-[3rem] overflow-hidden bg-card border border-border shadow-2xl pointer-events-auto group/browser transition-all duration-700 cursor-none"
+				className="w-full h-full relative rounded-[3rem] overflow-hidden bg-card/60 border border-white/10 shadow-2xl pointer-events-auto group/browser transition-all duration-700 cursor-none backdrop-blur-md"
 				style={{
 					scale,
 					transformOrigin: "center center"
 				}}
 			>
 				{/* Top Mock Window Bar */}
-				<div className="absolute top-0 left-0 w-full h-12 bg-background/50 backdrop-blur-xl border-b border-border/50 flex items-center px-6 gap-2 z-20">
+				<div className="absolute top-0 left-0 w-full h-12 bg-background/50 backdrop-blur-xl border-b border-white/5 flex items-center px-6 gap-2 z-20">
 					<div className="flex gap-1.5">
 						<div className="w-3 h-3 rounded-full bg-[#FF5F56] shadow-inner shadow-black/10" />
 						<div className="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-inner shadow-black/10" />
@@ -145,7 +132,7 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 				/>
 				
 				{/* Iframe overlay for visual polish */}
-				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/10)] opacity-20" />
+				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/15)] opacity-40" />
 
 				{/* AtmoLens Project Intro with Grain Background Overlay */}
 				<motion.div 
@@ -164,7 +151,7 @@ const SmoothScrollHeroBackground: React.FC<ISmoothScrollHeroBackgroundProps> = (
 						className="absolute inset-0 bg-card/60 backdrop-blur-2xl"
 						style={{
 							backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')",
-							backgroundSize: "120px 120px",
+							backgroundSize: "130px 130px",
 							opacity: 0.4
 						}}
 					/>
@@ -208,18 +195,19 @@ const SmoothScrollHero: React.FC<ISmoothScrollHeroProps> = ({
 	scrollHeight = 1500,
 	iframeSrc,
 	initialClipPercentage = 25,
-	finalClipPercentage = 75,
 }) => {
+	const containerRef = React.useRef<HTMLDivElement>(null);
+
 	return (
 		<div
+			ref={containerRef}
 			style={{ height: `calc(${scrollHeight}px + 100vh)` }}
 			className="relative w-full"
 		>
 			<SmoothScrollHeroBackground
-				scrollHeight={scrollHeight}
+				containerRef={containerRef}
 				iframeSrc={iframeSrc}
 				initialClipPercentage={initialClipPercentage}
-				finalClipPercentage={finalClipPercentage}
 			/>
 		</div>
 	);
