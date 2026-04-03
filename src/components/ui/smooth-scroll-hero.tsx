@@ -64,19 +64,20 @@ const SmoothScrollHeroBackground: React.FC<{
 		[0, 1],
 		[initialClipPercentage, 0],
 	);
+	// Smooth rounded corners via inset
 	const clipPath = useMotionTemplate`inset(${clipPadding}% ${clipPadding}% ${clipPadding}% ${clipPadding}% round 3rem)`;
 
-	// Scale animation for mock window
-	const scale = useTransform(scrollYProgress, [0, 1], [1.7, 1]);
+	// Scale animation for mock window - 1.4 is cleaner for text legibility
+	const scale = useTransform(scrollYProgress, [0, 1], [1.4, 1]);
 
-	// Showcase Panel dynamic animations (Center to Corner)
-	const showcaseLeft = useTransform(scrollYProgress, [0, 0.4, 0.9], ["50%", "50%", "2.5rem"]);
-	const showcaseBottom = useTransform(scrollYProgress, [0, 0.4, 0.9], ["50%", "50%", "2.5rem"]);
-	const showcaseX = useTransform(scrollYProgress, [0, 0.4, 0.9], ["-50%", "-50%", "0%"]);
-	const showcaseY = useTransform(scrollYProgress, [0, 0.4, 0.9], ["50%", "50%", "0%"]); 
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.4, 0.9], [1.2, 1.2, 1]);
-	const showcaseBlur = useTransform(scrollYProgress, [0, 0.2, 0.5], ["blur(0px)", "blur(10px)", "blur(20px)"]);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.95, 1], [0, 0, 1, 1, 0.9]);
+	// Showcase Panel dynamic animations (True Center to Corner)
+	const showcaseLeft = useTransform(scrollYProgress, [0, 0.5, 0.9], ["50%", "50%", "2.5rem"]);
+	const showcaseBottom = useTransform(scrollYProgress, [0, 0.5, 0.9], ["50%", "50%", "2.5rem"]);
+	const showcaseX = useTransform(scrollYProgress, [0, 0.5, 0.9], ["-50%", "-50%", "0%"]);
+	const showcaseY = useTransform(scrollYProgress, [0, 0.5, 0.9], ["50%", "50%", "0%"]); 
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.5, 0.9], [1.2, 1.2, 1]);
+	const showcaseBlur = useTransform(scrollYProgress, [0, 0.3], ["blur(0px)", "blur(20px)"]);
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.95, 1], [0, 0, 1, 1, 0.8]);
 
 	return (
 		<motion.div
@@ -89,7 +90,7 @@ const SmoothScrollHeroBackground: React.FC<{
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
-			{/* Custom 'Visit' Cursor */}
+			{/* Custom 'Visit' Cursor with Pulse Effect */}
 			<motion.div 
 				style={{ 
 					x: cursorX, 
@@ -99,10 +100,13 @@ const SmoothScrollHeroBackground: React.FC<{
 					opacity: isHovered ? 1 : 0,
 					scale: isHovered ? 1 : 0
 				}}
-				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-6 py-3 rounded-full font-mono text-[11px] uppercase tracking-[0.25em] shadow-[0_0_40px_rgba(var(--color-primary-rgb),0.5)] flex items-center gap-3 backdrop-blur-md border border-white/20 font-bold"
+				className="pointer-events-none absolute z-[100] bg-primary text-primary-foreground px-6 py-3 rounded-full font-mono text-[11px] uppercase tracking-[0.2em] shadow-[0_0_50px_rgba(var(--color-primary-rgb),0.5)] flex items-center gap-3 backdrop-blur-md border border-white/20 font-bold"
 			>
 				Visit Project
-				<motion.div animate={{ x: [0, 2, 0] }} transition={{ duration: 1, repeat: Infinity }}>
+				<motion.div
+					animate={{ x: [0, 3, 0] }}
+					transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+				>
 					<ArrowUpRight className="w-4 h-4" />
 				</motion.div>
 			</motion.div>
@@ -136,7 +140,7 @@ const SmoothScrollHeroBackground: React.FC<{
 
 				<iframe 
 					src={iframeSrc} 
-					className="w-full h-full pt-14 border-none pointer-events-none"
+					className="w-full h-full pt-14 border-none pointer-events-none opacity-80 group-hover/browser:opacity-100 transition-opacity duration-700"
 					title="Project Interactive Window"
 					loading="lazy"
 				/>
