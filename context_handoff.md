@@ -1,85 +1,117 @@
-# 🚀 Project Handover: GIS Portfolio & Lab System
+# 🏛️ Full Project Context: AtmoLens GIS Portfolio & Lab
 
-This document provides crucial context for continuing development on the **AtmoLens GIS Portfolio**. The project is currently in a "Polish & Refinement" phase, focusing on high-fidelity animations and cross-domain synchronization.
-
----
-
-## 🏛️ Architecture Overview
-
-The system is split into two primary domains:
-1.  **Main Portfolio (Next.js 15)**: The parent container found in `/src`.
-2.  **AtmoLens Lab (Vite/React)**: An experimental GIS dashboard located in `/webapp`, which is integrated into the Lab page via an iframe.
-
-### 🎨 Design Philosophy: "Liquid Glass & Scrapbook"
-The aesthetic combines **high-end glassmorphism** (backdrop blurs, gradients) with a **"Scrapbook" signature style** (grain textures, handwritten fonts).
-- **Core Font**: `Outfit` (Sans)
-- **Signature Font**: `Caveat` (Handwritten/Scrapbook style)
-- **Colors**: Blue-accented primary theme with strict HSL consistency.
+This document is a high-fidelity "Source of Truth" for the AtmoLens ecosystem. It covers the architecture, component mechanics, and inter-system protocols for the **Portfolio** and the **Lab System**.
 
 ---
 
-## 🏗️ Core Component: `SmoothScrollHero`
-Found in: `src/components/ui/smooth-scroll-hero.tsx`
+## 🛠️ Core Technology Stack
 
-This component handles the "Center-to-Corner" transition for the project showcase.
-
-### Key Implementation Details:
-*   **Scroll Logic**: Uses `useScroll` with a custom `useSpring` (stiffness: 1000, damping: 50) for local progress tracking. **DO NOT** use global `scrollY` for these animations to avoid parallax jitter.
-*   **Clip Path**: Animates an `inset` clip-path from `25%` to `0%` to create a "reveal" effect on scroll.
-*   **Custom Cursor**:
-    - Pulsing "Visit" label centered exactly on the pointer tip (`translateX/Y: 0%`).
-    - Uses a very high-stiffness spring to ensure the label tracks the mouse instantly.
-*   **Showcase Panel**:
-    - **Positioning**: Moves from a true viewport center (`top: 50%, left: 50%`) to the bottom-left corner (`bottom: 3rem, left: 3rem`).
-    - **Aesthetic**: Integrated `sparkles` animation and signature titles with a grainy backdrop-blur card.
+| Layer | Technology |
+| :--- | :--- |
+| **Parent App** | Next.js 15 (App Router), TypeScript, Tailwind CSS 4 |
+| **Lab App** | Vite, React, Three.js/Fiber (WebGL), GLSL |
+| **Animation** | Framer Motion (UI/Scroll), GSAP ScrollTrigger (Complex FX) |
+| **State/Theme** | `next-themes` (Parent), Custom `postMessage` listener (Iframe) |
+| **Infrastructure** | Vercel (Parent), Subdomain Routing (`atmolens.priyanshu.world`) |
 
 ---
 
-## 🌓 Theme Synchronization (CRITICAL)
+## 🏗️ Architecture & Domains
 
-The parent site and the iframe must stay in sync visually.
+### 1. The Portfolio (Parent)
+Located in `/src`. This acts as the main hub. It handles navigation (`SlideTabs`), branding, and the global ambient background (`ParticlesBackground`).
 
-### Implementation:
-1.  **Initial Load**: The parent appends `?theme=dark|light` to the `iframeSrc`.
-2.  **Real-Time Update**: 
-    - The `SmoothScrollHero` component uses `useTheme` from `next-themes`.
-    - It broadcasts a `SET_THEME` message via `postMessage` whenever the parent theme toggles.
-    - **Receiver**: `webapp/src/main.jsx` contains a `ThemeSync` component that listens for this message and applies the `.dark-theme` class to the `document.documentElement`.
+### 2. The Lab (Iframe Subdomain)
+Located in `/webapp`. An isolated, hardware-accelerated "Sandbox." 
+- **AtmoLens GIS**: A high-performance spatial dashboard integrated via an iframe on the `/lab` page.
+- **Theme Bridge**: Since it exists on a different origin, it requires the **ThemeSync Protocol** (see below) to stay visually consistent.
 
 ---
 
-## 🛠️ Ongoing Tasks & Next Steps
+## 🌓 ThemeSync Protocol (Inter-System Handshake)
+
+To prevent visual "flashes" when toggling light/dark mode, the portfolio and Lab app are tightly coupled:
 
 > [!IMPORTANT]
-> **Priority 1: Animation Smoothness**
-> If any jitter is noticed during the showcase transition, verify that `useSpring` is receiving the correct `rawScrollProgress` from the `containerRef`.
+> **Implementation Level 1: Initial Sync**
+> When the Lab page mounts, the `SmoothScrollHero` appends `?theme=dark|light` to the iframe URL. `webapp/src/main.jsx` reads this on mount.
 
 > [!TIP]
-> **Priority 2: Adding New Lab Projects**
-> The `SmoothScrollHero` is designed to be a factory. To add a new project, simply pass a new `iframeSrc` and update the `Showcase` child labels.
-
-### Current "To-Do" Items:
-- [ ] **Production Pass**: Verify the `3.5rem` rounded corners on extreme mobile aspect ratios (e.g., iPhone SE vs. iPad).
-- [ ] **Iframe Interaction**: The iframe currently has `pointer-events-none` for performance/animation stability. If interaction is needed, implement a "Double Click to Interact" overlay.
-- [ ] **GLSL Expansion**: The AtmoLens webapp (`/webapp`) uses custom shaders. Ensure any theme changes in the parent also update the shader uniforms (color palettes).
+> **Implementation Level 2: Real-time Sync**
+> The `SmoothScrollHero` broadcasts a `postMessage` with `type: 'SET_THEME'` whenever the parent theme changes. The `ThemeSync` component in the Lab app listens and applies the `.dark-theme` class instantly without a reload.
 
 ---
 
-## 📁 Key File Map
-| File | Responsibility |
+## 🎢 Page Deep-Dives
+
+### 🏠 Home Page (`src/app/page.tsx`)
+*   **Hero Animation**: Uses `ContainerScroll` for a 3D perspective tilt on the mock dashboard.
+*   **Radar Effect**: A subtle, pulsing background component (`Radar`) reflecting the "Geospatial" theme.
+*   **Experience Timeline**: Found in `src/components/ui/timeline.tsx`, this component uses `framer-motion` to reveal career milestones as the user scrolls.
+*   **Personal Branding**: Uses `Tilt` and `Spotlight` on the headshot card for a "hover-reactive" premium feel.
+
+### 🧪 Lab Page (`src/app/lab/page.tsx`)
+*   **SmoothScrollHero**: The center-piece. 
+    - **Logic**: It calculates scroll progress *locally* using `useScroll` with the `containerRef`.
+    - **Springs**: Uses high-stiffness `useSpring` (stiffness: 1000, damping: 50) for zero-lag cursor tracking.
+    - **Clip-Path Reveal**: Insets the viewport from `25%` to `0%` round `3.5rem`.
+    - **Transition**: Moves the showcase panel from **Screen Center** to **Bottom-Left Corner** over the scroll duration.
+
+---
+
+## 🧩 Component Special Specs
+
+### `SmoothScrollHero` (Architecture)
+- **Custom Cursor**: Centered exactly on the pointer tip (`translateX/Y: 0%`). It pulses a "VISIT" label via `framer-motion`.
+- **Showcase Details**: 
+    - Title: **"Cartographix"** using the `font-signature` (`Caveat`).
+    - Detail Tags: **"GLSL • GIS • TILE"** for technical authority.
+    - Aesthetic: Deep backdrop-blur (`backdrop-blur-3xl`) and grain texture overlay.
+
+### `FullScrollFx` (GSAP Engine)
+- Found in: `src/components/ui/full-screen-scroll-fx.tsx`.
+- This is a complex scroll-storytelling engine using **GSAP ScrollTrigger**. It pins sections and handles multi-layered word masking transitions.
+
+### `SlideTabs` (Navigation)
+- Implements a "sliding underline" effect that tracks the current active route using `layoutId` transitions.
+
+---
+
+## 🎨 Design System: Tailwind CSS 4
+
+The project uses **Tailwind 4**, meaning configuration is moved to `src/app/globals.css`.
+
+### Custom Theme Tokens:
+- `--font-signature`: Maps to the `Caveat` font.
+- `--font-display`: Maps to `Outfit`.
+- `--font-sans`: Maps to `Inter Tight`.
+- `--color-primary`: The primary blue/green brand color.
+- `--color-background`: Responsive to light/dark mode variables.
+
+### Key CSS Utilities:
+- `.liquid-glass`: A custom utility located in `webapp/src/index.css` that provides ultra-smooth glassmorphism with spotlight highlights.
+
+---
+
+## 📁 Key File Map for Successors
+
+| File | Context / Responsibility |
 | :--- | :--- |
-| `src/app/layout.tsx` | Global fonts (`Caveat`, `Outfit`) and Theme Provider. |
-| `src/components/ui/smooth-scroll-hero.tsx` | Core Lab animation logic & Showcase UI. |
-| `src/app/globals.css` | Tailwind 4 `@theme` tokens (e.g., `--font-signature`). |
-| `webapp/src/main.jsx` | Iframe theme listener & entry point. |
-| `webapp/src/index.css` | AtmoLens specific CSS variables (`--bg-color`, etc.). |
+| `src/app/layout.tsx` | Global fonts, Analytics, ThemeProvider. |
+| `src/app/page.tsx` | Landing experience and Timeline configuration. |
+| `src/components/ui/smooth-scroll-hero.tsx` | The math for the Lab animation and Cursor logic. |
+| `src/app/globals.css` | Tailwind 4 `@theme` block and core UI tokens. |
+| `webapp/src/main.jsx` | The `ThemeSync` listener for the AtmoLens app. |
+| `webapp/src/App.jsx` | The entry-point for the Lab's GIS visualization. |
 
 ---
 
-## 🤖 Note for Next LLM
-When editing **Tailwind 4** styles, remember that configuration happens in `globals.css` using the `@theme inline` block. **Do not** look for a `tailwind.config.ts` as it has been deprecated for this project.
+## 🤖 Note for Next AI Tasking
 
-Maintain the "Cartographix" branding—it requires bold typography, high-contrast details, and smooth, intentful interactions.
+Maintain the **"Scrapbook" signature style**. When adding new headings or branding:
+1. Use `font-signature` (`Caveat`) for "handwritten" elements.
+2. Use `backdrop-blur-3xl` for all floating interactions.
+3. Ensure all scroll-driven animations use **local refs** and **springs** to prevent the "Next.js Jitter" often found when using global scroll values.
 
 ---
-*Signed by: Antigravity*
+*Generated by Antigravity AI*
