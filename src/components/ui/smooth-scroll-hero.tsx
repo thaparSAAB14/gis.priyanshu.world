@@ -49,12 +49,28 @@ const SmoothScrollHeroBackground: React.FC<{
 	// Synchronize iframe theme with the current site theme
 	const { resolvedTheme, theme } = useTheme();
 	const currentTheme = resolvedTheme || theme || "dark";
+	const iframeRef = React.useRef<HTMLIFrameElement>(null);
+
 	// Append theme to URL to trigger re-renders in the iframe if it supports it
 	const finalIframeSrc = React.useMemo(() => {
-		const url = new URL(iframeSrc);
-		url.searchParams.set("theme", currentTheme);
-		return url.toString();
+		try {
+			const url = new URL(iframeSrc);
+			url.searchParams.set("theme", currentTheme);
+			return url.toString();
+		} catch (e) {
+			return iframeSrc;
+		}
 	}, [iframeSrc, currentTheme]);
+
+	// Broadcast theme changes to iframe via postMessage for live updates
+	React.useEffect(() => {
+		if (iframeRef.current?.contentWindow) {
+			iframeRef.current.contentWindow.postMessage({ 
+				type: 'SET_THEME', 
+				theme: currentTheme 
+			}, '*');
+		}
+	}, [currentTheme]);
 
 	const [isHovered, setIsHovered] = React.useState(false);
 	
@@ -120,7 +136,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				style={{ 
 					x: cursorX, 
 					y: cursorY, 
-					translateX: "24px",  // Shifted right of pointer tip
+					translateX: "12px",  // Closer to pointer tip
 					translateY: "-50%",
 					opacity: isHovered ? 1 : 0,
 					scale: isHovered ? 1 : 0
@@ -164,6 +180,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				</div>
 
 				<iframe 
+					ref={iframeRef}
 					src={finalIframeSrc} 
 					className="w-full h-full pt-14 border-none pointer-events-none group-hover/browser:scale-[1.01] transition-transform duration-1000"
 					title="Project Interactive Window"
