@@ -10,6 +10,7 @@ import {
 	useSpring,
 } from "framer-motion";
 import { ArrowUpRight, Globe, Sparkles } from "lucide-react";
+import { useTheme } from "next-themes";
 
 interface ISmoothScrollHeroProps {
 	/**
@@ -44,6 +45,16 @@ const SmoothScrollHeroBackground: React.FC<{
 		damping: 30,
 		restDelta: 0.001
 	});
+
+	// Synchronize iframe theme with the current site theme
+	const { resolvedTheme, theme } = useTheme();
+	const currentTheme = resolvedTheme || theme || "dark";
+	// Append theme to URL to trigger re-renders in the iframe if it supports it
+	const finalIframeSrc = React.useMemo(() => {
+		const url = new URL(iframeSrc);
+		url.searchParams.set("theme", currentTheme);
+		return url.toString();
+	}, [iframeSrc, currentTheme]);
 
 	const [isHovered, setIsHovered] = React.useState(false);
 	
@@ -153,7 +164,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				</div>
 
 				<iframe 
-					src={iframeSrc} 
+					src={finalIframeSrc} 
 					className="w-full h-full pt-14 border-none pointer-events-none group-hover/browser:scale-[1.01] transition-transform duration-1000"
 					title="Project Interactive Window"
 					loading="lazy"
