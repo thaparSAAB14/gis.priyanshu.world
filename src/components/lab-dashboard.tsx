@@ -4,11 +4,13 @@ import React from "react";
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
 import { FlaskConical, Sparkles, Beaker, Cpu } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
 export function LabDashboard() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <div className="relative min-h-screen overflow-x-clip bg-transparent transition-colors duration-300">
       <SlideTabs />
@@ -24,17 +26,40 @@ export function LabDashboard() {
       <div className="relative z-10 w-full flex flex-col items-center">
         {/* Existing Lab Hero Banner */}
         <section className="relative flex min-h-[100svh] w-full flex-col items-center justify-center px-4 pb-20 pt-28">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-card/5 rounded-full blur-3xl pointer-events-none" />
+          <motion.div
+            aria-hidden="true"
+            animate={
+              prefersReducedMotion
+                ? { opacity: 0.08, scale: 1 }
+                : { opacity: [0.07, 0.14, 0.07], scale: [0.98, 1.04, 0.98] }
+            }
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl"
+          />
+          <motion.div
+            aria-hidden="true"
+            animate={
+              prefersReducedMotion
+                ? { opacity: 0.05, y: 0, scale: 1 }
+                : { opacity: [0.04, 0.1, 0.04], y: [0, 12, 0], scale: [1, 1.05, 1] }
+            }
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            className="pointer-events-none absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-card/5 blur-3xl"
+          />
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={
+              prefersReducedMotion
+                ? { duration: 0.35 }
+                : { type: "spring", stiffness: 110, damping: 20, mass: 0.85 }
+            }
             className="relative z-10 flex max-w-3xl flex-col items-center text-center"
           >
             <div className="mb-6 flex items-center gap-3 rounded-full border border-primary/20 bg-background/60 px-4 py-2 backdrop-blur-xl">
               <motion.div
-                whileHover={{ scale: 1.12, rotate: 90 }}
+                whileHover={prefersReducedMotion ? { scale: 1.03 } : { scale: 1.08, rotate: 18 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
                 className="rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 p-2 shadow-xl shadow-primary/10"
               >
                 <FlaskConical className="h-5 w-5 text-primary" />
@@ -61,9 +86,22 @@ export function LabDashboard() {
             </div>
           </motion.div>
           
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 0.5 }} className="absolute bottom-16 flex flex-col items-center gap-2">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: prefersReducedMotion ? 0.2 : 0.9,
+              duration: prefersReducedMotion ? 0.25 : 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute bottom-16 flex flex-col items-center gap-2"
+          >
             <p className="text-[10px] font-mono text-foreground/50 tracking-[0.2em] uppercase">scroll to enter the featured build</p>
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-px h-12 bg-gradient-to-b from-primary/80 to-transparent" />
+            <motion.div
+              animate={prefersReducedMotion ? { opacity: 0.8 } : { y: [0, 8, 0], opacity: [0.65, 1, 0.65] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              className="h-12 w-px bg-gradient-to-b from-primary/80 to-transparent"
+            />
           </motion.div>
         </section>
 

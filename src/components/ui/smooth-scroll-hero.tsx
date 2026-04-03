@@ -48,18 +48,20 @@ const SmoothScrollHeroBackground: React.FC<{
 	initialClipPercentage: number;
 	showcase: IShowcaseContent;
 }> = ({ containerRef, iframeSrc, initialClipPercentage, showcase }) => {
+	const prefersReducedMotion = useReducedMotion();
 	const { scrollYProgress: rawScrollProgress } = useScroll({
 		target: containerRef as React.RefObject<HTMLElement>,
 		offset: ["start start", "end end"],
 	});
 
-	// High-performance spring for scroll progress
+	// Smooth the scroll-linked transforms so the hero feels deliberate
+	// rather than overly reactive to small wheel/touchpad input changes.
 	const scrollYProgress = useSpring(rawScrollProgress, {
-		stiffness: 100,
-		damping: 30,
+		stiffness: prefersReducedMotion ? 110 : 82,
+		damping: prefersReducedMotion ? 32 : 24,
+		mass: prefersReducedMotion ? 0.35 : 0.55,
 		restDelta: 0.001
 	});
-	const prefersReducedMotion = useReducedMotion();
 
 	// Synchronize iframe theme with the current site theme
 	const { resolvedTheme, theme } = useTheme();
@@ -101,6 +103,18 @@ const SmoothScrollHeroBackground: React.FC<{
 	// stays locked to the same surface that hides the native cursor.
 	const mouseX = useMotionValue(0);
 	const mouseY = useMotionValue(0);
+	const cursorX = useSpring(mouseX, {
+		stiffness: prefersReducedMotion ? 1200 : 820,
+		damping: prefersReducedMotion ? 70 : 42,
+		mass: 0.18,
+		restDelta: 0.001,
+	});
+	const cursorY = useSpring(mouseY, {
+		stiffness: prefersReducedMotion ? 1200 : 820,
+		damping: prefersReducedMotion ? 70 : 42,
+		mass: 0.18,
+		restDelta: 0.001,
+	});
 
 	const handleMouseMove = (e: React.MouseEvent) => {
 		const rect = e.currentTarget.getBoundingClientRect();
@@ -118,7 +132,7 @@ const SmoothScrollHeroBackground: React.FC<{
 	const clipPath = useMotionTemplate`inset(${clipPadding}% ${clipPadding}% ${clipPadding}% ${clipPadding}% round 3.5rem)`;
 
 	// Scale animation for mock window
-	const scale = useTransform(scrollYProgress, [0, 1], [prefersReducedMotion ? 1.03 : 1.12, 1]);
+	const scale = useTransform(scrollYProgress, [0, 1], [prefersReducedMotion ? 1.02 : 1.08, 1]);
 
 	// Showcase Panel dynamic animations (True Center to Bottom-Left Corner)
 	const showcaseLeft = useTransform(scrollYProgress, [0, 0.45, 0.95], ["50%", "50%", "1.5rem"]);
@@ -127,13 +141,13 @@ const SmoothScrollHeroBackground: React.FC<{
 	const showcaseX = useTransform(scrollYProgress, [0, 0.45, 0.95], ["-50%", "-50%", "0%"]);
 	const showcaseY = useTransform(scrollYProgress, [0, 0.45, 0.95], ["-50%", "-50%", "0%"]); 
 	
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.45, 0.95], [prefersReducedMotion ? 1.02 : 1.08, prefersReducedMotion ? 1.02 : 1.08, 1]);
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.45, 0.95], [prefersReducedMotion ? 1.01 : 1.05, prefersReducedMotion ? 1.01 : 1.05, 1]);
 	const showcaseBlur = useTransform(
 		scrollYProgress,
 		[0, 0.1, 0.5],
-		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(12px)"] : ["blur(10px)", "blur(18px)", "blur(28px)"],
+		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(10px)"] : ["blur(8px)", "blur(14px)", "blur(22px)"],
 	);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [1, 1, 1, 0.92]);
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [1, 1, 1, 0.95]);
 
 	return (
 		<motion.div
@@ -171,13 +185,17 @@ const SmoothScrollHeroBackground: React.FC<{
 				<motion.div 
 					aria-hidden="true"
 					style={{ 
-						x: mouseX,
-						y: mouseY,
+						x: cursorX,
+						y: cursorY,
 						translateX: "-50%", 
 						translateY: "-50%",
 						opacity: isHovered ? 1 : 0,
 						scale: isHovered ? 1 : 0.96,
 						boxShadow: "0 24px 70px rgba(30, 157, 241, 0.28)",
+					}}
+					transition={{
+						opacity: { duration: prefersReducedMotion ? 0.12 : 0.18, ease: [0.22, 1, 0.36, 1] },
+						scale: { type: "spring", stiffness: 420, damping: 30, mass: 0.35 },
 					}}
 					className="pointer-events-none absolute left-0 top-0 z-[100] hidden items-center gap-2 rounded-full border border-primary/25 bg-background/80 p-1 pr-1.5 text-foreground backdrop-blur-2xl md:flex"
 				>
@@ -208,13 +226,13 @@ const SmoothScrollHeroBackground: React.FC<{
 				<iframe 
 					ref={iframeRef}
 					src={finalIframeSrc} 
-					className="h-full w-full border-none pt-12 transition-transform duration-1000 group-hover/browser:scale-[1.01] pointer-events-none md:pt-14"
+					className="pointer-events-none h-full w-full border-none pt-12 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/browser:scale-[1.008] md:pt-14"
 					title="Project Interactive Window"
 					loading="lazy"
 				/>
 				
 				{/* Iframe overlay for visual polish */}
-				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-45 transition-opacity duration-500 group-hover/browser:opacity-25" />
+				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-45 transition-opacity duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/browser:opacity-25" />
 
 				{/* AtmoLens Showcase Container with Signature font */}
 				<motion.div 
