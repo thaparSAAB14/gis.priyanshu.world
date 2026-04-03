@@ -164,7 +164,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				style={{ 
 					x: cursorX, 
 					y: cursorY, 
-					translateX: "1rem", 
+					translateX: "-50%", 
 					translateY: "-50%",
 					opacity: isHovered ? 1 : 0,
 					scale: isHovered ? 1 : 0.92,
@@ -172,7 +172,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				}}
 				className="pointer-events-none absolute z-[100] hidden items-center gap-2 rounded-full border border-primary/25 bg-background/80 p-1 pr-1.5 text-foreground backdrop-blur-2xl md:flex"
 			>
-				<span className="rounded-full bg-primary px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-primary/20">
+				<span className="whitespace-nowrap rounded-full bg-primary px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-primary/20">
 					{cursorLabel}
 				</span>
 				<span className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/8 bg-foreground/[0.04] text-primary">
@@ -221,7 +221,7 @@ const SmoothScrollHeroBackground: React.FC<{
 
 				{/* AtmoLens Showcase Container with Signature font */}
 				<motion.div 
-					className="absolute z-40 max-w-[min(90vw,340px)] overflow-hidden rounded-[2rem] border border-white/10 p-2 shadow-3xl pointer-events-none select-none md:max-w-md md:rounded-[3rem]"
+					className="absolute z-40 max-w-[min(92vw,360px)] overflow-hidden rounded-[2rem] border border-white/10 p-2 shadow-3xl pointer-events-none select-none md:max-w-[26rem] md:rounded-[3rem]"
 					style={{
 						left: showcaseLeft,
 						top: showcaseTop,
@@ -243,7 +243,7 @@ const SmoothScrollHeroBackground: React.FC<{
 						}}
 					/>
 					
-					<div className="relative z-10 rounded-[1.8rem] border border-white/10 bg-gradient-to-br from-white/[0.12] to-transparent p-7 md:rounded-[2.8rem] md:p-11">
+					<div className="relative z-10 rounded-[1.8rem] border border-white/10 bg-gradient-to-br from-white/[0.12] to-transparent p-6 md:rounded-[2.8rem] md:p-10">
 						<div className="flex flex-col gap-1.5 mb-7">
 							<div className="flex items-center gap-3.5">
 								<motion.div 
@@ -257,30 +257,30 @@ const SmoothScrollHeroBackground: React.FC<{
 							</div>
 							
 							{/* Signature Font Title - Refined position */}
-							<span className="font-signature text-4xl md:text-6xl text-primary leading-tight -mt-4 -ml-2 opacity-100 block drop-shadow-sm select-none">
+							<span className="block -ml-1.5 -mt-3 font-signature text-3xl leading-tight text-primary opacity-100 drop-shadow-sm select-none md:-ml-2 md:-mt-4 md:text-5xl">
 								{showcase.handwrittenLabel}
 							</span>
 						</div>
 						
-						<h2 className="mb-5 font-display text-3xl font-black uppercase leading-[0.8] tracking-tighter text-foreground md:text-6xl">
+						<h2 className="mb-5 font-display text-[2.35rem] font-black uppercase leading-[0.82] tracking-[-0.05em] text-foreground md:text-[4.25rem]">
 							{showcase.title}<br />
 							<span className="font-medium italic text-foreground/35">{showcase.accentTitle}</span>
 						</h2>
 						
-						<p className="text-sm md:text-base text-foreground/60 leading-relaxed font-body mb-10 max-w-[280px]">
+						<p className="mb-8 max-w-[19rem] font-body text-sm leading-relaxed text-foreground/60 md:max-w-[20rem] md:text-[15px]">
 							{showcase.description}
 						</p>
 
-						<div className="mb-8 flex items-center gap-3 rounded-[1.4rem] border border-white/10 bg-foreground/[0.03] p-3 transition-colors duration-500 group-hover/browser:border-primary/20 group-hover/browser:bg-primary/[0.06]">
+						<div className="mb-8 flex flex-col gap-3 rounded-[1.4rem] border border-white/10 bg-foreground/[0.03] p-3 transition-colors duration-500 group-hover/browser:border-primary/20 group-hover/browser:bg-primary/[0.06] sm:flex-row sm:items-center">
 							<div className="min-w-0 flex-1">
 								<p className="mb-1 text-[10px] font-mono font-bold uppercase tracking-[0.24em] text-foreground/40">
 									Launch
 								</p>
-								<p className="truncate text-sm font-medium text-foreground/68">
+								<p className="truncate font-mono text-[11px] uppercase tracking-[0.14em] text-foreground/68 md:text-xs">
 									{displayUrl}
 								</p>
 							</div>
-							<div className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-primary/25 transition-transform duration-500 group-hover/browser:-translate-y-0.5">
+							<div className="inline-flex w-fit items-center gap-2 self-start rounded-full bg-primary px-4 py-2 text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-primary-foreground shadow-lg shadow-primary/25 transition-transform duration-500 group-hover/browser:-translate-y-0.5 sm:self-auto">
 								{cursorLabel}
 								<span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/15">
 									<ArrowUpRight className="h-3.5 w-3.5" />
@@ -288,15 +288,15 @@ const SmoothScrollHeroBackground: React.FC<{
 							</div>
 						</div>
 						
-						<div className="flex flex-wrap items-center gap-5 border-t border-white/10 pt-7 md:gap-8 md:pt-9">
-                           <div className="flex flex-col gap-1.5">
+						<div className="flex flex-wrap items-center gap-4 border-t border-white/10 pt-7 md:gap-6 md:pt-9">
+                           <div className="min-w-[8.5rem] flex flex-col gap-1.5">
                                <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Tech Stack</span>
-                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">{showcase.techStack}</span>
+                               <span className="text-[11px] font-bold uppercase leading-relaxed tracking-[0.16em] text-foreground/80 md:text-[12px]">{showcase.techStack}</span>
                            </div>
-                           <div className="w-[1px] h-10 bg-white/10" />
-                           <div className="flex flex-col gap-1.5">
+                           <div className="hidden h-10 w-[1px] bg-white/10 sm:block" />
+                           <div className="min-w-[8rem] flex flex-col gap-1.5">
                                <span className="text-[10px] font-mono uppercase text-foreground/40 tracking-[0.25em] font-bold">Domain</span>
-                               <span className="text-[12px] font-bold text-foreground/80 tracking-wide uppercase">{showcase.domain}</span>
+                               <span className="text-[11px] font-bold uppercase leading-relaxed tracking-[0.16em] text-foreground/80 md:text-[12px]">{showcase.domain}</span>
                             </div>
                         </div>
 					</div>
