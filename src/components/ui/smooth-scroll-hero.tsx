@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+
 import {
 	motion,
 	useMotionTemplate,
@@ -49,8 +50,8 @@ const SmoothScrollHeroBackground: React.FC<{
 	// Mouse tracking for custom cursor
 	const mouseX = useMotionValue(0);
 	const mouseY = useMotionValue(0);
-	const cursorX = useSpring(mouseX, { stiffness: 400, damping: 40 });
-	const cursorY = useSpring(mouseY, { stiffness: 400, damping: 40 });
+	const cursorX = useSpring(mouseX, { stiffness: 450, damping: 45 });
+	const cursorY = useSpring(mouseY, { stiffness: 450, damping: 45 });
 
 	const handleMouseMove = (e: React.MouseEvent) => {
 		const rect = e.currentTarget.getBoundingClientRect();
@@ -70,21 +71,27 @@ const SmoothScrollHeroBackground: React.FC<{
 	// Scale animation for mock window - 1.4 is cleaner for text legibility
 	const scale = useTransform(scrollYProgress, [0, 1], [1.4, 1]);
 
-	// Showcase Panel dynamic animations (True Center to Corner)
-	const showcaseLeft = useTransform(scrollYProgress, [0, 0.5, 0.9], ["50%", "50%", "2.5rem"]);
-	const showcaseBottom = useTransform(scrollYProgress, [0, 0.5, 0.9], ["50%", "50%", "2.5rem"]);
-	const showcaseX = useTransform(scrollYProgress, [0, 0.5, 0.9], ["-50%", "-50%", "0%"]);
-	const showcaseY = useTransform(scrollYProgress, [0, 0.5, 0.9], ["50%", "50%", "0%"]); 
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.5, 0.9], [1.2, 1.2, 1]);
-	const showcaseBlur = useTransform(scrollYProgress, [0, 0.3], ["blur(0px)", "blur(20px)"]);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.95, 1], [0, 0, 1, 1, 0.8]);
+	// Showcase Panel dynamic animations (True Viewport Centering)
+	const showcaseLeft = useTransform(scrollYProgress, [0, 0.5, 0.95], ["50%", "50%", "2.5rem"]);
+	const showcaseTop = useTransform(scrollYProgress, [0, 0.5, 0.95], ["50%", "50%", "auto"]);
+	const showcaseBottom = useTransform(scrollYProgress, [0, 0.5, 0.95], ["auto", "auto", "2.5rem"]);
+	const showcaseX = useTransform(scrollYProgress, [0, 0.5, 0.95], ["-50%", "-50%", "0%"]);
+	const showcaseY = useTransform(scrollYProgress, [0, 0.5, 0.95], ["-50%", "-50%", "0%"]); 
+	
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.5, 0.95], [1.2, 1.2, 1]);
+	const showcaseBlur = useTransform(scrollYProgress, [0, 0.4], ["blur(0px)", "blur(20px)"]);
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.15, 0.95, 1], [0, 0, 1, 1, 0.9]);
+	
+	// Overall section fade-in to smooth the transition from the Hero
+	const sectionOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
 	return (
 		<motion.div
-			className="sticky top-0 h-screen w-full bg-background flex items-center justify-center p-4 md:p-12 overflow-hidden pointer-events-none z-30"
+			className="sticky top-0 h-[100dvh] w-full bg-background flex items-center justify-center p-4 md:p-12 overflow-hidden pointer-events-none z-30"
 			style={{
 				clipPath,
-				willChange: "transform, clip-path",
+				opacity: sectionOpacity,
+				willChange: "transform, clip-path, opacity",
 			}}
 			onMouseMove={handleMouseMove}
 			onMouseEnter={() => setIsHovered(true)}
@@ -146,13 +153,14 @@ const SmoothScrollHeroBackground: React.FC<{
 				/>
 				
 				{/* Iframe overlay for visual polish */}
-				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/20)] opacity-40" />
+				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/25)] opacity-50" />
 
 				{/* AtmoLens Project Intro with Grain Background Overlay */}
 				<motion.div 
 					className="absolute z-40 p-1.5 rounded-[2.5rem] border border-white/10 overflow-hidden shadow-3xl max-w-[360px] md:max-w-xl pointer-events-none select-none"
 					style={{
 						left: showcaseLeft,
+						top: showcaseTop,
 						bottom: showcaseBottom,
 						x: showcaseX,
 						y: showcaseY,
