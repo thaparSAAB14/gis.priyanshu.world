@@ -25,6 +25,7 @@ export function LabDashboard() {
         techStack: "GLSL / GIS / Weather Tiles",
         domain: "Climate Mapping",
         cursorLabel: "Open Build",
+        placement: "left",
       },
     },
     {
@@ -42,6 +43,7 @@ export function LabDashboard() {
         techStack: "ArcGIS / StoryMaps / GIS",
         domain: "Narrative Mapping",
         cursorLabel: "Open Story",
+        placement: "right",
       },
     },
   ] as const;
