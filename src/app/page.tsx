@@ -256,7 +256,7 @@ export default function Home() {
                   src="/about-portrait.png"
                   alt="Priyanshu Portrait"
                   fill
-                  className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
+                  className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background/95 via-background/40 to-transparent pointer-events-none" />
               </div>
