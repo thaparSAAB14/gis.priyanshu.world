@@ -251,7 +251,7 @@ export default function Home() {
                 size={280}
                 springOptions={{ stiffness: 26.7, damping: 4.1, mass: 0.2 }}
               />
-              <div className="relative h-64 w-full group overflow-hidden">
+              <div className="relative aspect-[5/4] w-full group overflow-hidden">
                 <Image
                   src="/about-portrait.png"
                   alt="Priyanshu Portrait"
