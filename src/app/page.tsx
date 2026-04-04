@@ -253,10 +253,10 @@ export default function Home() {
               />
               <div className="relative h-64 w-full group overflow-hidden">
                 <Image
-                  src="/headshot-88.jpg"
-                  alt="Priyanshu"
+                  src="/ai-avatar.png"
+                  alt="Priyanshu AI Avatar"
                   fill
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
+                  className="object-cover group-hover:scale-105 transition-all duration-700 pointer-events-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
               </div>
