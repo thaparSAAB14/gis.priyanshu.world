@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Tilt } from "@/components/ui/tilt";
@@ -8,6 +7,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Timeline } from "@/components/ui/timeline";
 import { Radar } from "@/components/ui/radar-effect";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
+import { BongoCat } from "@/components/ui/bongo-cat";
 
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import {
@@ -251,13 +251,8 @@ export default function Home() {
                 size={280}
                 springOptions={{ stiffness: 26.7, damping: 4.1, mass: 0.2 }}
               />
-              <div className="relative h-64 w-full group overflow-hidden">
-                <Image
-                  src="/ai-avatar.png"
-                  alt="Priyanshu AI Avatar"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-all duration-700 pointer-events-none"
-                />
+              <div className="relative h-64 w-full group overflow-hidden bg-card/10">
+                <BongoCat />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
               </div>
               <div className="p-6">
