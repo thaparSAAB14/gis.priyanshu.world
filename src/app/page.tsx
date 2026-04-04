@@ -258,7 +258,7 @@ export default function Home() {
                   fill
                   className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background/95 via-background/40 to-transparent pointer-events-none" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-foreground font-display">
