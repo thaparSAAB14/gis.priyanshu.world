@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Tilt } from "@/components/ui/tilt";
@@ -7,7 +8,6 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Timeline } from "@/components/ui/timeline";
 import { Radar } from "@/components/ui/radar-effect";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
-import { BongoCat } from "@/components/ui/bongo-cat";
 
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import {
@@ -66,9 +66,9 @@ export default function Home() {
             <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Developed a survey-driven, auto-updating GIS map as part of a course-based project, linking data collection to dynamic spatial visualization.</li>
           </ul>
           <div className="mb-8">
-            <a 
-              href="https://arcg.is/y0efn" 
-              target="_blank" 
+            <a
+              href="https://arcg.is/y0efn"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-card border border-foreground/20 rounded-full text-sm font-mono hover:bg-foreground/5 hover:border-primary/50 shadow-xl shadow-primary/5 hover:shadow-primary/20 hover:text-primary transition-all duration-300"
             >
@@ -103,7 +103,7 @@ export default function Home() {
               <Database className="w-4 h-4 text-primary" />
               Relevant Coursework
             </strong>
-             Geographic Information Systems (GIS), Spatial Analysis & Cartography, Physical Geography, Weather & Climate Systems, Statistics for Data Analysis, Calculus I, Precalculus Mathematics, Physics for Life Sciences, Business Computing, Computer Applications.
+            Geographic Information Systems (GIS), Spatial Analysis & Cartography, Physical Geography, Weather & Climate Systems, Statistics for Data Analysis, Calculus I, Precalculus Mathematics, Physics for Life Sciences, Business Computing, Computer Applications.
           </div>
           <div className="flex flex-wrap gap-2 mb-6">
             {["GIS Fundamentals", "Cartography", "Statistics", "Physical Geography"].map((tag) => (
@@ -145,9 +145,9 @@ export default function Home() {
               <div className="relative z-10 flex flex-col items-center gap-6 p-8">
                 <div className="flex gap-4 items-center">
                   {[Globe, Layers, Satellite, Database, Map, Code].map((Icon, idx) => (
-                    <motion.div 
-                      key={idx} 
-                      whileHover={{ scale: 1.3, rotate: idx % 2 === 0 ? 15 : -15 }} 
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.3, rotate: idx % 2 === 0 ? 15 : -15 }}
                       className="cursor-pointer"
                     >
                       <Icon className={`w-8 h-8 ${idx % 2 === 0 ? "text-primary animate-pulse" : "text-primary"}`} />
@@ -155,7 +155,7 @@ export default function Home() {
                   ))}
                 </div>
                 {/* The "Hook" Element */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
@@ -163,12 +163,12 @@ export default function Home() {
                 >
                   <div className="relative group cursor-pointer">
                     {/* Glowing animated border via framer-motion */}
-                    <motion.div 
+                    <motion.div
                       animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                       className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-primary via-background to-primary opacity-40 group-hover:opacity-100 blur-sm group-hover:blur-md bg-[length:200%_auto] transition-all duration-500"
                     />
-                    
+
                     <div className="relative flex items-center gap-3 px-6 py-3 bg-gradient-to-b from-card to-background border border-foreground/20 rounded-full leading-none overflow-hidden backdrop-blur-md shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300">
                       <div className="flex items-center gap-2">
                         <span className="relative flex h-2.5 w-2.5">
@@ -183,15 +183,15 @@ export default function Home() {
                       <div className="w-px h-4 bg-neutral-300 "></div>
 
                       <p className="text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap">
-                        <span className="text-primary font-bold">LAT:</span> 49.28&deg; N 
-                        <span className="mx-2 text-neutral-300 ">|</span> 
+                        <span className="text-primary font-bold">LAT:</span> 49.28&deg; N
+                        <span className="mx-2 text-neutral-300 ">|</span>
                         <span className="text-primary font-bold">LON:</span> 123.12&deg; W
                       </p>
                     </div>
                   </div>
-                  
+
                   {/* Subtle terminal-like text below the pill */}
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 1 }}
@@ -210,7 +210,7 @@ export default function Home() {
                     <a href="mailto:connect@priyanshu.world">
                       <ButtonWithIcon label="HIRE ME" icon={Briefcase} className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20" />
                     </a>
-                    
+
                     <a
                       href="https://www.linkedin.com/in/priyanshu-624aa8368/"
                       target="_blank"
@@ -251,8 +251,13 @@ export default function Home() {
                 size={280}
                 springOptions={{ stiffness: 26.7, damping: 4.1, mass: 0.2 }}
               />
-              <div className="relative h-64 w-full group overflow-hidden bg-card/10">
-                <BongoCat />
+              <div className="relative h-64 w-full group overflow-hidden">
+                <Image
+                  src="/about-portrait.png"
+                  alt="Priyanshu Portrait"
+                  fill
+                  className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent pointer-events-none" />
               </div>
               <div className="p-6">
