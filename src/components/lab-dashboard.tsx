@@ -10,6 +10,41 @@ import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
 export function LabDashboard() {
   const prefersReducedMotion = useReducedMotion();
+  const labProjects = [
+    {
+      iframeSrc: "https://atmolens.priyanshu.world",
+      scrollHeight: 1500,
+      initialClipPercentage: 20,
+      showcase: {
+        eyebrow: "Featured Build",
+        handwrittenLabel: "AtmoLens",
+        title: "Atmospheric",
+        accentTitle: "intelligence",
+        description:
+          "A geospatial interface study that turns weather fields and atmospheric layers into a cinematic, shader-driven mapping experience.",
+        techStack: "GLSL / GIS / Weather Tiles",
+        domain: "Climate Mapping",
+        cursorLabel: "Open Build",
+      },
+    },
+    {
+      iframeSrc:
+        "https://storymaps.arcgis.com/stories/a0889557b3594487992bff5c68a3ee5e",
+      scrollHeight: 1500,
+      initialClipPercentage: 20,
+      showcase: {
+        eyebrow: "Story Map",
+        handwrittenLabel: "ArcGIS",
+        title: "Spatial",
+        accentTitle: "storytelling",
+        description:
+          "A narrative mapping project built in ArcGIS StoryMaps, pairing place-based writing with embedded maps and guided geographic context.",
+        techStack: "ArcGIS / StoryMaps / GIS",
+        domain: "Narrative Mapping",
+        cursorLabel: "Open Story",
+      },
+    },
+  ] as const;
 
   return (
     <div className="relative min-h-screen overflow-x-clip bg-transparent transition-colors duration-300">
@@ -96,7 +131,7 @@ export function LabDashboard() {
             }}
             className="absolute bottom-16 flex flex-col items-center gap-2"
           >
-            <p className="text-[10px] font-mono text-foreground/50 tracking-[0.2em] uppercase">scroll to enter the featured build</p>
+            <p className="text-[10px] font-mono text-foreground/50 tracking-[0.2em] uppercase">scroll to explore the featured builds</p>
             <motion.div
               animate={prefersReducedMotion ? { opacity: 0.8 } : { y: [0, 8, 0], opacity: [0.65, 1, 0.65] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
@@ -105,24 +140,18 @@ export function LabDashboard() {
           </motion.div>
         </section>
 
-        <section className="relative w-full z-20">
-          <SmoothScrollHero
-            iframeSrc="https://atmolens.priyanshu.world"
-            scrollHeight={1350}
-            initialClipPercentage={18}
-            showcase={{
-              eyebrow: "Featured Build",
-              handwrittenLabel: "AtmoLens",
-              title: "Atmospheric",
-              accentTitle: "intelligence",
-              description:
-                "A geospatial interface study that turns weather fields and atmospheric layers into a cinematic, shader-driven mapping experience.",
-              techStack: "GLSL / GIS / Weather Tiles",
-              domain: "Climate Mapping",
-              cursorLabel: "Open Build",
-            }}
-          />
-        </section>
+        <div className="relative z-20 w-full">
+          {labProjects.map((project) => (
+            <section key={project.iframeSrc} className="relative w-full">
+              <SmoothScrollHero
+                iframeSrc={project.iframeSrc}
+                scrollHeight={project.scrollHeight}
+                initialClipPercentage={project.initialClipPercentage}
+                showcase={project.showcase}
+              />
+            </section>
+          ))}
+        </div>
 
         <TapedFooter />
       </div>

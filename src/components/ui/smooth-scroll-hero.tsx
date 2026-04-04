@@ -168,7 +168,7 @@ const SmoothScrollHeroBackground: React.FC<{
 
 			{/* Scaled animated container holding the iframe */}
 			<motion.a
-				href="https://atmolens.priyanshu.world"
+				href={iframeSrc}
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label={`Open ${displayUrl} in a new tab`}
@@ -234,7 +234,7 @@ const SmoothScrollHeroBackground: React.FC<{
 				{/* Iframe overlay for visual polish */}
 				<div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(circle_at_top,transparent,black/35)] opacity-45 transition-opacity duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/browser:opacity-25" />
 
-				{/* AtmoLens Showcase Container with Signature font */}
+				{/* Project showcase container */}
 				<motion.div 
 					className="absolute z-40 w-[min(92vw,360px)] max-w-none overflow-hidden rounded-[2rem] border border-white/10 p-2 shadow-3xl pointer-events-none select-none md:w-[26rem] md:rounded-[3rem]"
 					style={{
@@ -271,7 +271,7 @@ const SmoothScrollHeroBackground: React.FC<{
 								<h3 className="text-[11px] font-mono text-primary/80 uppercase tracking-[0.4em] font-black">{showcase.eyebrow}</h3>
 							</div>
 							
-							{/* Signature Font Title - Refined position */}
+							{/* Signature-style title */}
 							<span className="block -ml-1 -mt-2 font-signature text-[clamp(2.25rem,8vw,3.2rem)] leading-tight text-primary opacity-100 drop-shadow-sm select-none md:-ml-2 md:-mt-4 md:text-5xl">
 								{showcase.handwrittenLabel}
 							</span>
