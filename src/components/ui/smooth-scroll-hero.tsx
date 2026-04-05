@@ -133,43 +133,39 @@ const SmoothScrollHeroBackground: React.FC<{
 	// Smooth rounded corners via inset
 	const clipPath = useMotionTemplate`inset(${clipPadding}% ${clipPadding}% ${clipPadding}% ${clipPadding}% round 3.5rem)`;
 
-	// Global sticky exit translation
-	const exitTranslateY = useTransform(scrollYProgress, [0.88, 1], ["0%", "-100%"]);
-	const exitScale = useTransform(scrollYProgress, [0.88, 1], [1, 0.95]);
-
 	// Scale animation for mock window
 	const scale = useTransform(
 		scrollYProgress, 
-		[0, 0.42, 0.88, 1], 
-		[prefersReducedMotion ? 1.02 : 1.08, 1, 1, 0.98]
+		[0, 0.42], 
+		[prefersReducedMotion ? 1.02 : 1.08, 1]
 	);
 
 	// Showcase Panel dynamic animations (True Center to Bottom-Left Corner)
 	const showcaseInset = useTransform(
 		scrollYProgress,
-		[0, 0.38, 0.88, 1],
-		["50%", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
+		[0, 0.38],
+		["50%", prefersReducedMotion ? "1.25rem" : "1.5rem"],
 	);
-	const showcaseTop = useTransform(scrollYProgress, [0, 0.38, 0.88], ["50%", "auto", "auto"]);
+	const showcaseTop = useTransform(scrollYProgress, [0, 0.38], ["50%", "auto"]);
 	const showcaseBottom = useTransform(
 		scrollYProgress,
-		[0, 0.38, 0.88, 1],
-		["auto", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
+		[0, 0.38],
+		["auto", prefersReducedMotion ? "1.25rem" : "1.5rem"],
 	);
 	const showcaseX = useTransform(
 		scrollYProgress,
-		[0, 0.38, 0.88, 1],
-		showcasePlacement === "right" ? ["50%", "0%", "0%", "0%"] : ["-50%", "0%", "0%", "0%"],
+		[0, 0.38],
+		showcasePlacement === "right" ? ["50%", "0%"] : ["-50%", "0%"],
 	);
-	const showcaseY = useTransform(scrollYProgress, [0, 0.38, 0.88, 1], ["-50%", "0%", "0%", "0%"]); 
+	const showcaseY = useTransform(scrollYProgress, [0, 0.38], ["-50%", "0%"]); 
 	
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.38, 0.88, 1], [prefersReducedMotion ? 1.01 : 1.05, 1, 1, 0.95]);
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.38], [prefersReducedMotion ? 1.01 : 1.05, 1]);
 	const showcaseBlur = useTransform(
 		scrollYProgress,
 		[0, 0.1, 0.5],
 		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(10px)"] : ["blur(8px)", "blur(14px)", "blur(22px)"],
 	);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.88, 1], [0, 1, 1, 0]);
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [0, 1, 1, 0.95]);
 
 	// Fade-out indicator for initial scroll
 	const indicatorOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
@@ -179,8 +175,6 @@ const SmoothScrollHeroBackground: React.FC<{
 			className="pointer-events-none sticky top-0 z-30 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-background p-3 md:p-12"
 			style={{
 				clipPath,
-				y: exitTranslateY,
-				scale: exitScale,
 				willChange: "transform, clip-path",
 			}}
 		>
