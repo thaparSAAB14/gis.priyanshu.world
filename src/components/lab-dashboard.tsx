@@ -6,6 +6,7 @@ import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
 import { FlaskConical, Sparkles, Beaker, Cpu } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { DottedSurface } from "@/components/ui/dotted-surface";
+import { PretextWrap } from "@/components/ui/pretext-wrap";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
 export function LabDashboard() {
@@ -154,6 +155,27 @@ export function LabDashboard() {
             </section>
           ))}
         </div>
+
+        {/* Pretext Text-Wrap Experiment */}
+        <section className="relative z-20 w-full">
+          <div className="mx-auto max-w-7xl px-4 py-16">
+            <div className="mb-8 flex items-center gap-3">
+              <div className="rounded-xl border border-primary/30 bg-primary/10 p-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <p className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary/70">Interactive Experiment</p>
+                <h2 className="text-xl font-bold text-foreground">Dynamic Text Wrap</h2>
+              </div>
+            </div>
+            <div className="overflow-hidden rounded-[2rem] border border-foreground/10 shadow-2xl">
+              <PretextWrap />
+            </div>
+            <p className="mt-4 text-center text-xs font-mono text-foreground/40">
+              Powered by <a href="https://github.com/chenglou/pretext" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-primary transition-colors">@chenglou/pretext</a> — Click logos to rotate. Text reflows in real-time.
+            </p>
+          </div>
+        </section>
 
         <TapedFooter />
       </div>
