@@ -126,53 +126,58 @@ const SmoothScrollHeroBackground: React.FC<{
 
 	// Clip path animation using local progress
 	const clipPadding = useTransform(
-		scrollYProgress,
-		[0, 1],
-		[prefersReducedMotion ? 8 : initialClipPercentage, 0],
+		rawScrollProgress,
+		[0, 0.42, 0.88, 1],
+		[prefersReducedMotion ? 8 : initialClipPercentage, 0, 0, 0],
 	);
 	// Smooth rounded corners via inset
 	const clipPath = useMotionTemplate`inset(${clipPadding}% ${clipPadding}% ${clipPadding}% ${clipPadding}% round 3.5rem)`;
 
+	// Global sticky exit translation
+	const exitTranslateY = useTransform(scrollYProgress, [0.88, 1], ["0%", "-100%"]);
+	const exitScale = useTransform(scrollYProgress, [0.88, 1], [1, 0.95]);
+
 	// Scale animation for mock window
-	const scale = useTransform(scrollYProgress, [0, 1], [prefersReducedMotion ? 1.02 : 1.08, 1]);
+	const scale = useTransform(
+		scrollYProgress, 
+		[0, 0.42, 0.88, 1], 
+		[prefersReducedMotion ? 1.02 : 1.08, 1, 1, 0.98]
+	);
 
 	// Showcase Panel dynamic animations (True Center to Bottom-Left Corner)
-	// Progress 0.0 -> 0.4: Animation in
-	// Progress 0.4 -> 0.8: HOLD (Plateau)
-	// Progress 0.8 -> 1.0: Transition/Exit
 	const showcaseInset = useTransform(
 		scrollYProgress,
-		[0, 0.3, 0.8, 1], // Stretched timeline
-		["50%", "50%", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
+		[0, 0.38, 0.88, 1],
+		["50%", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
 	);
-	const showcaseTop = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["50%", "50%", "auto", "auto"]);
+	const showcaseTop = useTransform(scrollYProgress, [0, 0.38, 0.88], ["50%", "auto", "auto"]);
 	const showcaseBottom = useTransform(
 		scrollYProgress,
-		[0, 0.3, 0.8, 1],
-		["auto", "auto", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
+		[0, 0.38, 0.88, 1],
+		["auto", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
 	);
 	const showcaseX = useTransform(
 		scrollYProgress,
-		[0, 0.3, 0.8, 1],
-		showcasePlacement === "right" ? ["50%", "50%", "0%", "0%"] : ["-50%", "-50%", "0%", "0%"],
+		[0, 0.38, 0.88, 1],
+		showcasePlacement === "right" ? ["50%", "0%", "0%", "0%"] : ["-50%", "0%", "0%", "0%"],
 	);
-	const showcaseY = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["-50%", "-50%", "0%", "0%"]); 
+	const showcaseY = useTransform(scrollYProgress, [0, 0.38, 0.88, 1], ["-50%", "0%", "0%", "0%"]); 
 	
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [prefersReducedMotion ? 1.01 : 1.05, prefersReducedMotion ? 1.01 : 1.05, 1, 1]);
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.38, 0.88, 1], [prefersReducedMotion ? 1.01 : 1.05, 1, 1, 0.95]);
 	const showcaseBlur = useTransform(
 		scrollYProgress,
-		[0, 0.1, 0.4, 0.8],
-		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(10px)", "blur(10px)"] : ["blur(8px)", "blur(14px)", "blur(22px)", "blur(22px)"],
+		[0, 0.1, 0.5],
+		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(10px)"] : ["blur(8px)", "blur(14px)", "blur(22px)"],
 	);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.8, 1], [1, 1, 1, 0]); // Fades out at the very end
-	
-	const iframeOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]); // Fade out iframe at the end of the long scroll
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.88, 1], [0, 1, 1, 0]);
 
 	return (
 		<motion.div
 			className="pointer-events-none sticky top-0 z-30 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-background p-3 md:p-12"
 			style={{
 				clipPath,
+				y: exitTranslateY,
+				scale: exitScale,
 				willChange: "transform, clip-path",
 			}}
 		>
@@ -184,7 +189,7 @@ const SmoothScrollHeroBackground: React.FC<{
 					backgroundSize: "150px 150px",
 				}}
 			/>
-
+ 
 			{/* Scaled animated container holding the iframe */}
 			<motion.a
 				href={iframeSrc}
@@ -242,10 +247,9 @@ const SmoothScrollHeroBackground: React.FC<{
 					<div className="hidden w-24 md:block" />
 				</div>
 
-				<motion.iframe 
+				<iframe 
 					ref={iframeRef}
 					src={finalIframeSrc} 
-					style={{ opacity: iframeOpacity }}
 					className="pointer-events-none h-full w-full border-none pt-12 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/browser:scale-[1.008] md:pt-14"
 					title="Project Interactive Window"
 					loading="lazy"
