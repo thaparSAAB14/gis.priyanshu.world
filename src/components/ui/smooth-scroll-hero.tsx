@@ -377,7 +377,7 @@ const SmoothScrollHero: React.FC<ISmoothScrollHeroProps> = ({
 	return (
 		<div
 			ref={containerRef}
-			style={{ height: `calc(${scrollHeight}px + 100vh)` }}
+			style={{ height: `${scrollHeight}px` }}
 			className="relative w-full z-10"
 		>
 			<SmoothScrollHeroBackground
