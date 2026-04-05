@@ -13,7 +13,7 @@ export function LabDashboard() {
   const labProjects = [
     {
       iframeSrc: "https://atmolens.priyanshu.world",
-      scrollHeight: 3500,
+      scrollHeight: 2750,
       initialClipPercentage: 20,
       showcase: {
         eyebrow: "Featured Build",
@@ -31,7 +31,7 @@ export function LabDashboard() {
     {
       iframeSrc:
         "https://storymaps.arcgis.com/stories/a0889557b3594487992bff5c68a3ee5e",
-      scrollHeight: 3500,
+      scrollHeight: 2750,
       initialClipPercentage: 20,
       showcase: {
         eyebrow: "Story Map",
