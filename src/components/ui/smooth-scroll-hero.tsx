@@ -137,31 +137,36 @@ const SmoothScrollHeroBackground: React.FC<{
 	const scale = useTransform(scrollYProgress, [0, 1], [prefersReducedMotion ? 1.02 : 1.08, 1]);
 
 	// Showcase Panel dynamic animations (True Center to Bottom-Left Corner)
+	// Progress 0.0 -> 0.4: Animation in
+	// Progress 0.4 -> 0.8: HOLD (Plateau)
+	// Progress 0.8 -> 1.0: Transition/Exit
 	const showcaseInset = useTransform(
 		scrollYProgress,
-		[0, 0.45, 0.95],
-		["50%", "50%", prefersReducedMotion ? "1.25rem" : "1.5rem"],
+		[0, 0.3, 0.8, 1], // Stretched timeline
+		["50%", "50%", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
 	);
-	const showcaseTop = useTransform(scrollYProgress, [0, 0.45, 0.95], ["50%", "50%", "auto"]);
+	const showcaseTop = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["50%", "50%", "auto", "auto"]);
 	const showcaseBottom = useTransform(
 		scrollYProgress,
-		[0, 0.45, 0.95],
-		["auto", "auto", prefersReducedMotion ? "1.25rem" : "1.5rem"],
+		[0, 0.3, 0.8, 1],
+		["auto", "auto", prefersReducedMotion ? "1.25rem" : "1.5rem", prefersReducedMotion ? "1.25rem" : "1.5rem"],
 	);
 	const showcaseX = useTransform(
 		scrollYProgress,
-		[0, 0.45, 0.95],
-		showcasePlacement === "right" ? ["50%", "50%", "0%"] : ["-50%", "-50%", "0%"],
+		[0, 0.3, 0.8, 1],
+		showcasePlacement === "right" ? ["50%", "50%", "0%", "0%"] : ["-50%", "-50%", "0%", "0%"],
 	);
-	const showcaseY = useTransform(scrollYProgress, [0, 0.45, 0.95], ["-50%", "-50%", "0%"]); 
+	const showcaseY = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["-50%", "-50%", "0%", "0%"]); 
 	
-	const showcaseScale = useTransform(scrollYProgress, [0, 0.45, 0.95], [prefersReducedMotion ? 1.01 : 1.05, prefersReducedMotion ? 1.01 : 1.05, 1]);
+	const showcaseScale = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [prefersReducedMotion ? 1.01 : 1.05, prefersReducedMotion ? 1.01 : 1.05, 1, 1]);
 	const showcaseBlur = useTransform(
 		scrollYProgress,
-		[0, 0.1, 0.5],
-		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(10px)"] : ["blur(8px)", "blur(14px)", "blur(22px)"],
+		[0, 0.1, 0.4, 0.8],
+		prefersReducedMotion ? ["blur(0px)", "blur(0px)", "blur(10px)", "blur(10px)"] : ["blur(8px)", "blur(14px)", "blur(22px)", "blur(22px)"],
 	);
-	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [1, 1, 1, 0.95]);
+	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.8, 1], [1, 1, 1, 0]); // Fades out at the very end
+	
+	const iframeOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0]); // Fade out iframe at the end of the long scroll
 
 	return (
 		<motion.div
@@ -237,9 +242,10 @@ const SmoothScrollHeroBackground: React.FC<{
 					<div className="hidden w-24 md:block" />
 				</div>
 
-				<iframe 
+				<motion.iframe 
 					ref={iframeRef}
 					src={finalIframeSrc} 
+					style={{ opacity: iframeOpacity }}
 					className="pointer-events-none h-full w-full border-none pt-12 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/browser:scale-[1.008] md:pt-14"
 					title="Project Interactive Window"
 					loading="lazy"
