@@ -171,6 +171,9 @@ const SmoothScrollHeroBackground: React.FC<{
 	);
 	const showcaseOpacity = useTransform(scrollYProgress, [0, 0.1, 0.88, 1], [0, 1, 1, 0]);
 
+	// Fade-out indicator for initial scroll
+	const indicatorOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+
 	return (
 		<motion.div
 			className="pointer-events-none sticky top-0 z-30 flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-background p-3 md:p-12"
@@ -181,6 +184,22 @@ const SmoothScrollHeroBackground: React.FC<{
 				willChange: "transform, clip-path",
 			}}
 		>
+			{/* Scroll Down Indicator Component (Added to right corner) */}
+			<motion.div 
+				style={{ opacity: indicatorOpacity }}
+				className="absolute bottom-6 right-6 z-[60] flex flex-col items-center gap-4 md:bottom-12 md:right-12"
+			>
+				<span className="text-[9px] font-mono font-bold uppercase tracking-[0.4em] text-primary/60 [writing-mode:vertical-lr]">
+					Explore Project
+				</span>
+				<div className="relative h-16 w-px bg-primary/10 overflow-hidden">
+					<motion.div 
+						animate={{ y: ["-100%", "100%"] }}
+						transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+						className="h-1/2 w-full bg-gradient-to-b from-transparent via-primary to-transparent"
+					/>
+				</div>
+			</motion.div>
 			{/* Persistent Noise Texture for Atmosphere */}
 			<div 
 				className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay z-0"
