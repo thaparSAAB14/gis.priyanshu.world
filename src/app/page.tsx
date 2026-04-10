@@ -477,9 +477,15 @@ export default function Home() {
               title: "Multi-Scale Mapping",
               desc: "Cartographic work showing projection handling, boundary context, and map design across regional to local scales.",
               img: "/projects/study-area-location-map.jpeg"
+            },
+            {
+              id: "atmolens",
+              title: "AtmoLens WebGL Dashboard",
+              desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
+              img: "/about-portrait.png"
             }
           ].map((p, i) => (
-            <a href={`/projects/${p.id}`} key={i} className="group relative block w-full h-[320px] rounded-2xl overflow-hidden border border-border/50 bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-primary/10">
+            <a href={`/projects/${p.id}`} key={i} className={`group relative block w-full h-[320px] rounded-2xl overflow-hidden border border-border/50 bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-primary/10 ${i === 4 ? "md:col-span-2" : ""}`}>
               <Image 
                 src={p.img} 
                 alt={p.title} 

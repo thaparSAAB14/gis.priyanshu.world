@@ -48,7 +48,20 @@ const projectsData = {
     tools: ["QGIS", "Map Projections", "Vector Data"],
     workflow: "Engineered robust CRS reprojections, inset map integration, and rigorous scale bars indicating exact physical distances.",
     outcome: "Delivered a visually unified map clearly articulating macro and micro spatial relationships.",
-    skills: ["Coordinate Systems (CRS)", "Map Layouts", "Cartographic Design"]
+    skills: ["Coordinate Systems (CRS)", "Map Layouts", "Cartographic Design"],
+    liveUrl: null
+  },
+  "atmolens": {
+    title: "AtmoLens GIS Dashboard",
+    summary: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
+    image: "/about-portrait.png", 
+    problem: "Traditional GIS platforms lack the real-time fluidity required for public-facing data visualization in modern web browsers.",
+    goal: "Architect a custom, high-performance spatial data rendering pipeline integrating external APIs directly onto a WebGL canvas.",
+    tools: ["React", "WebGL", "Next.js", "TailwindCSS"],
+    workflow: "Engineered a custom mapping interface, decoupled rendering logic from React hydration for 60fps performance, and styled with glassmorphic UI patterns.",
+    outcome: "A fully live, interactive spatial playground capable of handling complex visual layers instantly.",
+    skills: ["Web GIS", "Front-end Architecture", "Interactive Mapping"],
+    liveUrl: "/lab"
   }
 };
 
@@ -115,7 +128,7 @@ export default async function ProjectCaseStudy(props: { params: Promise<{ slug: 
           </div>
           <div>
             <h3 className="text-sm font-mono tracking-widest text-primary uppercase mb-3">Key Skills</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-8">
               {project.skills.map(skill => (
                 <li key={skill} className="flex items-center gap-2 text-foreground/80 text-sm">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary/50" /> {skill}
@@ -123,6 +136,15 @@ export default async function ProjectCaseStudy(props: { params: Promise<{ slug: 
               ))}
             </ul>
           </div>
+          
+          {project.liveUrl && (
+            <div className="pt-6 border-t border-border/50">
+               <h3 className="text-sm font-mono tracking-widest text-primary uppercase mb-4">View Live Project</h3>
+               <Link href={project.liveUrl} className="flex w-full items-center justify-center py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                  Launch Application
+               </Link>
+            </div>
+          )}
         </div>
       </main>
     </div>
