@@ -31,7 +31,6 @@ import {
   Search,
   PenTool,
   Server,
-  Server,
   Microscope,
 } from "lucide-react";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
