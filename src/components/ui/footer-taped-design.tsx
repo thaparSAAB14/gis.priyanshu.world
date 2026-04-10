@@ -42,7 +42,7 @@ export const Component = () => {
               Priyanshu Portfolio
             </Link>
             <p className="text-foreground/70 font-medium text-sm w-full">
-              Experimental geographic projects and systems built with care.
+              Spatial analysis, cartography & web mapping — currently seeking GIS analyst and geospatial research roles across Canada.
             </p>
           </div>
 
@@ -54,6 +54,12 @@ export const Component = () => {
               <div className="flex flex-col gap-2 text-sm text-foreground/70 dark:text-neutral-300 items-start">
                 <Link className="hover:text-primary transition-colors font-medium" href="/">
                   Home
+                </Link>
+                <Link className="hover:text-primary transition-colors font-medium" href="/#projects">
+                  Projects
+                </Link>
+                <Link className="hover:text-primary transition-colors font-medium" href="/resume">
+                  Resume
                 </Link>
                 <Link className="hover:text-primary transition-colors font-medium" href="/lab">
                   Lab

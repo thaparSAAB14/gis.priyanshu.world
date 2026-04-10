@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+QGIS_Location Maps_Chapter/
+Priyanshu_resume.pdf

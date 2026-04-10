@@ -27,21 +27,23 @@ const signature = Caveat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://gis.priyanshu.world"),
   title: {
-    default: "Priyanshu | GIS Developer & Geospatial Data Analyst",
-    template: "%s | Priyanshu - GIS Developer",
+    default: "Priyanshu | Junior GIS Analyst & Geospatial Research Assistant",
+    template: "%s | Priyanshu - GIS Analyst",
   },
   description:
-    "Portfolio of Priyanshu, a GIS Developer and Data Analyst specializing in spatial analysis, web mapping, cartography, and full-stack web engineering. Building interactive maps and geospatial dashboards.",
+    "Portfolio of Priyanshu, a Junior GIS Analyst and Geospatial Research Assistant specializing in spatial analysis, cartography, Survey123, ArcGIS Pro, QGIS, and publication-quality map production for Canadian environmental and geospatial roles.",
   keywords: [
-    "GIS", "Geospatial", "GIS Developer", "Data Analyst", "Spatial Analysis", 
-    "WebGIS", "Cartography", "Remote Sensing", "React", "Next.js", 
-    "Mapbox", "Leaflet", "Data Visualization", "Vancouver", "Earth Observation"
+    "Junior GIS Analyst", "Geospatial Research Assistant", "GIS Technician",
+    "ArcGIS Pro", "ArcGIS Online", "QGIS", "Survey123",
+    "Spatial Analysis", "Cartography", "Thematic Mapping", "Geoprocessing",
+    "Data Integration", "QA/QC", "Web GIS", "Environmental GIS",
+    "Canadian GIS", "Vancouver", "Map Production", "Publication-Quality Maps",
   ],
   authors: [{ name: "Priyanshu", url: "https://gis.priyanshu.world" }],
   creator: "Priyanshu",
   openGraph: {
-    title: "Priyanshu | GIS Developer & Geospatial Data Analyst",
-    description: "Crafting interactive web maps, spatial analysis pipelines, and immersive geospatial dashboards. Merging software engineering with earth sciences.",
+    title: "Priyanshu | Junior GIS Analyst & Geospatial Research Assistant",
+    description: "Spatial analysis, cartography, and web mapping — turning geographic data into clear, decision-ready maps and systems. Currently seeking GIS analyst and geospatial research roles across Canada.",
     url: "https://gis.priyanshu.world",
     siteName: "Priyanshu | GIS Portfolio",
     locale: "en_CA",
@@ -49,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Priyanshu | GIS Developer & Geospatial Analyst",
-    description: "Mapping the world with code. Exploring spatial intelligence, WebGIS, and Earth observation.",
+    title: "Priyanshu | Junior GIS Analyst & Geospatial Research Assistant",
+    description: "Spatial analysis, cartography, and web mapping for Canadian environmental and geospatial roles.",
   },
   robots: {
     index: true,

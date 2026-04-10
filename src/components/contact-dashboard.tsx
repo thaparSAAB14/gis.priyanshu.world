@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SlideTabs } from "@/components/ui/slide-tabs";
-import { Copy, Mail, MapPin } from "lucide-react";
+import { Copy, Mail, MapPin, Github, Download, ExternalLink } from "lucide-react";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 import { BackgroundPaths } from "@/components/ui/background-paths";
@@ -38,7 +38,7 @@ export function ContactDashboard() {
               <span className="text-primary italic">together.</span>
             </h1>
             <p className="text-lg text-foreground/70 max-w-lg mt-2">
-              Currently open for new opportunities in geospatial analysis, mapping, and web engineering.
+              Available for junior GIS analyst, cartography, mapping, and geospatial research roles across Canada.
             </p>
           </div>
 
@@ -60,12 +60,18 @@ export function ContactDashboard() {
 
             <div className="w-full h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-2" />
 
-            <div className="relative z-10 flex flex-wrap justify-center items-center gap-6">
+            <div className="relative z-10 flex flex-wrap justify-center items-center gap-4">
               <a href={`mailto:${email}`}>
                 <ButtonWithIcon label="SEND EMAIL" icon={Mail} className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20" />
               </a>
               <a href="https://www.linkedin.com/in/priyanshu-624aa8368/" target="_blank" rel="noopener noreferrer">
                 <ButtonWithIcon label="LINKEDIN" className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
+              </a>
+              <a href="https://github.com/thaparSAAB14" target="_blank" rel="noopener noreferrer">
+                <ButtonWithIcon label="GITHUB" icon={Github} className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
+              </a>
+              <a href="/resume.pdf" download>
+                <ButtonWithIcon label="RESUME" icon={Download} className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
               </a>
             </div>
           </div>

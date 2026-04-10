@@ -33,6 +33,21 @@ export const SlideTabs = () => {
       match: (host, path) => host === "lab.priyanshu.world" ? false : path === "/"
     },
     { 
+      label: "Projects", 
+      href: isProd ? "https://gis.priyanshu.world/#projects" : "/#projects",
+      match: () => false
+    },
+    { 
+      label: "About", 
+      href: isProd ? "https://gis.priyanshu.world/#about" : "/#about",
+      match: () => false
+    },
+    { 
+      label: "Resume", 
+      href: isProd ? "https://gis.priyanshu.world/resume" : "/resume",
+      match: (host, path) => path.startsWith("/resume")
+    },
+    { 
       label: "Lab", 
       href: isProd ? "https://lab.priyanshu.world" : "/lab",
       match: (host, path) => host === "lab.priyanshu.world" ? true : path.startsWith("/lab")

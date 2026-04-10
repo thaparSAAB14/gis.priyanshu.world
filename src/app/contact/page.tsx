@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import { ContactDashboard } from "@/components/contact-dashboard";
 
 export const metadata: Metadata = {
-  title: "Connect | Priyanshu GIS",
-  description: "Get in touch for opportunities in geospatial analysis, WebGIS development, cartography, and spatial engineering.",
+  title: "Contact | Priyanshu — Junior GIS Analyst",
+  description: "Get in touch for junior GIS analyst, cartography, geospatial research, and spatial data roles across Canada.",
   openGraph: {
-    title: "Connect with Priyanshu | GIS Developer",
-    description: "Open for new opportunities in geospatial analysis, mapping, and web engineering.",
+    title: "Contact Priyanshu | Junior GIS Analyst",
+    description: "Available for junior GIS analyst, cartography, mapping, and geospatial research roles across Canada.",
     url: "https://gis.priyanshu.world/contact",
     siteName: "Priyanshu GIS Portfolio",
     type: "website",

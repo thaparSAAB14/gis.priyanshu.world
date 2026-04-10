@@ -23,28 +23,201 @@ import {
   Code,
   Briefcase,
   Mail,
+  Download,
+  ArrowRight,
+  FileText,
+  Compass,
+  BarChart3,
+  Search,
+  PenTool,
+  Server,
+  Microscope,
+  ExternalLink,
 } from "lucide-react";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
+/* ─── PROJECT DATA ────────────────────────────────────────────── */
+const featuredProjects = [
+  {
+    title: "Bear Sighting Reporting System",
+    role: "GIS Analyst",
+    summary:
+      "Designed a survey-driven, auto-updating wildlife reporting system using Survey123 and ArcGIS Online, supporting real-time data collection and spatial visualization for conservation awareness.",
+    tools: ["Survey123", "ArcGIS Online", "Web GIS"],
+    image: "/projects/metro-vancouver-municipalities.jpeg",
+    href: "https://arcg.is/y0efn",
+    deliverables: "Dynamic web map, Survey123 form, auto-updating dashboard",
+  },
+  {
+    title: "Geological Mapping — Metro Vancouver",
+    role: "Geospatial Research Assistant",
+    summary:
+      "Produced publication-quality geological and location maps of the Metro Vancouver region for a faculty-led academic book chapter, integrating data from the Geological Survey of Canada.",
+    tools: ["QGIS", "Cartographic Design", "Data Integration"],
+    image: "/projects/geological-map-metro-vancouver.jpeg",
+    href: null,
+    deliverables:
+      "Geological maps, study area maps, field trip route maps, cartographic figures for publication",
+  },
+  {
+    title: "Field Trip Route Analysis",
+    role: "Geospatial Research Assistant",
+    summary:
+      "Created multi-layer geological route maps combining transit networks, surficial geology, and field site locations for an academic field guide chapter.",
+    tools: ["QGIS", "Spatial Analysis", "NAD83/BC Albers"],
+    image: "/projects/geology-route-queen-elizabeth.jpeg",
+    href: null,
+    deliverables:
+      "Field trip route maps with geology overlays, publication-ready cartographic layouts",
+  },
+  {
+    title: "Study Area & Location Mapping",
+    role: "Geospatial Research Assistant",
+    summary:
+      "Developed multi-scale location maps from national to municipal level, supporting geographic context for academic research across Metro Vancouver.",
+    tools: ["QGIS", "Multi-Scale Mapping", "Projections"],
+    image: "/projects/study-area-location-map.jpeg",
+    href: null,
+    deliverables:
+      "Multi-scale location maps, municipal boundary maps, coordinate reference documentation",
+  },
+];
+
+/* ─── SKILLS DATA ─────────────────────────────────────────────── */
+const skillCategories = [
+  {
+    label: "GIS Platforms",
+    icon: Globe,
+    skills: ["ArcGIS Pro", "ArcGIS Online", "QGIS"],
+  },
+  {
+    label: "Spatial Analysis",
+    icon: Search,
+    skills: [
+      "Geoprocessing",
+      "Overlay Analysis",
+      "Buffering",
+      "Spatial Queries",
+    ],
+  },
+  {
+    label: "Cartography",
+    icon: PenTool,
+    skills: [
+      "Thematic Mapping",
+      "Map Layouts",
+      "Cartographic Design",
+      "Publication-Quality Maps",
+    ],
+  },
+  {
+    label: "Data Management",
+    icon: Database,
+    skills: [
+      "Data Integration",
+      "Attribute Management",
+      "QA/QC",
+      "Projections & CRS",
+    ],
+  },
+  {
+    label: "Web GIS",
+    icon: Layers,
+    skills: ["Survey123", "ArcGIS Online", "Web Mapping", "Dynamic Dashboards"],
+  },
+  {
+    label: "Supporting Tools",
+    icon: Server,
+    skills: ["Python (Basic)", "Excel", "Next.js", "Git"],
+  },
+];
+
+/* ─── CORE FOCUS DATA ─────────────────────────────────────────── */
+const coreFocusAreas = [
+  {
+    icon: Compass,
+    title: "Spatial Analysis",
+    desc: "Geoprocessing, overlay analysis, and scenario-based geographic problem-solving.",
+  },
+  {
+    icon: PenTool,
+    title: "Cartography",
+    desc: "Publication-quality map production with clear legends, scales, and projections.",
+  },
+  {
+    icon: Database,
+    title: "Data Integration",
+    desc: "Sourcing, cleaning, and integrating multi-format spatial datasets with systematic QA/QC.",
+  },
+  {
+    icon: Globe,
+    title: "Web GIS",
+    desc: "Survey123 forms, ArcGIS Online dashboards, and dynamic web-based mapping systems.",
+  },
+  {
+    icon: Microscope,
+    title: "Research Support",
+    desc: "Faculty-led academic research with spatial visualization and geographic data documentation.",
+  },
+  {
+    icon: BarChart3,
+    title: "Decision Support",
+    desc: "Turning complex geographic data into clear, decision-ready maps and spatial outputs.",
+  },
+];
+
 export default function Home() {
+  /* ─── TIMELINE DATA ──────────────────────────────────────── */
   const timelineData = [
     {
-      title: "Nov 2025 - Present",
+      title: "Nov 2025 — Present",
       content: (
         <div>
           <p className="text-foreground text-xs md:text-sm font-normal mb-4">
-            <span className="text-primary font-medium text-lg">Geospatial Research Assistant</span>
+            <span className="text-primary font-medium text-lg">
+              Geospatial Research Assistant
+            </span>
           </p>
           <ul className="text-foreground/70 text-xs md:text-sm font-normal mb-8 list-none space-y-3">
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Collaborating with faculty on an academic book project involving geographic and spatial analysis.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Developing custom GIS maps, figures, and spatial visualizations to support scholarly content.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Supporting research through geospatial data sourcing, cleaning, integration, and visualization.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Translating complex geographic concepts into clear, publication-quality spatial representations.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Gaining exposure to academic research standards, documentation, and publication workflows.</li>
+            <li className="flex gap-3">
+              <span className="text-primary mt-1 text-[10px]">&bull;</span>
+              Producing publication-quality maps, figures, and spatial
+              visualizations for a faculty-led academic book on Metro Vancouver
+              geology.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary mt-1 text-[10px]">&bull;</span>
+              Sourcing and integrating geospatial datasets from the Geological
+              Survey of Canada, BC government, and TransLink GTFS feeds.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary mt-1 text-[10px]">&bull;</span>
+              Designing multi-scale cartographic products including geological
+              maps, field trip route maps, and study area location maps.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary mt-1 text-[10px]">&bull;</span>
+              Performing data cleaning, attribute management, and QA/QC to
+              ensure accuracy across all spatial deliverables.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary mt-1 text-[10px]">&bull;</span>
+              Translating complex geographic concepts into clear, reproducible
+              cartographic outputs aligned with academic publication standards.
+            </li>
           </ul>
           <div className="flex flex-wrap gap-2 mb-6">
-            {["Academic Research", "Map Design", "Spatial Visualization", "Data Sourcing"].map((tag) => (
-              <span key={tag} className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20">
+            {[
+              "QGIS",
+              "Cartographic Design",
+              "Data Sourcing",
+              "QA/QC",
+              "Academic Publishing",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
+              >
                 {tag}
               </span>
             ))}
@@ -53,17 +226,47 @@ export default function Home() {
       ),
     },
     {
-      title: "May 2025 - Dec 2025",
+      title: "May 2025 — Dec 2025",
       content: (
         <div>
           <p className="text-foreground text-xs md:text-sm font-normal mb-4">
-            <span className="text-foreground font-medium text-lg">GIS Analyst</span> <span className="opacity-50">&mdash; Academic Projects & Applied Labs</span>
+            <span className="text-foreground font-medium text-lg">
+              GIS Analyst
+            </span>{" "}
+            <span className="opacity-50">
+              &mdash; Applied GIS Projects & Spatial Analysis
+            </span>
           </p>
           <ul className="text-foreground/70 text-xs md:text-sm font-normal mb-6 list-none space-y-3">
-            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">&bull;</span> Designed and analyzed spatial datasets using QGIS and ArcGIS, managing vector and raster data, projections, and attribute tables for academic GIS labs.</li>
-            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">&bull;</span> Performed spatial analysis and geoprocessing, including overlay analysis, buffering, querying, classification, and thematic mapping.</li>
-            <li className="flex gap-3"><span className="text-foreground/30 mt-1 text-[10px]">&bull;</span> Produced professional, publication-ready maps using cartographic design principles to support geographic analysis and scenario modeling.</li>
-            <li className="flex gap-3"><span className="text-primary mt-1 text-[10px]">&bull;</span> Developed a survey-driven, auto-updating GIS map as part of a course-based project, linking data collection to dynamic spatial visualization.</li>
+            <li className="flex gap-3">
+              <span className="text-foreground/30 mt-1 text-[10px]">
+                &bull;
+              </span>
+              Designed and analyzed spatial datasets using QGIS and ArcGIS Pro,
+              managing vector/raster data, projections, and attribute tables
+              across multiple applied projects.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-foreground/30 mt-1 text-[10px]">
+                &bull;
+              </span>
+              Performed spatial analysis and geoprocessing, including overlay
+              analysis, buffering, spatial queries, classification, and thematic
+              mapping.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-foreground/30 mt-1 text-[10px]">
+                &bull;
+              </span>
+              Produced professional, publication-ready maps using cartographic
+              best practices to support geographic analysis and decision-making.
+            </li>
+            <li className="flex gap-3">
+              <span className="text-primary mt-1 text-[10px]">&bull;</span>
+              Built a survey-driven, auto-updating GIS wildlife reporting system
+              linking Survey123 data collection to dynamic ArcGIS Online
+              visualization.
+            </li>
           </ul>
           <div className="mb-8">
             <a
@@ -73,41 +276,66 @@ export default function Home() {
               className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-card border border-foreground/20 rounded-full text-sm font-mono hover:bg-foreground/5 hover:border-primary/50 shadow-xl shadow-primary/5 hover:shadow-primary/20 hover:text-primary transition-all duration-300"
             >
               <Globe className="w-4 h-4 text-primary animate-pulse" />
-              [ View Web Map Application ]
+              [ View Bear Sighting Web Map ]
             </a>
           </div>
           <div className="flex flex-wrap gap-2 mb-6">
-            {["QGIS", "ArcGIS", "Geoprocessing", "Thematic Mapping", "Web GIS"].map(
-              (tag) => (
-                <span key={tag} className="px-3 py-1 text-xs rounded-full bg-card/50 backdrop-blur-md text-foreground/70 border border-foreground/10">
-                  {tag}
-                </span>
-              )
-            )}
+            {[
+              "QGIS",
+              "ArcGIS Pro",
+              "Survey123",
+              "Geoprocessing",
+              "Thematic Mapping",
+              "Web GIS",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 text-xs rounded-full bg-card/50 backdrop-blur-md text-foreground/70 border border-foreground/10"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
         </div>
       ),
     },
     {
-      title: "May 2024 - Apr 2026",
+      title: "May 2024 — Apr 2026",
       content: (
         <div>
           <p className="text-foreground text-xs md:text-sm font-normal mb-2">
-            <span className="text-foreground/80 font-bold tracking-tight text-xl">Capilano University</span>
+            <span className="text-foreground/80 font-bold tracking-tight text-xl">
+              Capilano University
+            </span>
           </p>
           <p className="text-primary text-xs md:text-sm font-mono mb-4 uppercase tracking-widest">
-            Associate of Science <span className="opacity-50 lowercase tracking-normal text-foreground">(North Vancouver, BC)</span>
+            Associate of Science{" "}
+            <span className="opacity-50 lowercase tracking-normal text-foreground">
+              (North Vancouver, BC)
+            </span>
           </p>
           <div className="text-foreground/70 text-xs md:text-sm font-normal mb-6 leading-relaxed bg-foreground/5 border border-foreground/10 p-5 rounded-xl">
             <strong className="text-foreground font-semibold flex items-center gap-2 mb-3">
               <Database className="w-4 h-4 text-primary" />
               Relevant Coursework
             </strong>
-            Geographic Information Systems (GIS), Spatial Analysis & Cartography, Physical Geography, Weather & Climate Systems, Statistics for Data Analysis, Calculus I, Precalculus Mathematics, Physics for Life Sciences, Business Computing, Computer Applications.
+            Geographic Information Systems (GIS), Spatial Analysis &
+            Cartography, Physical Geography, Weather & Climate Systems,
+            Statistics for Data Analysis, Calculus I, Precalculus Mathematics,
+            Physics for Life Sciences, Business Computing, Computer
+            Applications.
           </div>
           <div className="flex flex-wrap gap-2 mb-6">
-            {["GIS Fundamentals", "Cartography", "Statistics", "Physical Geography"].map((tag) => (
-              <span key={tag} className="px-3 py-1 text-xs font-mono rounded-md bg-transparent text-foreground/50 border border-foreground/10">
+            {[
+              "GIS Fundamentals",
+              "Cartography",
+              "Statistics",
+              "Physical Geography",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 text-xs font-mono rounded-md bg-transparent text-foreground/50 border border-foreground/10"
+              >
                 {tag}
               </span>
             ))}
@@ -128,15 +356,40 @@ export default function Home() {
             titleComponent={
               <>
                 <h1 className="text-4xl font-semibold text-foreground font-display">
-                  Mapping the World with Code <br />
-                  <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent">
-                    GIS &times; Dev
+                  Junior GIS Analyst & <br />
+                  <span className="text-4xl md:text-[5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent">
+                    Geospatial Research Assistant
                   </span>
                 </h1>
-                <p className="mt-4 pb-16 md:pb-24 text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto">
-                  Exploring geospatial systems, spatial analysis, and the
-                  technology that connects us to our planet.
+                <p className="mt-4 pb-8 text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto">
+                  Spatial analysis, cartography, and web mapping — turning
+                  geographic data into clear, decision-ready maps and systems.
                 </p>
+
+                {/* CTA Buttons */}
+                <div className="pb-12 md:pb-20 flex flex-wrap justify-center items-center gap-4">
+                  <a href="#projects">
+                    <ButtonWithIcon
+                      label="VIEW PROJECTS"
+                      icon={ArrowRight}
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20"
+                    />
+                  </a>
+                  <a href="/resume">
+                    <ButtonWithIcon
+                      label="RESUME"
+                      icon={FileText}
+                      className="bg-card hover:bg-card/90 text-foreground border border-foreground/20"
+                    />
+                  </a>
+                  <a href="/contact">
+                    <ButtonWithIcon
+                      label="CONTACT"
+                      icon={Mail}
+                      className="bg-card hover:bg-card/90 text-foreground border border-foreground/20"
+                    />
+                  </a>
+                </div>
               </>
             }
           >
@@ -144,17 +397,24 @@ export default function Home() {
               {/* Center content */}
               <div className="relative z-10 flex flex-col items-center gap-6 p-8">
                 <div className="flex gap-4 items-center">
-                  {[Globe, Layers, Satellite, Database, Map, Code].map((Icon, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ scale: 1.3, rotate: idx % 2 === 0 ? 15 : -15 }}
-                      className="cursor-pointer"
-                    >
-                      <Icon className={`w-8 h-8 ${idx % 2 === 0 ? "text-primary animate-pulse" : "text-primary"}`} />
-                    </motion.div>
-                  ))}
+                  {[Globe, Layers, Satellite, Database, Map, Code].map(
+                    (Icon, idx) => (
+                      <motion.div
+                        key={idx}
+                        whileHover={{
+                          scale: 1.3,
+                          rotate: idx % 2 === 0 ? 15 : -15,
+                        }}
+                        className="cursor-pointer"
+                      >
+                        <Icon
+                          className={`w-8 h-8 ${idx % 2 === 0 ? "text-primary animate-pulse" : "text-primary"}`}
+                        />
+                      </motion.div>
+                    )
+                  )}
                 </div>
-                {/* The "Hook" Element */}
+                {/* Location Badge */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -164,8 +424,18 @@ export default function Home() {
                   <div className="relative group cursor-pointer">
                     {/* Glowing animated border via framer-motion */}
                     <motion.div
-                      animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                      animate={{
+                        backgroundPosition: [
+                          "0% 50%",
+                          "100% 50%",
+                          "0% 50%",
+                        ],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
                       className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-primary via-background to-primary opacity-40 group-hover:opacity-100 blur-sm group-hover:blur-md bg-[length:200%_auto] transition-all duration-500"
                     />
 
@@ -176,49 +446,44 @@ export default function Home() {
                           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
                         </span>
                         <p className="font-mono text-xs md:text-sm font-semibold tracking-wider text-foreground ">
-                          LIVE
+                          AVAILABLE
                         </p>
                       </div>
 
                       <div className="w-px h-4 bg-neutral-300 "></div>
 
                       <p className="text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap">
-                        <span className="text-primary font-bold">LAT:</span> 49.28&deg; N
+                        <span className="text-primary font-bold">LAT:</span>{" "}
+                        49.28&deg; N
                         <span className="mx-2 text-neutral-300 ">|</span>
-                        <span className="text-primary font-bold">LON:</span> 123.12&deg; W
+                        <span className="text-primary font-bold">LON:</span>{" "}
+                        123.12&deg; W
                       </p>
                     </div>
                   </div>
 
-                  {/* Subtle terminal-like text below the pill */}
+                  {/* Professional value statement */}
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 1 }}
                     className="text-[10px] md:text-xs font-mono text-foreground/70 mt-6 tracking-widest uppercase"
                   >
-                    <span className="text-primary mr-2 animate-pulse">&gt;</span>
-                    exploring --spatial-data
+                    <span className="text-primary mr-2 animate-pulse">
+                      &gt;
+                    </span>
+                    ArcGIS · QGIS · Survey123 · Cartography
                   </motion.p>
 
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.2, duration: 0.5 }}
-                    className="mt-10 flex flex-wrap justify-center items-center gap-6"
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.3, duration: 1 }}
+                    className="text-[10px] md:text-xs font-mono text-foreground/50 mt-2 tracking-wider"
                   >
-                    <a href="mailto:connect@priyanshu.world">
-                      <ButtonWithIcon label="HIRE ME" icon={Briefcase} className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20" />
-                    </a>
-
-                    <a
-                      href="https://www.linkedin.com/in/priyanshu-624aa8368/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ButtonWithIcon label="CONNECT" className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
-                    </a>
-                  </motion.div>
+                    Open to GIS Analyst, Cartography & Geospatial Research roles
+                    across Canada
+                  </motion.p>
                 </motion.div>
                 {/* Immersive Deep Radar Background */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[-1]">
@@ -227,6 +492,89 @@ export default function Home() {
               </div>
             </div>
           </ContainerScroll>
+        </div>
+      </section>
+
+      {/* ===== FEATURED WORK SECTION ===== */}
+      <section id="projects" className="py-20 md:py-28 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm font-mono text-primary mb-2 tracking-widest uppercase">
+              Selected Work
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground font-display">
+              Featured{" "}
+              <span className="text-primary">Projects</span>
+            </h2>
+            <p className="mt-4 text-lg text-foreground/60 max-w-2xl mx-auto">
+              Real GIS deliverables — from publication-quality geological maps
+              to survey-driven web mapping systems.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {featuredProjects.map((project, idx) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+                className="group relative rounded-2xl overflow-hidden border border-foreground/10 bg-gradient-to-br from-card to-background shadow-lg hover:shadow-xl hover:shadow-primary/10 transition-all duration-500"
+              >
+                {/* Map thumbnail */}
+                <div className="relative h-56 md:h-64 w-full overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+                  {/* Role badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest rounded-full bg-primary/90 text-primary-foreground backdrop-blur-sm border border-primary/30">
+                      {project.role}
+                    </span>
+                  </div>
+                  {project.href && (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute top-4 right-4 p-2 rounded-full bg-card/80 border border-foreground/10 backdrop-blur-sm hover:bg-primary/20 hover:border-primary/30 transition-all"
+                    >
+                      <ExternalLink className="w-4 h-4 text-foreground/70" />
+                    </a>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-foreground font-display mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed mb-4">
+                    {project.summary}
+                  </p>
+                  <p className="text-xs text-foreground/50 mb-4 font-mono">
+                    <span className="text-primary">Deliverables:</span>{" "}
+                    {project.deliverables}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map((tool) => (
+                      <span
+                        key={tool}
+                        className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-foreground/5 text-foreground/60 border border-foreground/10"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -254,7 +602,7 @@ export default function Home() {
               <div className="relative aspect-[5/4] w-full group overflow-hidden">
                 <Image
                   src="/about-portrait.png"
-                  alt="Priyanshu Portrait"
+                  alt="Priyanshu — Junior GIS Analyst"
                   fill
                   className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none"
                 />
@@ -269,7 +617,7 @@ export default function Home() {
                   <span className="text-sm">Metro-Vancouver, BC</span>
                 </div>
                 <p className="mt-3 text-sm text-foreground/70 font-mono">
-                  GIS Student &middot; Capilano University
+                  Junior GIS Analyst &middot; Geospatial Research Assistant
                 </p>
               </div>
             </div>
@@ -282,30 +630,34 @@ export default function Home() {
                 // about.me
               </p>
               <h2 className="text-3xl md:text-5xl font-bold text-foreground font-display">
-                Hello, I&apos;m <span className="text-primary ">Priyanshu</span>
+                Hello, I&apos;m{" "}
+                <span className="text-primary ">Priyanshu</span>
               </h2>
             </div>
             <p className="text-lg text-foreground/70 leading-relaxed">
-              Associate of Science student at Capilano University, currently
-              working as a Geospatial Research Assistant. I collaborate with
-              faculty on academic projects, developing custom GIS maps and
-              spatial visualizations for scholarly publications.
+              I&apos;m a GIS analyst and geospatial research assistant based in
+              Metro Vancouver, currently producing publication-quality maps and
+              spatial visualizations for faculty-led academic research at
+              Capilano University.
             </p>
             <p className="text-base text-foreground/70 leading-relaxed">
               From overlay analysis and thematic mapping to survey-driven
-              auto-updating maps, I love translating complex geographic concepts
-              into clear, meaningful spatial representations. Exploring the
-              intersection of GIS, cartography, and data science.
+              auto-updating web maps, I specialize in turning complex geographic
+              data into clear, decision-ready outputs. I care deeply about data
+              quality, cartographic precision, and making spatial information
+              accessible and usable.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               {[
+                "ArcGIS Pro",
+                "ArcGIS Online",
                 "QGIS",
-                "ArcGIS",
+                "Survey123",
                 "Spatial Analysis",
                 "Cartography",
                 "Geoprocessing",
-                "Data Visualization",
-                "Microsoft Excel",
+                "Data Integration",
+                "QA/QC",
               ].map((skill) => (
                 <motion.span
                   key={skill}
@@ -320,8 +672,88 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== CORE FOCUS AREAS ===== */}
+      <section className="py-16 md:py-24 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-sm font-mono text-primary mb-2 tracking-widest uppercase">
+              What I Work On
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display">
+              Core GIS <span className="text-primary">Focus Areas</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {coreFocusAreas.map((area, idx) => (
+              <motion.div
+                key={area.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
+                className="group p-6 rounded-2xl border border-foreground/10 bg-gradient-to-br from-card/50 to-background hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+              >
+                <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <area.icon className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-base font-bold text-foreground font-display mb-2">
+                  {area.title}
+                </h3>
+                <p className="text-sm text-foreground/60 leading-relaxed">
+                  {area.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SKILLS SECTION ===== */}
+      <section id="skills" className="py-16 md:py-24 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-sm font-mono text-primary mb-2 tracking-widest uppercase">
+              Technical Capability
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display">
+              Tools &{" "}
+              <span className="text-primary">Skills</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {skillCategories.map((category, idx) => (
+              <motion.div
+                key={category.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
+                className="p-6 rounded-2xl border border-foreground/10 bg-card/30 backdrop-blur-sm"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <category.icon className="w-5 h-5 text-primary" />
+                  <h3 className="text-sm font-bold text-foreground font-display uppercase tracking-wider">
+                    {category.label}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 text-xs font-mono rounded-lg bg-foreground/5 text-foreground/70 border border-foreground/10"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== WORK / TIMELINE SECTION ===== */}
-      <section id="work" className="pb-24 md:pb-40">
+      <section id="experience" className="pb-24 md:pb-40">
         <Timeline data={timelineData} />
       </section>
 
@@ -330,4 +762,3 @@ export default function Home() {
     </div>
   );
 }
-

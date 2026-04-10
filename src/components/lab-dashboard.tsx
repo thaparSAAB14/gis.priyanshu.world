@@ -3,8 +3,9 @@
 import React from "react";
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
-import { FlaskConical, Sparkles, Beaker, Cpu } from "lucide-react";
+import { FlaskConical, Sparkles, Beaker, Cpu, ArrowLeft } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 
@@ -111,9 +112,15 @@ export function LabDashboard() {
                 Lab
               </span>
             </h1>
-            <p className="mb-8 max-w-2xl text-lg text-foreground/70 md:text-xl">
+            <p className="mb-4 max-w-2xl text-lg text-foreground/70 md:text-xl">
               A running archive of creative code, interface studies, and geospatial experiments built to test ideas in public.
             </p>
+            <div className="mb-6">
+              <Link href="/#projects" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-mono text-primary hover:bg-primary/20 transition-all">
+                <ArrowLeft className="w-3.5 h-3.5" />
+                View Polished Projects
+              </Link>
+            </div>
             <div className="flex flex-wrap items-center justify-center gap-4 text-foreground/70">
               <div className="flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /><span className="text-xs font-mono uppercase tracking-widest">creative code</span></div>
               <div className="hidden h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-800 sm:block" />
