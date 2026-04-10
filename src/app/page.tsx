@@ -485,19 +485,19 @@ export default function Home() {
               img: "/about-portrait.png"
             }
           ].map((p, i) => (
-            <a href={`/projects/${p.id}`} key={i} className={`group relative block w-full h-[320px] rounded-2xl overflow-hidden border border-border/50 bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-primary/10 ${i === 4 ? "md:col-span-2" : ""}`}>
+            <a href={`/projects/${p.id}`} key={i} className={`group relative block w-full h-[320px] rounded-2xl overflow-hidden border border-border/40 bg-card/40 backdrop-blur-xl hover:border-primary/60 transition-all duration-500 hover:-translate-y-1 shadow-lg hover:shadow-[0_0_40px_rgba(0,255,255,0.15)] ${i === 4 ? "md:col-span-2" : ""}`}>
               <Image 
                 src={p.img} 
                 alt={p.title} 
                 fill 
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-in-out" 
+                className="object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-in-out mix-blend-luminosity group-hover:mix-blend-normal" 
               />
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-background via-background/90 to-transparent pt-24 text-left">
-                <h3 className="text-2xl font-bold font-display text-white tracking-tight mb-2 group-hover:text-primary transition-colors">{p.title}</h3>
-                <p className="text-sm font-medium text-gray-300 line-clamp-2 md:line-clamp-3 w-11/12 leading-relaxed">{p.desc}</p>
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-background via-background/95 to-transparent pt-32 text-left">
+                <h3 className="text-2xl font-bold font-display text-primary tracking-tight mb-2 group-hover:text-white transition-colors">{p.title}</h3>
+                <p className="text-sm font-medium text-foreground/80 line-clamp-2 md:line-clamp-3 w-11/12 leading-relaxed">{p.desc}</p>
                 <div className="mt-4 inline-flex items-center text-xs font-mono tracking-widest text-primary uppercase font-semibold">
-                  Read Case Study <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  Read Case Study <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
                 </div>
               </div>
             </a>
