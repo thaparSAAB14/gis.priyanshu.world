@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Tent, Flame, Droplets, Bath, Compass } from 'lucide-react';
+import { Globe, Map, Compass, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const InteractiveSelector = () => {
@@ -10,34 +10,28 @@ const InteractiveSelector = () => {
   
   const options = [
     {
-      title: "Luxury Tent",
-      description: "Cozy glamping under the stars",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-      icon: <Tent size={20} className="text-white" />
+      title: "Bear Sighting Network",
+      description: "Auto-updating survey-driven wildlife database",
+      image: "/projects/metro-vancouver-municipalities.jpeg",
+      icon: <Globe size={20} className="text-white" />
     },
     {
-      title: "Campfire Feast",
-      description: "Gourmet s'mores & stories",
-      image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
-      icon: <Flame size={20} className="text-white" />
+      title: "Metro Vancouver Geology",
+      description: "Publication-ready QGIS cartography & spatial design",
+      image: "/projects/geological-map-metro-vancouver.jpeg",
+      icon: <Map size={20} className="text-white" />
     },
     {
-      title: "Lakeside Retreat",
-      description: "Private dock & canoe rides",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-      icon: <Droplets size={20} className="text-white" />
-    },
-    {
-      title: "Mountain Spa",
-      description: "Outdoor sauna & hot tub",
-      image: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80",
-      icon: <Bath size={20} className="text-white" />
-    },
-    {
-      title: "Guided Adventure",
-      description: "Expert-led nature tours",
-      image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80",
+      title: "Field Route Analytics",
+      description: "Complex overlay analysis of geological transit networks",
+      image: "/projects/geology-route-queen-elizabeth.jpeg",
       icon: <Compass size={20} className="text-white" />
+    },
+    {
+      title: "Multi-Scale Mapping",
+      description: "High-precision map projections & boundary contexts",
+      image: "/projects/study-area-location-map.jpeg",
+      icon: <Layers size={20} className="text-white" />
     }
   ];
 
@@ -66,8 +60,8 @@ const InteractiveSelector = () => {
     <div className="relative flex flex-col items-center justify-center py-20 px-4 font-sans text-white w-full rounded-2xl overflow-hidden mt-8 max-w-6xl mx-auto"> 
       {/* Header Section mapped cleanly to Next.js Tailwind configuration globally */}
       <div className="w-full max-w-2xl px-6 mb-12 text-center animate-in fade-in slide-in-from-top-4 duration-1000 delay-[300ms] fill-mode-both">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-3 tracking-tight font-display">Escape in Style</h2>
-        <p className="text-lg md:text-xl text-foreground/70 font-medium max-w-xl mx-auto">Discover luxurious experiences in nature’s most breathtaking spots.</p>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-3 tracking-tight font-display">Core GIS Deliverables</h2>
+        <p className="text-lg md:text-xl text-foreground/70 font-medium max-w-xl mx-auto">Explore production-ready spatial analysis, dynamic web mapping, and publication-quality cartography.</p>
       </div>
 
       {/* Options Slider Container */}

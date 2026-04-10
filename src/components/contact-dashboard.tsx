@@ -5,7 +5,6 @@ import { SlideTabs } from "@/components/ui/slide-tabs";
 import { Copy, Mail, MapPin, Github, Download, ExternalLink } from "lucide-react";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
-import { BackgroundPaths } from "@/components/ui/background-paths";
 import { motion } from "framer-motion";
 
 export function ContactDashboard() {
@@ -19,7 +18,7 @@ export function ContactDashboard() {
   };
 
   return (
-    <BackgroundPaths className="transition-colors duration-300">
+    <div className="relative min-h-screen transition-colors duration-300 bg-transparent flex flex-col">
       <SlideTabs />
 
       <main className="flex-1 flex flex-col items-center justify-center relative z-10 px-4 py-32 mt-16">
@@ -70,8 +69,8 @@ export function ContactDashboard() {
               <a href="https://github.com/thaparSAAB14" target="_blank" rel="noopener noreferrer">
                 <ButtonWithIcon label="GITHUB" icon={Github} className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
               </a>
-              <a href="/resume.pdf" download>
-                <ButtonWithIcon label="RESUME" icon={Download} className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                <ButtonWithIcon label="VIEW RESUME" icon={Download} className="bg-card hover:bg-card/90 text-foreground border border-foreground/20" />
               </a>
             </div>
           </div>
@@ -83,6 +82,6 @@ export function ContactDashboard() {
       </main>
 
       <TapedFooter />
-    </BackgroundPaths>
+    </div>
   );
 }

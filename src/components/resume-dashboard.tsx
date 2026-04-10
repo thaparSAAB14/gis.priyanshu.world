@@ -50,9 +50,9 @@ export function ResumeDashboard() {
               Junior GIS Analyst & Geospatial Research Assistant — available for
               spatial analysis, cartography, and data roles across Canada.
             </p>
-            <a href="/resume.pdf" download>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
               <ButtonWithIcon
-                label="DOWNLOAD RESUME (PDF)"
+                label="VIEW RESUME (PDF)"
                 icon={Download}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/20 shadow-xl shadow-primary/20"
               />
@@ -238,9 +238,9 @@ export function ResumeDashboard() {
 
           {/* Bottom Download */}
           <div className="flex justify-center pt-4">
-            <a href="/resume.pdf" download>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
               <ButtonWithIcon
-                label="DOWNLOAD RESUME (PDF)"
+                label="VIEW RESUME (PDF)"
                 icon={Download}
                 className="bg-card hover:bg-card/90 text-foreground border border-foreground/20"
               />

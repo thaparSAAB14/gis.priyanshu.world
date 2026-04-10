@@ -89,33 +89,33 @@ const skillCategories = [
 const coreFocusAreas = [
   {
     icon: Compass,
-    title: "Spatial Analysis",
-    desc: "Geoprocessing, overlay analysis, and scenario-based geographic problem-solving.",
+    title: "Advanced Spatial Analysis",
+    desc: "Complex geoprocessing, proximity mapping, and scenario-based geographic modeling to solve intricate spatial problems.",
   },
   {
     icon: PenTool,
-    title: "Cartography",
-    desc: "Publication-quality map production with clear legends, scales, and projections.",
+    title: "Publication Cartography",
+    desc: "Designing production-ready, precise map layouts with sophisticated legends, rigorous scales, and flawless projections.",
   },
   {
     icon: Database,
-    title: "Data Integration",
-    desc: "Sourcing, cleaning, and integrating multi-format spatial datasets with systematic QA/QC.",
+    title: "Spatial Data Engineering",
+    desc: "Systematically sourcing, cleaning, and synthesizing multi-format geospatial datasets via strict QA/QC methodologies.",
   },
   {
     icon: Globe,
-    title: "Web GIS",
-    desc: "Survey123 forms, ArcGIS Online dashboards, and dynamic web-based mapping systems.",
+    title: "Enterprise Web GIS",
+    desc: "Architecting interactive Survey123 platforms, ArcGIS Online dashboards, and fully dynamic web-based mapping ecosystems.",
   },
   {
     icon: Microscope,
-    title: "Research Support",
-    desc: "Faculty-led academic research with spatial visualization and geographic data documentation.",
+    title: "Academic Geospatial Research",
+    desc: "Driving faculty-led geological research through robust spatial visualization, leading to formal academic book co-authorship.",
   },
   {
     icon: BarChart3,
-    title: "Decision Support",
-    desc: "Turning complex geographic data into clear, decision-ready maps and spatial outputs.",
+    title: "Decision-Support Systems",
+    desc: "Distilling massive geographic data flows into clear, actionable, and visually stunning interactive analytical models.",
   },
 ];
 
@@ -308,15 +308,14 @@ export default function Home() {
           <ContainerScroll
             titleComponent={
               <>
-                <h1 className="text-4xl font-semibold text-foreground font-display">
-                  Junior GIS Analyst & <br />
-                  <span className="text-4xl md:text-[5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent">
-                    Geospatial Research Assistant
+                <h1 className="text-4xl md:text-5xl font-semibold text-foreground font-display tracking-tight leading-tight">
+                  Junior GIS Analyst, Co-Author & <br />
+                  <span className="text-5xl md:text-[5.5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent transform">
+                    Geospatial Researcher
                   </span>
                 </h1>
-                <p className="mt-4 pb-8 text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto">
-                  Spatial analysis, cartography, and web mapping — turning
-                  geographic data into clear, decision-ready maps and systems.
+                <p className="mt-6 pb-8 text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto font-medium leading-relaxed">
+                  Engineering high-performance enterprise maps, complex spatial analysis, and dynamic Web GIS systems. <br className="hidden md:block" /><span className="text-primary/90">Co-author of an upcoming academic book on Metro Vancouver geology.</span>
                 </p>
 
                 {/* CTA Buttons */}
@@ -420,21 +419,20 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 1 }}
-                    className="text-[10px] md:text-xs font-mono text-foreground/70 mt-6 tracking-widest uppercase"
+                    className="text-[10px] md:text-xs font-mono text-foreground/70 mt-6 tracking-widest uppercase text-center"
                   >
                     <span className="text-primary mr-2 animate-pulse">
                       &gt;
                     </span>
-                    ArcGIS · QGIS · Survey123 · Cartography
+                    ArcGIS · QGIS · Python · Next.js · Data Engineering
                   </motion.p>
-
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.3, duration: 1 }}
-                    className="text-[10px] md:text-xs font-mono text-foreground/50 mt-2 tracking-wider"
+                    className="text-[10px] md:text-xs font-mono text-foreground/50 mt-2 tracking-wider text-center"
                   >
-                    Open to GIS Analyst, Cartography & Geospatial Research roles
+                    Open to GIS Analyst, Geospatial Research & Data Engineering roles
                     across Canada
                   </motion.p>
                 </motion.div>
@@ -509,18 +507,11 @@ export default function Home() {
                 <span className="text-primary ">Priyanshu</span>
               </h2>
             </div>
-            <p className="text-lg text-foreground/70 leading-relaxed">
-              I&apos;m a GIS analyst and geospatial research assistant based in
-              Metro Vancouver, currently producing publication-quality maps and
-              spatial visualizations for faculty-led academic research at
-              Capilano University.
+            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed font-medium">
+              I am a high-impact GIS Analyst, Geospatial Researcher, and <strong className="text-primary">academic co-author</strong> based in Metro Vancouver. I currently produce publication-quality maps and advanced spatial visualizations for faculty-led geology research at Capilano University.
             </p>
-            <p className="text-base text-foreground/70 leading-relaxed">
-              From overlay analysis and thematic mapping to survey-driven
-              auto-updating web maps, I specialize in turning complex geographic
-              data into clear, decision-ready outputs. I care deeply about data
-              quality, cartographic precision, and making spatial information
-              accessible and usable.
+            <p className="text-base md:text-lg text-foreground/70 leading-relaxed">
+              From complex overlay analysis and thematic mapping to engineering survey-driven auto-updating web platforms, I specialize in transforming raw geographic data into dynamic, decision-ready systems. I adhere to rigorous QA/QC standards to ensure flawless cartographic precision and data integrity.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               {[
