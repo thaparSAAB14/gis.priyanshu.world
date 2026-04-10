@@ -1,152 +1,55 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface TabItem {
   label: string;
   href: string;
-  match: (hostname: string, pathname: string) => boolean;
+  external?: boolean;
+  match: (pathname: string) => boolean;
 }
 
+const tabs: TabItem[] = [
+  { label: "Home", href: "/", match: (path) => path === "/" },
+  { label: "Projects", href: "/projects", match: (path) => path.startsWith("/projects") },
+  { label: "About", href: "/about", match: (path) => path.startsWith("/about") },
+  { label: "Resume", href: "/resume", match: (path) => path.startsWith("/resume") },
+  { label: "Connect", href: "/contact", match: (path) => path.startsWith("/contact") },
+  {
+    label: "Lab (Exp)",
+    href: "https://lab.priyanshu.world",
+    external: true,
+    match: (path) => path.startsWith("/lab"),
+  },
+];
+
 export const SlideTabs = () => {
-  const [position, setPosition] = useState({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
-  const [hostname, setHostname] = useState("");
-  const pathname = usePathname();
-
-  useEffect(() => {
-    setHostname(window.location.hostname);
-  }, []);
-
-  const isProd = hostname.includes("priyanshu.world");
-
-  const tabs: TabItem[] = [
-    { 
-      label: "Home", 
-      href: isProd ? "https://gis.priyanshu.world" : "/",
-      match: (host, path) => host === "lab.priyanshu.world" ? false : path === "/"
-    },
-    { 
-      label: "Projects", 
-      href: isProd ? "https://gis.priyanshu.world/#projects" : "/#projects",
-      match: () => false
-    },
-    { 
-      label: "About", 
-      href: isProd ? "https://gis.priyanshu.world/#about" : "/#about",
-      match: () => false
-    },
-    { 
-      label: "Resume", 
-      href: isProd ? "https://gis.priyanshu.world/resume" : "/resume",
-      match: (host, path) => path.startsWith("/resume")
-    },
-    { 
-      label: "Lab", 
-      href: isProd ? "https://lab.priyanshu.world" : "/lab",
-      match: (host, path) => host === "lab.priyanshu.world" ? true : path.startsWith("/lab")
-    },
-    { 
-      label: "Connect", 
-      href: isProd ? "https://gis.priyanshu.world/contact" : "/contact",
-      match: (host, path) => path.startsWith("/contact")
-    },
-  ];
-  
-  const getIndex = (host: string, p: string) => {
-    const idx = tabs.findIndex((tab) => tab.match(host, p));
-    return idx === -1 ? 0 : idx;
-  };
-  
-  const [selected, setSelected] = useState(0);
-  const tabsRef = useRef<(HTMLLIElement | null)[]>([]);
-
-  // Correctly set initial active tab once hostname is known
-  useEffect(() => {
-    if (hostname) {
-      setSelected(getIndex(hostname, pathname || "/"));
-    }
-  }, [hostname, pathname]);
-
-  useEffect(() => {
-    if (!pathname) return;
-    const idx = getIndex(hostname, pathname);
-    if (idx !== -1 && idx !== selected) {
-      setSelected(idx);
-    }
-  }, [pathname, hostname, selected]);
-
-  useEffect(() => {
-    const selectedTab = tabsRef.current[selected];
-    if (selectedTab) {
-      const { width } = selectedTab.getBoundingClientRect();
-      setPosition({
-        left: selectedTab.offsetLeft,
-        width,
-        opacity: 1,
-      });
-    }
-  }, [selected]);
-
-  const handleMouseLeave = () => {
-    const selectedTab = tabsRef.current[selected];
-    if (selectedTab) {
-      const { width } = selectedTab.getBoundingClientRect();
-      setPosition({
-        left: selectedTab.offsetLeft,
-        width,
-        opacity: 1,
-      });
-    }
-  };
+  const pathname = usePathname() || "/";
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <ul
-        onPointerLeave={(e) => {
-          if (e.pointerType === "touch") return;
-          handleMouseLeave();
-        }}
-        className="relative flex w-fit rounded-full border border-foreground/20 bg-gradient-to-b from-card/90 to-background/90 backdrop-blur-xl p-1 shadow-lg shadow-foreground/5 dark:shadow-foreground/20 transition-all duration-300"
-      >
-        {tabs.map((tab, i) => (
-          <li
-            key={tab.label}
-            ref={(el) => {
-              tabsRef.current[i] = el;
-            }}
-            onClick={() => setSelected(i)}
-            onPointerEnter={(e) => {
-              if (e.pointerType === "touch") return; // Prevents "double tap" bug on mobile
-              const el = tabsRef.current[i];
-              if (!el) return;
-              const { width } = el.getBoundingClientRect();
-              setPosition({
-                left: el.offsetLeft,
-                width,
-                opacity: 1,
-              });
-            }}
-            className="relative z-10 block cursor-pointer"
-          >
-            <Link
-              href={tab.href}
-              className="block px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground dark:hover:text-white transition-colors mix-blend-difference"
-            >
-              {tab.label}
-            </Link>
-          </li>
-        ))}
-        <motion.li
-          animate={{ ...position }}
-          className="absolute z-0 h-9 rounded-full bg-gradient-to-r from-primary/30 to-primary/10 border border-primary/30 shadow-inner"
-        />
+    <nav className="fixed top-6 left-1/2 z-50 -translate-x-1/2">
+      <ul className="flex w-fit items-center rounded-full border border-foreground/20 bg-gradient-to-b from-card/90 to-background/90 p-1 text-sm shadow-lg shadow-foreground/5 backdrop-blur-xl">
+        {tabs.map((tab) => {
+          const isActive = tab.match(pathname);
+
+          return (
+            <li key={tab.label}>
+              <Link
+                href={tab.href}
+                target={tab.external ? "_blank" : undefined}
+                rel={tab.external ? "noopener noreferrer" : undefined}
+                className={`block rounded-full px-4 py-2 transition-colors ${
+                  isActive
+                    ? "bg-primary/20 text-foreground border border-primary/30"
+                    : "text-foreground/70 hover:text-foreground"
+                }`}
+              >
+                {tab.label}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
