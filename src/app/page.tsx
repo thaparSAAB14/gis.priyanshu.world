@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Tilt } from "@/components/ui/tilt";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Timeline } from "@/components/ui/timeline";
+import InteractiveSelector from "@/components/ui/interactive-selector";
 import { Radar } from "@/components/ui/radar-effect";
 import { ButtonWithIcon } from "@/components/ui/button-with-icon";
 
@@ -31,57 +31,10 @@ import {
   Search,
   PenTool,
   Server,
+  Server,
   Microscope,
-  ExternalLink,
 } from "lucide-react";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
-
-/* ─── PROJECT DATA ────────────────────────────────────────────── */
-const featuredProjects = [
-  {
-    title: "Bear Sighting Reporting System",
-    role: "GIS Analyst",
-    summary:
-      "Designed a survey-driven, auto-updating wildlife reporting system using Survey123 and ArcGIS Online, supporting real-time data collection and spatial visualization for conservation awareness.",
-    tools: ["Survey123", "ArcGIS Online", "Web GIS"],
-    image: "/projects/metro-vancouver-municipalities.jpeg",
-    href: "https://arcg.is/y0efn",
-    deliverables: "Dynamic web map, Survey123 form, auto-updating dashboard",
-  },
-  {
-    title: "Geological Mapping — Metro Vancouver",
-    role: "Geospatial Research Assistant",
-    summary:
-      "Produced publication-quality geological and location maps of the Metro Vancouver region for a faculty-led academic book chapter, integrating data from the Geological Survey of Canada.",
-    tools: ["QGIS", "Cartographic Design", "Data Integration"],
-    image: "/projects/geological-map-metro-vancouver.jpeg",
-    href: null,
-    deliverables:
-      "Geological maps, study area maps, field trip route maps, cartographic figures for publication",
-  },
-  {
-    title: "Field Trip Route Analysis",
-    role: "Geospatial Research Assistant",
-    summary:
-      "Created multi-layer geological route maps combining transit networks, surficial geology, and field site locations for an academic field guide chapter.",
-    tools: ["QGIS", "Spatial Analysis", "NAD83/BC Albers"],
-    image: "/projects/geology-route-queen-elizabeth.jpeg",
-    href: null,
-    deliverables:
-      "Field trip route maps with geology overlays, publication-ready cartographic layouts",
-  },
-  {
-    title: "Study Area & Location Mapping",
-    role: "Geospatial Research Assistant",
-    summary:
-      "Developed multi-scale location maps from national to municipal level, supporting geographic context for academic research across Metro Vancouver.",
-    tools: ["QGIS", "Multi-Scale Mapping", "Projections"],
-    image: "/projects/study-area-location-map.jpeg",
-    href: null,
-    deliverables:
-      "Multi-scale location maps, municipal boundary maps, coordinate reference documentation",
-  },
-];
 
 /* ─── SKILLS DATA ─────────────────────────────────────────────── */
 const skillCategories = [
@@ -496,86 +449,8 @@ export default function Home() {
       </section>
 
       {/* ===== FEATURED WORK SECTION ===== */}
-      <section id="projects" className="py-20 md:py-28 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm font-mono text-primary mb-2 tracking-widest uppercase">
-              Selected Work
-            </p>
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground font-display">
-              Featured{" "}
-              <span className="text-primary">Projects</span>
-            </h2>
-            <p className="mt-4 text-lg text-foreground/60 max-w-2xl mx-auto">
-              Real GIS deliverables — from publication-quality geological maps
-              to survey-driven web mapping systems.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredProjects.map((project, idx) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.1, duration: 0.6 }}
-                className="group relative rounded-2xl overflow-hidden border border-foreground/10 bg-gradient-to-br from-card to-background shadow-lg hover:shadow-xl hover:shadow-primary/10 transition-all duration-500"
-              >
-                {/* Map thumbnail */}
-                <div className="relative h-56 md:h-64 w-full overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-                  {/* Role badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest rounded-full bg-primary/90 text-primary-foreground backdrop-blur-sm border border-primary/30">
-                      {project.role}
-                    </span>
-                  </div>
-                  {project.href && (
-                    <a
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute top-4 right-4 p-2 rounded-full bg-card/80 border border-foreground/10 backdrop-blur-sm hover:bg-primary/20 hover:border-primary/30 transition-all"
-                    >
-                      <ExternalLink className="w-4 h-4 text-foreground/70" />
-                    </a>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-foreground font-display mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-foreground/60 leading-relaxed mb-4">
-                    {project.summary}
-                  </p>
-                  <p className="text-xs text-foreground/50 mb-4 font-mono">
-                    <span className="text-primary">Deliverables:</span>{" "}
-                    {project.deliverables}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-foreground/5 text-foreground/60 border border-foreground/10"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+      <section id="projects" className="py-12 md:py-20">
+        <InteractiveSelector />
       </section>
 
       {/* ===== ABOUT SECTION ===== */}
