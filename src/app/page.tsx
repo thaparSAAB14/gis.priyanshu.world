@@ -472,7 +472,7 @@ export default function Home() {
                 title: "Bear Sighting Network",
                 desc: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online.",
                 category: "Web GIS & Survey123",
-                img: "/projects/metro-vancouver-municipalities.jpeg",
+                img: "/projects/metro-vancouver-municipalities.webp",
                 colSpan: "lg:col-span-7",
               },
               {
@@ -480,7 +480,7 @@ export default function Home() {
                 title: "Metro Vancouver Geology",
                 desc: "Publication-quality geology and location mapping for faculty-led research.",
                 category: "Cartography",
-                img: "/projects/geological-map-metro-vancouver.jpeg",
+                img: "/projects/geological-map-metro-vancouver.webp",
                 colSpan: "lg:col-span-5",
               },
               {
@@ -488,7 +488,7 @@ export default function Home() {
                 title: "Field Route Analytics",
                 desc: "Spatial analysis involving route design, geology context, and multi-layer overlays.",
                 category: "Spatial Analysis",
-                img: "/projects/geology-route-queen-elizabeth.jpeg",
+                img: "/projects/geology-route-queen-elizabeth.webp",
                 colSpan: "lg:col-span-5",
               },
               {
@@ -496,7 +496,7 @@ export default function Home() {
                 title: "Multi-Scale Mapping",
                 desc: "Cartographic work showing projection handling across regional to local scales.",
                 category: "Cartography",
-                img: "/projects/study-area-location-map.jpeg",
+                img: "/projects/study-area-location-map.webp",
                 colSpan: "lg:col-span-7",
               },
               {

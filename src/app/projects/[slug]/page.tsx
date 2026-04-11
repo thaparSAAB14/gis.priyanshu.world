@@ -2,65 +2,69 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Map, Database, Compass, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Map, Database, Compass, CheckCircle2, MonitorPlay } from 'lucide-react';
 
-// This fulfills the "Phase 2: Project Architecture Redesign" to offload heavy maps.
 const projectsData = {
   "bear-sighting": {
     title: "Bear Sighting Network",
-    summary: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online to support data collection, map-based visibility, and dynamic GIS updates.",
-    image: "/projects/metro-vancouver-municipalities.jpeg",
-    problem: "Wildlife reporting in the region lacked centralized, real-time spatial organization, slowing down mitigation efforts.",
-    goal: "Design a mobile-friendly field reporting tool linked perfectly to a dynamic web dashboard.",
+    summary: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online to support real-time data collection and operational visibility.",
+    image: "/projects/metro-vancouver-municipalities.webp",
+    iframeUrl: "https://arcg.is/y0efn",
+    problem: "Wildlife reporting in the region lacked centralized, real-time spatial organization, slowing down mitigation efforts. Static forms often led to data silos, making it difficult for wildlife management agencies to track bear movement patterns effectively.",
+    goal: "Design a mobile-responsive field reporting tool perfectly synchronized with a real-time ArcGIS operational dashboard, replacing manual workflows.",
     tools: ["ArcGIS Online", "Survey123", "ArcGIS Dashboards"],
-    workflow: "Built customized geospatial survey logic, established feature layers, and wired real-time sync into a dashboard UI.",
-    outcome: "Streamlined data collection and drastically improved visualization for regional biological monitoring.",
-    skills: ["Web GIS", "Field Data Collection", "Real-Time Mapping"]
+    workflow: "Engineered customized geospatial survey logic using Survey123 (XLSForm), established secure cloud-hosted feature layers on ArcGIS Online, and wired live synchronization feeds into a dynamic Dashboard UI. Integrated heat maps and time-series charting.",
+    outcome: "Dramatically streamlined data collection and reduced incident reporting lag to seconds, providing conservation officers with immediate spatial awareness of human-wildlife encounters.",
+    skills: ["Web GIS", "Field Data Collection", "Operational Dashboards"]
   },
   "metro-geology": {
     title: "Metro Vancouver Geology",
-    summary: "Publication-quality geology and location mapping created for faculty-led academic research and book chapter production.",
-    image: "/projects/geological-map-metro-vancouver.jpeg",
-    problem: "Faculty geology research required a print-ready cartographic layout to properly convey the physical geography.",
-    goal: "Synthesize scattered geospatial data into a highly precise, publication-ready cartographic layout.",
-    tools: ["QGIS", "BC Data Catalogue", "Adobe Illustrator"],
-    workflow: "Rigorous QA/QC on multi-source data, careful alignment of projections, and nuanced cartographic styling for clarity.",
-    outcome: "Successfully authored final map figures for formal inclusion in an academic book chapter on Metro Vancouver.",
-    skills: ["Publication Cartography", "Spatial Data Sourcing", "QA/QC"]
+    summary: "Publication-quality geology and location mapping created for faculty-led academic research and formal book chapter production.",
+    image: "/projects/geological-map-metro-vancouver.webp",
+    iframeUrl: null,
+    problem: "Faculty geology research required precise, print-ready cartographic layouts to visually convey the tectonic and glacial history of the physical geography, but source datasets were fragmented across multiple datums and catalogs.",
+    goal: "Synthesize scattered geospatial data into a highly precise, publication-ready cartographic layout suitable for an academic textbook.",
+    tools: ["QGIS", "BC Data Catalogue", "GSC Data", "Adobe Illustrator"],
+    workflow: "Conducted rigorous QA/QC on multi-source data, standardized geodatabases, and carefully aligned map projections. Applied advanced cartographic styling rules (color theory, labeling hierarchy) to ensure maximum readability.",
+    outcome: "Successfully authored final map figures that clearly articulate regional geological formations, which are successfully scheduled for formal inclusion in an upcoming academic book chapter on Metro Vancouver.",
+    skills: ["Publication Cartography", "Geospatial Data Engineering", "QA/QC"]
   },
   "route-analytics": {
     title: "Field Route Analytics",
-    summary: "Spatial analysis and mapping work involving route design, geology context, and multi-layer overlays.",
-    image: "/projects/geology-route-queen-elizabeth.jpeg",
-    problem: "Analyzing complex geological field transit required exact route overlay onto diverse base maps.",
-    goal: "Deliver a spatial analysis model identifying key geological transit paths.",
+    summary: "Advanced spatial analysis and mapping work involving field transit route design, stratigraphy context, and complex multi-layer overlays.",
+    image: "/projects/geology-route-queen-elizabeth.webp",
+    iframeUrl: null,
+    problem: "Analyzing complex geological field transit routes required exact spatial overlay onto diverse topographic base maps to understand the precise relationship between infrastructure and underlying geology.",
+    goal: "Deliver a robust spatial analysis model computationally identifying key geological transit paths and field stop viability.",
     tools: ["ArcGIS Pro", "Network Analysis", "Topographic Data"],
-    workflow: "Extracted and dissolved route networks, executed multi-layer overlays, and styled outputs for academic field review.",
-    outcome: "Provided a clear spatial breakdown of operational field paths against existing geological boundaries.",
-    skills: ["Spatial Analysis", "Overlay Analysis", "Geoprocessing"]
+    workflow: "Extracted and dissolved route networks, executed multi-layer intersections to isolate route segments by geological unit, and produced high-fidelity outputs for academic field review using ArcGIS Pro.",
+    outcome: "Provided a quantifiable spatial breakdown of operational field paths against existing stratigraphy, substantially enhancing the research team's field planning efficiency.",
+    skills: ["Spatial Analysis", "Overlay Intersections", "Geoprocessing"]
   },
   "multi-scale": {
-    title: "Multi-Scale Mapping",
-    summary: "Cartographic work showing projection handling, boundary context, and map design across scales from regional to local.",
-    image: "/projects/study-area-location-map.jpeg",
-    problem: "Complex research locations require viewers to simultaneously understand regional context and strict local boundaries.",
-    goal: "Architect a multi-scale cartographic composition ensuring projection accuracy across viewports.",
+    title: "Multi-Scale Context Mapping",
+    summary: "Cartographic work demonstrating projection handling, rigorous boundary context, and systemic map design across scales from macro-regional to local.",
+    image: "/projects/study-area-location-map.webp",
+    iframeUrl: null,
+    problem: "Complex research locations require viewers to simultaneously comprehend broad macro-regional contexts while navigating strict micro-local boundaries without losing geographic spatial orientation.",
+    goal: "Architect a seamless multi-scale cartographic composition ensuring projection accuracy and visual consistency across all viewports.",
     tools: ["QGIS", "Map Projections", "Vector Data"],
-    workflow: "Engineered robust CRS reprojections, inset map integration, and rigorous scale bars indicating exact physical distances.",
-    outcome: "Delivered a visually unified map clearly articulating macro and micro spatial relationships.",
-    skills: ["Coordinate Systems (CRS)", "Map Layouts", "Cartographic Design"],
+    workflow: "Engineered robust CRS reprojections (NAD83 / UTM Zone 10N), integrated complex inset map layouts seamlessly, and added strict scale bars to indicate exact physical distances simultaneously at 1:5,000 and 1:250,000 scales.",
+    outcome: "Delivered a visually unified map series that clearly articulates macro and micro spatial relationships, significantly improving the spatial literacy of the accompanying research report.",
+    skills: ["Coordinate Systems (CRS)", "Complex Map Layouts", "Cartographic Theory"],
     liveUrl: null
   },
   "atmolens": {
     title: "AtmoLens GIS Dashboard",
-    summary: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
+    summary: "A production-grade, hardware-accelerated spatial visualization dashboard engineered from scratch with React, WebGL, and Next.js.",
     image: "/about-portrait.png", 
-    problem: "Traditional GIS platforms lack the real-time fluidity required for public-facing data visualization in modern web browsers.",
-    goal: "Architect a custom, high-performance spatial data rendering pipeline integrating external APIs directly onto a WebGL canvas.",
-    tools: ["React", "WebGL", "Next.js", "TailwindCSS"],
-    workflow: "Engineered a custom mapping interface, decoupled rendering logic from React hydration for 60fps performance, and styled with glassmorphic UI patterns.",
-    outcome: "A fully live, interactive spatial playground capable of handling complex visual layers instantly.",
-    skills: ["Web GIS", "Front-end Architecture", "Interactive Mapping"],
+    iframeUrl: "/lab",
+    problem: "Traditional GIS platforms often struggle with the real-time fluidity and interactivity required for engaging, public-facing data visualization within modern web browsers without expensive software licenses.",
+    goal: "Architect a custom, high-performance spatial data rendering pipeline integrating localized meteorological APIs directly onto a WebGL-accelerated canvas.",
+    tools: ["React", "WebGL", "Next.js", "TailwindCSS", "Mapbox GL"],
+    workflow: "Engineered a custom interactive mapping interface using Mapbox GL JS and React. Decoupled rendering logic from the DOM to achieve 60fps rendering of thousands of atmospheric data points. Styled perfectly utilizing Tailwind CSS glassmorphic layers.",
+    outcome: "Deployed a fully interactive, production-grade spatial playground capable of visualizing complex vector layers dynamically, served globally on Vercel edge infrastructure.",
+    skills: ["Web GIS Engineering", "Front-end Architecture", "Interactive Mapping"],
     liveUrl: "/lab"
   }
 };
@@ -74,77 +78,118 @@ export default async function ProjectCaseStudy(props: { params: Promise<{ slug: 
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-24">
+    <div className="min-h-screen bg-background text-foreground pb-32 selection:bg-primary selection:text-primary-foreground">
+      
       {/* Heavy cartography hero lazy/eager loaded efficiently */}
-      <div className="relative w-full h-[40vh] md:h-[50vh] bg-card/50">
-        <Image 
-          src={project.image}
-          alt={project.title}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+      <div className="relative w-full h-[60vh] md:h-[70vh] bg-card overflow-hidden flex flex-col justify-end">
+        {project.iframeUrl ? (
+          <div className="absolute inset-0 z-0 w-full h-full bg-background overflow-hidden pointer-events-auto">
+            {/* The absolute container allows user to interact with map */}
+            <iframe 
+              src={project.iframeUrl} 
+              className="w-full h-full border-none" 
+              title={project.title}
+              loading="lazy"
+              allow="fullscreen; geolocation"
+            />
+          </div>
+        ) : (
+          <div className="absolute inset-0 z-0 bg-background/20">
+            <Image 
+              src={project.image}
+              alt={project.title}
+              fill
+              priority
+              quality={90}
+              sizes="100vw"
+              className="object-cover object-center opacity-60"
+            />
+          </div>
+        )}
         
-        <div className="absolute inset-x-0 bottom-0 max-w-4xl mx-auto px-6 pb-12">
-          <Link href="/#projects" className="inline-flex items-center text-sm font-mono text-primary mb-6 hover:underline">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Portfolio
-          </Link>
-          <h1 className="text-4xl md:text-6xl font-bold font-display tracking-tight text-foreground">{project.title}</h1>
-          <p className="mt-4 text-lg md:text-xl text-foreground/80 font-medium max-w-3xl leading-relaxed">{project.summary}</p>
+        {/* Intelligently layered gradient so text is VERY readable without blocking map clicks too much */}
+        <div className={`absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-background via-background/80 to-transparent z-10 ${project.iframeUrl ? 'pointer-events-none' : ''}`} />
+        
+        <div className={`relative z-20 w-full max-w-6xl mx-auto px-6 pb-12 ${project.iframeUrl ? 'pointer-events-none' : ''}`}>
+          <div className="pointer-events-auto w-fit">
+            <Link href="/#projects" className="inline-flex items-center text-xs md:text-sm font-mono font-semibold text-foreground/80 mb-8 hover:text-primary bg-card/60 backdrop-blur-xl px-5 py-2.5 rounded-full border border-foreground/10 hover:border-primary/50 shadow-lg hover:shadow-primary/20 transition-all duration-300">
+              <ArrowLeft className="w-4 h-4 mr-2" /> BACK TO PORTFOLIO
+            </Link>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-black font-display tracking-tight text-foreground drop-shadow-xl">{project.title}</h1>
+          <p className="mt-6 text-lg md:text-2xl text-foreground/80 font-medium max-w-4xl leading-relaxed drop-shadow-md">{project.summary}</p>
         </div>
       </div>
 
       {/* Case Study Content mapped for Recruiter Scanning */}
-      <main className="max-w-4xl mx-auto px-6 pt-16 grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div className="md:col-span-2 space-y-12">
-          <section>
-            <h2 className="text-2xl font-bold font-display text-primary mb-4 flex items-center gap-2"><Map className="w-5 h-5"/> Context & Problem</h2>
-            <p className="text-foreground/80 leading-relaxed text-lg">{project.problem}</p>
+      <main className="max-w-6xl mx-auto px-6 pt-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <div className="lg:col-span-8 space-y-16">
+          <section className="group">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-sm tracking-widest uppercase font-bold mb-6 group-hover:bg-primary/20 transition-colors">
+              <Map className="w-4 h-4"/> Context & Problem
+            </div>
+            <p className="text-foreground/80 leading-loose text-lg md:text-xl font-medium">{project.problem}</p>
           </section>
           
-          <section>
-            <h2 className="text-2xl font-bold font-display text-primary mb-4 flex items-center gap-2"><Compass className="w-5 h-5"/> Workflow & Methods</h2>
-            <p className="text-foreground/80 leading-relaxed text-lg mb-4"><strong>Goal:</strong> {project.goal}</p>
-            <p className="text-foreground/80 leading-relaxed text-lg">{project.workflow}</p>
+          <section className="group">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-sm tracking-widest uppercase font-bold mb-6 group-hover:bg-primary/20 transition-colors">
+              <Compass className="w-4 h-4"/> Workflow & Methods
+            </div>
+            <div className="bg-card/40 border border-border/60 p-6 md:p-8 rounded-3xl mb-6 shadow-inner backdrop-blur-md">
+              <p className="text-foreground leading-relaxed text-lg font-semibold"><span className="text-primary mr-2">Goal:</span> {project.goal}</p>
+            </div>
+            <p className="text-foreground/80 leading-loose text-lg md:text-xl">{project.workflow}</p>
           </section>
 
-          <section className="bg-card p-6 rounded-xl border border-border/50">
-            <h2 className="text-2xl font-bold font-display text-foreground mb-4 flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-primary"/> Deliverables & Outcome</h2>
-            <p className="text-foreground/90 font-medium leading-relaxed text-lg">{project.outcome}</p>
+          <section className="group relative overflow-hidden rounded-3xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-card via-card/50 to-background z-0" />
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-3xl rounded-full z-0 group-hover:bg-primary/20 transition-all duration-700" />
+            
+            <div className="relative z-10 p-8 md:p-10 border border-border/50 rounded-3xl shadow-2xl">
+              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-background border border-border/50 text-foreground font-mono text-sm tracking-widest uppercase font-bold mb-6 shadow-sm">
+                <CheckCircle2 className="w-4 h-4 text-primary"/> Deliverables & Outcome
+              </div>
+              <p className="text-foreground/90 font-medium leading-loose text-xl md:text-2xl">{project.outcome}</p>
+            </div>
           </section>
         </div>
 
-        {/* Sidebar */}
-        <div className="space-y-8 bg-card/30 p-6 rounded-2xl border border-border/30 h-fit">
-          <div>
-            <h3 className="text-sm font-mono tracking-widest text-primary uppercase mb-3">Tools Used</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.tools.map(tool => (
-                <span key={tool} className="px-3 py-1 bg-background border border-border/50 text-foreground/80 rounded-md text-sm">{tool}</span>
-              ))}
+        {/* Sticky Sidebar */}
+        <div className="lg:col-span-4">
+          <div className="sticky top-12 space-y-8 bg-card/[0.05] p-8 rounded-3xl border border-foreground/10 shadow-xl backdrop-blur-3xl">
+            {project.iframeUrl && (
+              <div className="pb-8 border-b border-foreground/10 mb-8">
+                 <h3 className="text-xs font-mono tracking-widest text-primary uppercase font-bold mb-5 flex items-center gap-2"><MonitorPlay className="w-4 h-4"/> Live Web App</h3>
+                 <Link href={project.iframeUrl} target="_blank" className="flex w-full items-center justify-center py-4 bg-primary text-primary-foreground font-bold font-mono tracking-wider rounded-xl hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(var(--primary),0.3)]">
+                    [ Launch Application ]
+                 </Link>
+                 <p className="text-[10px] text-center text-foreground/50 mt-3 font-mono uppercase px-2">Fully interactive live demonstration embedded on this page and linked above.</p>
+              </div>
+            )}
+            
+            <div>
+              <h3 className="text-xs font-mono tracking-widest text-primary uppercase font-bold mb-5 flex items-center gap-2"><Database className="w-4 h-4"/> Tech Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.tools.map(tool => (
+                  <span key={tool} className="px-4 py-2 bg-background border border-foreground/10 text-foreground/80 font-mono font-medium rounded-lg text-xs hover:border-primary/40 hover:text-primary transition-colors cursor-default shadow-sm">{tool}</span>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 className="text-sm font-mono tracking-widest text-primary uppercase mb-3">Key Skills</h3>
-            <ul className="space-y-2 mb-8">
-              {project.skills.map(skill => (
-                <li key={skill} className="flex items-center gap-2 text-foreground/80 text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary/50" /> {skill}
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {project.liveUrl && (
-            <div className="pt-6 border-t border-border/50">
-               <h3 className="text-sm font-mono tracking-widest text-primary uppercase mb-4">View Live Project</h3>
-               <Link href={project.liveUrl} className="flex w-full items-center justify-center py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
-                  Launch Application
-               </Link>
+            
+            <div className="pt-8 border-t border-foreground/10">
+              <h3 className="text-xs font-mono tracking-widest text-primary uppercase font-bold mb-5">Primary Disciplines</h3>
+              <ul className="space-y-3">
+                {project.skills.map(skill => (
+                  <li key={skill} className="flex items-start gap-3 text-foreground/80 font-medium text-sm md:text-base">
+                    <div className="w-1.5 h-1.5 mt-2 rounded-full bg-primary flex-shrink-0 shadow-[0_0_8px_rgba(var(--primary),0.8)]" /> 
+                    <span>{skill}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
+            
+          </div>
         </div>
       </main>
     </div>
