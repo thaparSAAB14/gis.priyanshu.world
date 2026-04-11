@@ -504,7 +504,7 @@ export default function Home() {
                             src={p.iframeUrl} 
                             loading="lazy" 
                             scrolling="no"
-                            className="w-[120%] h-[120%] -ml-[10%] -mt-[10%] border-none opacity-90 group-hover:opacity-100 transition-opacity duration-500" 
+                            className="w-full h-full border-none opacity-90 group-hover:opacity-100 transition-opacity duration-500" 
                           />
                        </div>
                     ) : p.img === "atmolens-gradient" ? (
@@ -529,8 +529,8 @@ export default function Home() {
                   <div className="w-full bg-card/80 backdrop-blur-md flex-shrink-0 p-6 md:p-8 flex justify-between items-center z-20 group-hover:bg-card transition-colors duration-300">
                     <div className="flex-1 pr-4 md:pr-10">
                       <div className="text-[10px] md:text-xs font-mono font-bold text-primary uppercase tracking-widest mb-3">{p.category}</div>
-                      <h3 className="text-2xl md:text-3xl font-extrabold font-display text-foreground tracking-tight mb-2 group-hover:text-primary transition-colors duration-300">{p.title}</h3>
-                      <p className="text-sm md:text-base font-medium text-foreground/70 line-clamp-2 md:line-clamp-1 group-hover:text-foreground/90 transition-colors">{p.desc}</p>
+                      <h3 className="text-2xl md:text-3xl font-extrabold font-display text-foreground tracking-tight mb-2 group-hover:text-primary transition-colors duration-300 leading-tight">{p.title}</h3>
+                      <p className="text-sm md:text-base font-medium text-foreground/70 line-clamp-2 sm:line-clamp-3 group-hover:text-foreground/90 transition-colors">{p.desc}</p>
                     </div>
                     
                     <div className="hidden sm:flex w-12 h-12 rounded-full border border-primary/20 text-primary items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 flex-shrink-0 shadow-sm">
