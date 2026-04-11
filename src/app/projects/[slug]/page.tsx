@@ -6,15 +6,15 @@ import { ArrowLeft, Map, Database, Compass, CheckCircle2, MonitorPlay } from 'lu
 
 const projectsData = {
   "bear-sighting": {
-    title: "Bear Sighting Network",
-    summary: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online to support real-time data collection and operational visibility.",
+    title: "Improving Bear Sighting Data Collection",
+    summary: "A fully automated spatial data pipeline replacing inefficient manual data collection with a streamlined Survey123 digital system for a local non-profit wildlife organization.",
     image: "/projects/metro-vancouver-municipalities.webp",
     iframeUrl: "https://arcg.is/y0efn",
-    problem: "Wildlife reporting in the region lacked centralized, real-time spatial organization, slowing down mitigation efforts. Static forms often led to data silos, making it difficult for wildlife management agencies to track bear movement patterns effectively.",
-    goal: "Design a mobile-responsive field reporting tool perfectly synchronized with a real-time ArcGIS operational dashboard, replacing manual workflows.",
+    problem: "A local non-profit wildlife organization was relying on an inefficient manual data collection process to monitor bear activity, which delayed public safety responses and limited spatial awareness of wildlife movement.",
+    goal: "Replace the manual reporting system with a fully automated, streamlined digital data pipeline to track bear sightings (Black vs. Grizzly) and improve real-time community safety.",
     tools: ["ArcGIS Online", "Survey123", "ArcGIS Dashboards"],
-    workflow: "Engineered customized geospatial survey logic using Survey123 (XLSForm), established secure cloud-hosted feature layers on ArcGIS Online, and wired live synchronization feeds into a dynamic Dashboard UI. Integrated heat maps and time-series charting.",
-    outcome: "Dramatically streamlined data collection and reduced incident reporting lag to seconds, providing conservation officers with immediate spatial awareness of human-wildlife encounters.",
+    workflow: "Engineered a user-friendly Survey123 form for immediate field reporting with precise map-based locations and media uploads. Submissions are instantly stored in ArcGIS Online and fed into a dynamic Web Map and ArcGIS Dashboard containing pie charts, summary indicators, and temporal graphs.",
+    outcome: "Served as a robust proof-of-concept for modernizing wildlife management, providing the non-profit with a professional-grade operational dashboard for immediate spatial awareness and long-term trend analysis.",
     skills: ["Web GIS", "Field Data Collection", "Operational Dashboards"]
   },
   "metro-geology": {
@@ -30,16 +30,16 @@ const projectsData = {
     skills: ["Publication Cartography", "Geospatial Data Engineering", "QA/QC"]
   },
   "atmolens": {
-    title: "AtmoLens GIS Dashboard",
-    summary: "A production-grade, hardware-accelerated spatial visualization dashboard engineered from scratch with React, WebGL, and Next.js.",
-    image: "/about-portrait.png", 
+    title: "AtmoLens Synoptic Enhancer",
+    summary: "Real-time automated enhancement pipeline for ECCC meteorological charts, delivering unmatched clarity for complex weather data.",
+    image: "atmolens-gradient", 
     iframeUrl: "https://atmolens.priyanshu.world",
-    problem: "Traditional GIS platforms often struggle with the real-time fluidity and interactivity required for engaging, public-facing data visualization within modern web browsers without expensive software licenses.",
-    goal: "Architect a custom, high-performance spatial data rendering pipeline integrating localized meteorological APIs directly onto a WebGL-accelerated canvas.",
-    tools: ["React", "WebGL", "Next.js", "TailwindCSS", "Mapbox GL"],
-    workflow: "Engineered a custom interactive mapping interface using Mapbox GL JS and React. Decoupled rendering logic from the DOM to achieve 60fps rendering of thousands of atmospheric data points. Styled perfectly utilizing Tailwind CSS glassmorphic layers.",
-    outcome: "Deployed a fully interactive, production-grade spatial playground capable of visualizing complex vector layers dynamically, served globally on Vercel edge infrastructure.",
-    skills: ["Web GIS Engineering", "Front-end Architecture", "Interactive Mapping"],
+    problem: "Environment Canada (ECCC) synoptic charts are notoriously difficult to read—landmasses blend into oceans, and coastlines disappear under dense isobars, obstructing actual weather pattern analysis.",
+    goal: "Develop a deterministic pipeline to automatically fetch, enhance, and catalog meteorological charts entirely server-side, stripping away static noise.",
+    tools: ["Next.js", "Serverless Cron", "Adaptive Enhancer", "Cloud Architecture"],
+    workflow: "Built an adaptive enhancer paired with an automated cron job that triggers every 30 minutes. The system fetches fresh synoptics from ECCC servers, applies a deterministic mask to isolate meteorological linework from static background textures, and recolors the map for optimal readability.",
+    outcome: "Successfully deployed a fully automated cloud-based archive that dramatically improves the readability of synoptic data, making complex meteorological charts simple and accessible.",
+    skills: ["Cloud Architecture", "Data Pipelining", "Automated Image Processing"],
     liveUrl: "https://atmolens.priyanshu.world"
   }
 };

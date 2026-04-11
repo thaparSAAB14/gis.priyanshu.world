@@ -469,9 +469,9 @@ export default function Home() {
             {[
               {
                 id: "bear-sighting",
-                title: "Bear Sighting Network",
-                desc: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online.",
-                category: "Web GIS & Survey123",
+                title: "Improving Bear Sighting Data Collection",
+                desc: "A fully automated spatial data pipeline replacing manual logging with field-ready Survey123 collection and real-time ArcGIS Online dashboards.",
+                category: "Web GIS & Spatial Dashboards",
                 img: "/projects/metro-vancouver-municipalities.webp",
                 iframeUrl: "https://arcg.is/y0efn",
                 colSpan: "col-span-1 md:col-span-1 lg:col-span-7",
@@ -486,9 +486,9 @@ export default function Home() {
               },
               {
                 id: "atmolens",
-                title: "AtmoLens WebGL Dashboard",
-                desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
-                category: "Full-Stack Development",
+                title: "AtmoLens Synoptic Enhancer",
+                desc: "An automated deterministic pipeline and cloud dashboard that fetches, enhances, and catalogs real-time ECCC meteorological charts.",
+                category: "Full-Stack & Cloud Architecture",
                 img: "atmolens-gradient",
                 iframeUrl: "https://atmolens.priyanshu.world",
                 colSpan: "col-span-1 md:col-span-2 lg:col-span-12",
