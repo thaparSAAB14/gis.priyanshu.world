@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ParticlesBackground } from "@/components/ui/particles-background";
+import { TerminalCursor } from "@/components/ui/terminal-cursor";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
@@ -83,6 +85,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <ParticlesBackground />
+          <TerminalCursor />
           <ThemeToggle />
           <Analytics />
           <SpeedInsights />
