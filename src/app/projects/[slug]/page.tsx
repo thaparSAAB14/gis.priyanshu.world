@@ -29,43 +29,18 @@ const projectsData = {
     outcome: "Successfully authored final map figures that clearly articulate regional geological formations, which are successfully scheduled for formal inclusion in an upcoming academic book chapter on Metro Vancouver.",
     skills: ["Publication Cartography", "Geospatial Data Engineering", "QA/QC"]
   },
-  "route-analytics": {
-    title: "Field Route Analytics",
-    summary: "Advanced spatial analysis and mapping work involving field transit route design, stratigraphy context, and complex multi-layer overlays.",
-    image: "/projects/geology-route-queen-elizabeth.webp",
-    iframeUrl: null,
-    problem: "Analyzing complex geological field transit routes required exact spatial overlay onto diverse topographic base maps to understand the precise relationship between infrastructure and underlying geology.",
-    goal: "Deliver a robust spatial analysis model computationally identifying key geological transit paths and field stop viability.",
-    tools: ["ArcGIS Pro", "Network Analysis", "Topographic Data"],
-    workflow: "Extracted and dissolved route networks, executed multi-layer intersections to isolate route segments by geological unit, and produced high-fidelity outputs for academic field review using ArcGIS Pro.",
-    outcome: "Provided a quantifiable spatial breakdown of operational field paths against existing stratigraphy, substantially enhancing the research team's field planning efficiency.",
-    skills: ["Spatial Analysis", "Overlay Intersections", "Geoprocessing"]
-  },
-  "multi-scale": {
-    title: "Multi-Scale Context Mapping",
-    summary: "Cartographic work demonstrating projection handling, rigorous boundary context, and systemic map design across scales from macro-regional to local.",
-    image: "/projects/study-area-location-map.webp",
-    iframeUrl: null,
-    problem: "Complex research locations require viewers to simultaneously comprehend broad macro-regional contexts while navigating strict micro-local boundaries without losing geographic spatial orientation.",
-    goal: "Architect a seamless multi-scale cartographic composition ensuring projection accuracy and visual consistency across all viewports.",
-    tools: ["QGIS", "Map Projections", "Vector Data"],
-    workflow: "Engineered robust CRS reprojections (NAD83 / UTM Zone 10N), integrated complex inset map layouts seamlessly, and added strict scale bars to indicate exact physical distances simultaneously at 1:5,000 and 1:250,000 scales.",
-    outcome: "Delivered a visually unified map series that clearly articulates macro and micro spatial relationships, significantly improving the spatial literacy of the accompanying research report.",
-    skills: ["Coordinate Systems (CRS)", "Complex Map Layouts", "Cartographic Theory"],
-    liveUrl: null
-  },
   "atmolens": {
     title: "AtmoLens GIS Dashboard",
     summary: "A production-grade, hardware-accelerated spatial visualization dashboard engineered from scratch with React, WebGL, and Next.js.",
     image: "/about-portrait.png", 
-    iframeUrl: "/lab",
+    iframeUrl: "https://atmolens.priyanshu.world",
     problem: "Traditional GIS platforms often struggle with the real-time fluidity and interactivity required for engaging, public-facing data visualization within modern web browsers without expensive software licenses.",
     goal: "Architect a custom, high-performance spatial data rendering pipeline integrating localized meteorological APIs directly onto a WebGL-accelerated canvas.",
     tools: ["React", "WebGL", "Next.js", "TailwindCSS", "Mapbox GL"],
     workflow: "Engineered a custom interactive mapping interface using Mapbox GL JS and React. Decoupled rendering logic from the DOM to achieve 60fps rendering of thousands of atmospheric data points. Styled perfectly utilizing Tailwind CSS glassmorphic layers.",
     outcome: "Deployed a fully interactive, production-grade spatial playground capable of visualizing complex vector layers dynamically, served globally on Vercel edge infrastructure.",
     skills: ["Web GIS Engineering", "Front-end Architecture", "Interactive Mapping"],
-    liveUrl: "/lab"
+    liveUrl: "https://atmolens.priyanshu.world"
   }
 };
 
@@ -83,14 +58,15 @@ export default async function ProjectCaseStudy(props: { params: Promise<{ slug: 
       {/* Heavy cartography hero lazy/eager loaded efficiently */}
       <div className="relative w-full h-[60vh] md:h-[70vh] bg-card overflow-hidden flex flex-col justify-end">
         {project.iframeUrl ? (
-          <div className="absolute inset-0 z-0 w-full h-full bg-background overflow-hidden pointer-events-auto">
-            {/* The absolute container allows user to interact with map */}
+          <div className="absolute inset-0 z-0 w-full h-full bg-background overflow-hidden pointer-events-none">
+            {/* Locked iframe acting purely as a rich interactive visual hero */}
             <iframe 
               src={project.iframeUrl} 
-              className="w-full h-full border-none" 
+              className="w-full h-[120%] -mt-[10%] border-none opacity-80" 
               title={project.title}
               loading="lazy"
-              allow="fullscreen; geolocation"
+              scrolling="no"
+              tabIndex={-1}
             />
           </div>
         ) : (

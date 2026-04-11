@@ -485,28 +485,12 @@ export default function Home() {
                 colSpan: "col-span-1 md:col-span-1 lg:col-span-5",
               },
               {
-                id: "route-analytics",
-                title: "Field Route Analytics",
-                desc: "Spatial analysis involving route design, geology context, and multi-layer overlays.",
-                category: "Spatial Analysis",
-                img: "/projects/geology-route-queen-elizabeth.webp",
-                colSpan: "col-span-1 md:col-span-1 lg:col-span-5",
-              },
-              {
-                id: "multi-scale",
-                title: "Multi-Scale Mapping",
-                desc: "Cartographic work showing projection handling across regional to local scales.",
-                category: "Cartography",
-                img: "/projects/study-area-location-map.webp",
-                colSpan: "col-span-1 md:col-span-1 lg:col-span-7",
-              },
-              {
                 id: "atmolens",
                 title: "AtmoLens WebGL Dashboard",
                 desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
                 category: "Full-Stack Development",
                 img: "atmolens-gradient",
-                iframeUrl: "/lab",
+                iframeUrl: "https://atmolens.priyanshu.world",
                 colSpan: "col-span-1 md:col-span-2 lg:col-span-12",
               }
             ].map((p, i) => (
@@ -515,12 +499,12 @@ export default function Home() {
                   {/* Top Image Section */}
                   <div className="relative w-full flex-1 overflow-hidden bg-background">
                     {p.iframeUrl ? (
-                       <div className="absolute inset-0 w-full h-full pointer-events-none group-hover:pointer-events-auto transition-all z-10">
+                       <div className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-hidden">
                           <iframe 
                             src={p.iframeUrl} 
                             loading="lazy" 
-                            className="w-full h-full border-none opacity-90 group-hover:opacity-100 transition-opacity duration-500 scale-[1.02]" 
-                            allow="fullscreen"
+                            scrolling="no"
+                            className="w-[120%] h-[120%] -ml-[10%] -mt-[10%] border-none opacity-90 group-hover:opacity-100 transition-opacity duration-500" 
                           />
                        </div>
                     ) : p.img === "atmolens-gradient" ? (
