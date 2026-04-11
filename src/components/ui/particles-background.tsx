@@ -17,9 +17,9 @@ export function ParticlesBackground() {
     <div className="fixed inset-0 z-[-1] pointer-events-none bg-background">
       <Particles
         className="absolute inset-0"
-        quantity={35}
+        quantity={180}
         ease={80}
-        staticity={50}
+        staticity={40}
         color={color}
         refresh
       />
