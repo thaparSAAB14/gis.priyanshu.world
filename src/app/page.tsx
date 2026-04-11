@@ -473,7 +473,7 @@ export default function Home() {
                 desc: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online.",
                 category: "Web GIS & Survey123",
                 img: "/projects/metro-vancouver-municipalities.webp",
-                colSpan: "lg:col-span-7",
+                colSpan: "col-span-1 md:col-span-1 lg:col-span-7",
               },
               {
                 id: "metro-geology",
@@ -481,7 +481,7 @@ export default function Home() {
                 desc: "Publication-quality geology and location mapping for faculty-led research.",
                 category: "Cartography",
                 img: "/projects/geological-map-metro-vancouver.webp",
-                colSpan: "lg:col-span-5",
+                colSpan: "col-span-1 md:col-span-1 lg:col-span-5",
               },
               {
                 id: "route-analytics",
@@ -489,7 +489,7 @@ export default function Home() {
                 desc: "Spatial analysis involving route design, geology context, and multi-layer overlays.",
                 category: "Spatial Analysis",
                 img: "/projects/geology-route-queen-elizabeth.webp",
-                colSpan: "lg:col-span-5",
+                colSpan: "col-span-1 md:col-span-1 lg:col-span-5",
               },
               {
                 id: "multi-scale",
@@ -497,7 +497,7 @@ export default function Home() {
                 desc: "Cartographic work showing projection handling across regional to local scales.",
                 category: "Cartography",
                 img: "/projects/study-area-location-map.webp",
-                colSpan: "lg:col-span-7",
+                colSpan: "col-span-1 md:col-span-1 lg:col-span-7",
               },
               {
                 id: "atmolens",
@@ -505,41 +505,39 @@ export default function Home() {
                 desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
                 category: "Full-Stack Development",
                 img: "/about-portrait.png",
-                colSpan: "lg:col-span-12",
+                colSpan: "col-span-1 md:col-span-2 lg:col-span-12",
               }
             ].map((p, i) => (
-              <Tilt key={i} rotationFactor={6} isRevese className={`w-full h-full ${p.colSpan}`}>
-                <a href={`/projects/${p.id}`} className="group relative block w-full h-[400px] md:h-[480px] rounded-3xl overflow-hidden border border-foreground/10 bg-card hover:border-primary/40 transition-all duration-700 shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.03)]">
-                  <Spotlight className="z-20 from-primary/30 via-primary/5 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" size={350} />
-                  
+              <div key={i} className={`w-full h-full ${p.colSpan}`}>
+                <a href={`/projects/${p.id}`} className="group relative block w-full h-[400px] md:h-[480px] rounded-[2rem] overflow-hidden border border-foreground/10 bg-card hover:border-primary/40 transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-[0_20px_40px_rgba(var(--shadow-color),0.1)]">
                   <Image 
                     src={p.img} 
                     alt={p.title} 
                     fill 
                     sizes="(max-width: 768px) 100vw, 70vw"
-                    className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out mix-blend-luminosity group-hover:mix-blend-normal" 
+                    className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
                   />
                   
-                  {/* Dramatic internal gradient for perfect text contrast */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
+                  {/* Internal gradient for perfect text contrast without making the card muddy */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent pointer-events-none" />
                   
-                  <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between z-30">
-                    <div className="flex justify-between items-start">
-                      <div className="px-5 py-2.5 rounded-full bg-background/80 backdrop-blur-md border border-foreground/10 text-[11px] md:text-xs font-mono font-bold text-primary uppercase tracking-widest shadow-md">
-                        {p.category}
+                  <div className="absolute inset-x-0 bottom-0 p-8 md:p-10 flex flex-col justify-end z-30">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <div className="inline-flex px-4 py-1.5 mb-4 rounded-full bg-background/90 backdrop-blur-md border border-foreground/10 text-xs font-mono font-bold text-primary uppercase tracking-widest shadow-md">
+                          {p.category}
+                        </div>
+                        <h3 className="text-3xl md:text-4xl font-extrabold font-display text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors duration-500 drop-shadow-md">{p.title}</h3>
+                        <p className="text-base md:text-lg font-medium text-foreground/80 line-clamp-2 md:w-5/6 drop-shadow-sm leading-relaxed">{p.desc}</p>
                       </div>
-                      <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 shadow-xl">
-                        <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-500 delay-100" />
+                      
+                      <div className="hidden lg:flex w-14 h-14 rounded-full bg-primary text-primary-foreground items-center justify-center translate-x-4 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 shadow-xl flex-shrink-0">
+                        <ArrowRight className="w-6 h-6 -rotate-45 group-hover:rotate-0 transition-transform duration-500 delay-100" />
                       </div>
-                    </div>
-                    
-                    <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out">
-                      <h3 className="text-3xl md:text-4xl font-extrabold font-display text-foreground mb-4 tracking-tight group-hover:text-primary transition-colors duration-500 drop-shadow-sm">{p.title}</h3>
-                      <p className="text-base md:text-lg font-medium text-foreground/80 line-clamp-2 md:w-5/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 leading-relaxed">{p.desc}</p>
                     </div>
                   </div>
                 </a>
-              </Tilt>
+              </div>
             ))}
           </div>
         </div>
