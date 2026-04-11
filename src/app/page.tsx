@@ -504,36 +504,42 @@ export default function Home() {
                 title: "AtmoLens WebGL Dashboard",
                 desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
                 category: "Full-Stack Development",
-                img: "/about-portrait.png",
+                img: "atmolens-gradient",
                 colSpan: "col-span-1 md:col-span-2 lg:col-span-12",
               }
             ].map((p, i) => (
               <div key={i} className={`w-full h-full ${p.colSpan}`}>
-                <a href={`/projects/${p.id}`} className="group relative block w-full h-[400px] md:h-[480px] rounded-[2rem] overflow-hidden border border-foreground/10 bg-card hover:border-primary/40 transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-[0_20px_40px_rgba(var(--shadow-color),0.1)]">
-                  <Image 
-                    src={p.img} 
-                    alt={p.title} 
-                    fill 
-                    sizes="(max-width: 768px) 100vw, 70vw"
-                    className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
-                  />
-                  
-                  {/* Internal gradient for perfect text contrast without making the card muddy */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent pointer-events-none" />
-                  
-                  <div className="absolute inset-x-0 bottom-0 p-8 md:p-10 flex flex-col justify-end z-30">
-                    <div className="flex justify-between items-end">
-                      <div>
-                        <div className="inline-flex px-4 py-1.5 mb-4 rounded-full bg-background/90 backdrop-blur-md border border-foreground/10 text-xs font-mono font-bold text-primary uppercase tracking-widest shadow-md">
-                          {p.category}
-                        </div>
-                        <h3 className="text-3xl md:text-4xl font-extrabold font-display text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors duration-500 drop-shadow-md">{p.title}</h3>
-                        <p className="text-base md:text-lg font-medium text-foreground/80 line-clamp-2 md:w-5/6 drop-shadow-sm leading-relaxed">{p.desc}</p>
+                <a href={`/projects/${p.id}`} className="group flex flex-col w-full h-[400px] md:h-[480px] rounded-[2rem] overflow-hidden border border-foreground/10 bg-card hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
+                  {/* Top Image Section */}
+                  <div className="relative w-full flex-1 overflow-hidden bg-background">
+                    {p.img === "atmolens-gradient" ? (
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#0f1419] via-[#1e9df1]/20 to-[#00b87a]/10 opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out flex w-full h-full justify-center items-center overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--shadow-color)_0,transparent_60%)]" />
+                        <div className="text-primary/10 font-mono text-7xl md:text-9xl font-black rotate-[-5deg] scale-125 whitespace-nowrap blur-[2px]">WEBGL / REACT</div>
                       </div>
-                      
-                      <div className="hidden lg:flex w-14 h-14 rounded-full bg-primary text-primary-foreground items-center justify-center translate-x-4 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 shadow-xl flex-shrink-0">
-                        <ArrowRight className="w-6 h-6 -rotate-45 group-hover:rotate-0 transition-transform duration-500 delay-100" />
-                      </div>
+                    ) : (
+                      <Image 
+                        src={p.img} 
+                        alt={p.title} 
+                        fill 
+                        sizes="(max-width: 768px) 100vw, 70vw"
+                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
+                      />
+                    )}
+                    {/* Inner shadow to separate image from text block cleanly */}
+                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+                  </div>
+                  
+                  {/* Bottom Text Label Section */}
+                  <div className="w-full bg-card/80 backdrop-blur-md flex-shrink-0 p-6 md:p-8 flex justify-between items-center z-20 group-hover:bg-card transition-colors duration-300">
+                    <div className="flex-1 pr-4 md:pr-10">
+                      <div className="text-[10px] md:text-xs font-mono font-bold text-primary uppercase tracking-widest mb-3">{p.category}</div>
+                      <h3 className="text-2xl md:text-3xl font-extrabold font-display text-foreground tracking-tight mb-2 group-hover:text-primary transition-colors duration-300">{p.title}</h3>
+                      <p className="text-sm md:text-base font-medium text-foreground/70 line-clamp-2 md:line-clamp-1 group-hover:text-foreground/90 transition-colors">{p.desc}</p>
+                    </div>
+                    
+                    <div className="hidden sm:flex w-12 h-12 rounded-full border border-primary/20 text-primary items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 flex-shrink-0 shadow-sm">
+                      <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
                     </div>
                   </div>
                 </a>
