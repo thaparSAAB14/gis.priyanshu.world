@@ -53,12 +53,12 @@ export default async function ProjectCaseStudy(props: { params: Promise<{ slug: 
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-32 selection:bg-primary selection:text-primary-foreground">
+    <div className="min-h-screen text-foreground pb-32 selection:bg-primary selection:text-primary-foreground">
       
       {/* Heavy cartography hero lazy/eager loaded efficiently */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] bg-card overflow-hidden flex flex-col justify-end">
+      <div className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden flex flex-col justify-end">
         {project.iframeUrl ? (
-          <div className="absolute inset-0 z-0 w-full h-full bg-background overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 z-0 w-full h-full overflow-hidden pointer-events-none">
             {/* Locked iframe acting purely as a rich interactive visual hero */}
             <iframe 
               src={project.iframeUrl} 
