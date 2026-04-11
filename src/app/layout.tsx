@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
-import { Inter_Tight, Outfit, Caveat } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { CustomCursor } from "@/components/ui/custom-cursor";
-import { TerminalCursor } from "@/components/ui/terminal-cursor";
-import { ParticlesBackground } from "@/components/ui/particles-background";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
+  display: "swap"
 });
 
-const interTight = Inter_Tight({
+const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap"
 });
 
-const signature = Caveat({
-  variable: "--font-signature",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap"
 });
 
 export const metadata: Metadata = {
@@ -78,15 +78,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${interTight.variable} ${signature.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} font-sans h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <ParticlesBackground />
           <ThemeToggle />
-          <CustomCursor />
-          <TerminalCursor />
           <Analytics />
           <SpeedInsights />
           <main className="flex-1 relative z-0">{children}</main>

@@ -473,6 +473,7 @@ export default function Home() {
                 desc: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online.",
                 category: "Web GIS & Survey123",
                 img: "/projects/metro-vancouver-municipalities.webp",
+                iframeUrl: "https://arcg.is/y0efn",
                 colSpan: "col-span-1 md:col-span-1 lg:col-span-7",
               },
               {
@@ -505,6 +506,7 @@ export default function Home() {
                 desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
                 category: "Full-Stack Development",
                 img: "atmolens-gradient",
+                iframeUrl: "/lab",
                 colSpan: "col-span-1 md:col-span-2 lg:col-span-12",
               }
             ].map((p, i) => (
@@ -512,7 +514,16 @@ export default function Home() {
                 <a href={`/projects/${p.id}`} className="group flex flex-col w-full h-[400px] md:h-[480px] rounded-[2rem] overflow-hidden border border-foreground/10 bg-card hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
                   {/* Top Image Section */}
                   <div className="relative w-full flex-1 overflow-hidden bg-background">
-                    {p.img === "atmolens-gradient" ? (
+                    {p.iframeUrl ? (
+                       <div className="absolute inset-0 w-full h-full pointer-events-none group-hover:pointer-events-auto transition-all z-10">
+                          <iframe 
+                            src={p.iframeUrl} 
+                            loading="lazy" 
+                            className="w-full h-full border-none opacity-90 group-hover:opacity-100 transition-opacity duration-500 scale-[1.02]" 
+                            allow="fullscreen"
+                          />
+                       </div>
+                    ) : p.img === "atmolens-gradient" ? (
                       <div className="absolute inset-0 bg-gradient-to-br from-[#0f1419] via-[#1e9df1]/20 to-[#00b87a]/10 opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out flex w-full h-full justify-center items-center overflow-hidden">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--shadow-color)_0,transparent_60%)]" />
                         <div className="text-primary/10 font-mono text-7xl md:text-9xl font-black rotate-[-5deg] scale-125 whitespace-nowrap blur-[2px]">WEBGL / REACT</div>
@@ -527,7 +538,7 @@ export default function Home() {
                       />
                     )}
                     {/* Inner shadow to separate image from text block cleanly */}
-                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-20" />
                   </div>
                   
                   {/* Bottom Text Label Section */}
