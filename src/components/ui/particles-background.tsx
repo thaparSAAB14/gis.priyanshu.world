@@ -21,6 +21,8 @@ export function ParticlesBackground() {
         ease={80}
         staticity={40}
         color={color}
+        vx={0.15}
+        vy={-0.15}
         refresh
       />
     </div>

@@ -446,7 +446,7 @@ export default function Home() {
       </section>
 
       {/* ===== FEATURED WORK SECTION ===== */}
-      <section id="projects" className="w-full relative z-10 py-16 md:py-28 px-4 bg-foreground/[0.02] border-y border-foreground/[0.05]">
+      <section id="projects" className="w-full relative z-10 py-16 md:py-28 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 gap-6 px-2">
             <div className="max-w-3xl">
