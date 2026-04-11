@@ -446,62 +446,102 @@ export default function Home() {
       </section>
 
       {/* ===== FEATURED WORK SECTION ===== */}
-      <section id="projects" className="w-full relative z-10 py-16 px-4 mb-24 max-w-6xl mx-auto">
-        <div className="w-full max-w-2xl px-6 mb-12 text-center mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight font-display">Featured Projects</h2>
-          <p className="text-lg text-foreground/70 font-medium">Applied spatial analysis, dynamic web mapping, and publication-quality cartography.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8 px-2 md:px-6">
-          {[
-            {
-              id: "bear-sighting",
-              title: "Bear Sighting Network",
-              desc: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online.",
-              img: "/projects/metro-vancouver-municipalities.jpeg"
-            },
-            {
-              id: "metro-geology",
-              title: "Metro Vancouver Geology",
-              desc: "Publication-quality geology and location mapping created for faculty-led academic research and book production.",
-              img: "/projects/geological-map-metro-vancouver.jpeg"
-            },
-            {
-              id: "route-analytics",
-              title: "Field Route Analytics",
-              desc: "Spatial analysis and mapping work involving route design, geology context, and multi-layer overlays.",
-              img: "/projects/geology-route-queen-elizabeth.jpeg"
-            },
-            {
-              id: "multi-scale",
-              title: "Multi-Scale Mapping",
-              desc: "Cartographic work showing projection handling, boundary context, and map design across regional to local scales.",
-              img: "/projects/study-area-location-map.jpeg"
-            },
-            {
-              id: "atmolens",
-              title: "AtmoLens WebGL Dashboard",
-              desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
-              img: "/about-portrait.png"
-            }
-          ].map((p, i) => (
-            <a href={`/projects/${p.id}`} key={i} className={`group relative block w-full h-[320px] rounded-2xl overflow-hidden border border-border/40 bg-card/40 backdrop-blur-xl hover:border-primary/60 transition-all duration-500 hover:-translate-y-1 shadow-lg hover:shadow-[0_0_40px_rgba(0,255,255,0.15)] ${i === 4 ? "md:col-span-2" : ""}`}>
-              <Image 
-                src={p.img} 
-                alt={p.title} 
-                fill 
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover opacity-60 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-in-out mix-blend-luminosity group-hover:mix-blend-normal" 
-              />
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-background via-background/95 to-transparent pt-32 text-left">
-                <h3 className="text-2xl font-bold font-display text-primary tracking-tight mb-2 group-hover:text-white transition-colors">{p.title}</h3>
-                <p className="text-sm font-medium text-foreground/80 line-clamp-2 md:line-clamp-3 w-11/12 leading-relaxed">{p.desc}</p>
-                <div className="mt-4 inline-flex items-center text-xs font-mono tracking-widest text-primary uppercase font-semibold">
-                  Read Case Study <span className="ml-2 group-hover:translate-x-2 transition-transform">→</span>
-                </div>
-              </div>
+      <section id="projects" className="w-full relative z-10 py-16 md:py-28 px-4 bg-foreground/[0.02] border-y border-foreground/[0.05]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 gap-6 px-2">
+            <div className="max-w-3xl">
+              <p className="text-sm font-mono text-primary mb-4 tracking-widest uppercase flex items-center gap-3">
+                <span className="w-8 h-px bg-primary"></span> Portfolio
+              </p>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tight font-display">
+                Featured Work
+              </h2>
+              <p className="text-lg md:text-xl text-foreground/70 mt-6 font-medium leading-relaxed max-w-2xl">
+                Applied spatial analysis, dynamic web mapping, and publication-quality cartography. Discover my workflow from data sourcing to final product.
+              </p>
+            </div>
+            <a href="#about" className="inline-flex items-center gap-2 text-sm font-bold text-foreground/60 hover:text-primary uppercase tracking-wider transition-colors group mb-2 md:mb-4">
+              More About Me <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 xl:gap-8 px-2">
+            {[
+              {
+                id: "bear-sighting",
+                title: "Bear Sighting Network",
+                desc: "Survey-driven wildlife reporting and web mapping workflow built with Survey123 and ArcGIS Online.",
+                category: "Web GIS & Survey123",
+                img: "/projects/metro-vancouver-municipalities.jpeg",
+                colSpan: "lg:col-span-7",
+              },
+              {
+                id: "metro-geology",
+                title: "Metro Vancouver Geology",
+                desc: "Publication-quality geology and location mapping for faculty-led research.",
+                category: "Cartography",
+                img: "/projects/geological-map-metro-vancouver.jpeg",
+                colSpan: "lg:col-span-5",
+              },
+              {
+                id: "route-analytics",
+                title: "Field Route Analytics",
+                desc: "Spatial analysis involving route design, geology context, and multi-layer overlays.",
+                category: "Spatial Analysis",
+                img: "/projects/geology-route-queen-elizabeth.jpeg",
+                colSpan: "lg:col-span-5",
+              },
+              {
+                id: "multi-scale",
+                title: "Multi-Scale Mapping",
+                desc: "Cartographic work showing projection handling across regional to local scales.",
+                category: "Cartography",
+                img: "/projects/study-area-location-map.jpeg",
+                colSpan: "lg:col-span-7",
+              },
+              {
+                id: "atmolens",
+                title: "AtmoLens WebGL Dashboard",
+                desc: "A production-grade, hardware-accelerated spatial visualization dashboard engineered with React, WebGL, and Next.js.",
+                category: "Full-Stack Development",
+                img: "/about-portrait.png",
+                colSpan: "lg:col-span-12",
+              }
+            ].map((p, i) => (
+              <Tilt key={i} rotationFactor={6} isRevese className={`w-full h-full ${p.colSpan}`}>
+                <a href={`/projects/${p.id}`} className="group relative block w-full h-[400px] md:h-[480px] rounded-3xl overflow-hidden border border-foreground/10 bg-card hover:border-primary/40 transition-all duration-700 shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.03)]">
+                  <Spotlight className="z-20 from-primary/30 via-primary/5 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" size={350} />
+                  
+                  <Image 
+                    src={p.img} 
+                    alt={p.title} 
+                    fill 
+                    sizes="(max-width: 768px) 100vw, 70vw"
+                    className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out mix-blend-luminosity group-hover:mix-blend-normal" 
+                  />
+                  
+                  {/* Dramatic internal gradient for perfect text contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
+                  
+                  <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between z-30">
+                    <div className="flex justify-between items-start">
+                      <div className="px-5 py-2.5 rounded-full bg-background/80 backdrop-blur-md border border-foreground/10 text-[11px] md:text-xs font-mono font-bold text-primary uppercase tracking-widest shadow-md">
+                        {p.category}
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center translate-x-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 shadow-xl">
+                        <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-500 delay-100" />
+                      </div>
+                    </div>
+                    
+                    <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-out">
+                      <h3 className="text-3xl md:text-4xl font-extrabold font-display text-foreground mb-4 tracking-tight group-hover:text-primary transition-colors duration-500 drop-shadow-sm">{p.title}</h3>
+                      <p className="text-base md:text-lg font-medium text-foreground/80 line-clamp-2 md:w-5/6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 leading-relaxed">{p.desc}</p>
+                    </div>
+                  </div>
+                </a>
+              </Tilt>
+            ))}
+          </div>
         </div>
       </section>
 
