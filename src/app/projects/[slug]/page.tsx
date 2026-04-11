@@ -88,12 +88,12 @@ export default async function ProjectCaseStudy(props: { params: Promise<{ slug: 
         
         <div className={`relative z-20 w-full max-w-6xl mx-auto px-6 pb-12 ${project.iframeUrl ? 'pointer-events-none' : ''}`}>
           <div className="pointer-events-auto w-fit">
-            <Link href="/#projects" className="inline-flex items-center text-xs md:text-sm font-mono font-semibold text-foreground/80 mb-8 hover:text-primary bg-card/60 backdrop-blur-xl px-5 py-2.5 rounded-full border border-foreground/10 hover:border-primary/50 shadow-lg hover:shadow-primary/20 transition-all duration-300">
+            <Link href="/#projects" className="inline-flex items-center text-[10px] sm:text-xs md:text-sm font-mono font-semibold text-foreground/80 mb-6 sm:mb-8 hover:text-primary bg-card/60 backdrop-blur-xl px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-foreground/10 hover:border-primary/50 shadow-lg hover:shadow-primary/20 transition-all duration-300">
               <ArrowLeft className="w-4 h-4 mr-2" /> BACK TO PORTFOLIO
             </Link>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black font-display tracking-tight text-foreground drop-shadow-xl">{project.title}</h1>
-          <p className="mt-6 text-lg md:text-2xl text-foreground/80 font-medium max-w-4xl leading-relaxed drop-shadow-md">{project.summary}</p>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-display tracking-tight text-foreground drop-shadow-xl">{project.title}</h1>
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-2xl text-foreground/80 font-medium max-w-4xl leading-relaxed drop-shadow-md">{project.summary}</p>
         </div>
       </div>
 

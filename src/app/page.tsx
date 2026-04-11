@@ -307,9 +307,9 @@ export default function Home() {
           <ContainerScroll
             titleComponent={
               <>
-                <h1 className="text-4xl md:text-5xl font-semibold text-foreground font-display tracking-tight leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground font-display tracking-tight leading-tight">
                   Junior GIS Analyst & <br />
-                  <span className="text-5xl md:text-[5.5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent transform">
+                  <span className="text-[2.75rem] sm:text-5xl md:text-[5.5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent transform">
                     Geospatial Researcher
                   </span>
                 </h1>
@@ -390,7 +390,7 @@ export default function Home() {
                       className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-primary via-background to-primary opacity-40 group-hover:opacity-100 blur-sm group-hover:blur-md bg-[length:200%_auto] transition-all duration-500"
                     />
 
-                    <div className="relative flex items-center gap-3 px-6 py-3 bg-gradient-to-b from-card to-background border border-foreground/20 rounded-full leading-none overflow-hidden backdrop-blur-md shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300">
+                    <div className="relative flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-6 py-3 bg-gradient-to-b from-card to-background border border-foreground/20 rounded-3xl sm:rounded-full leading-none overflow-hidden backdrop-blur-md shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300">
                       <div className="flex items-center gap-2">
                         <span className="relative flex h-2.5 w-2.5">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -401,9 +401,9 @@ export default function Home() {
                         </p>
                       </div>
 
-                      <div className="w-px h-4 bg-neutral-300 "></div>
+                      <div className="hidden sm:block w-px h-4 bg-neutral-300 "></div>
 
-                      <p className="text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap">
+                      <p className="text-[10px] sm:text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap mt-1 sm:mt-0">
                         <span className="text-primary font-bold">LAT:</span>{" "}
                         49.28&deg; N
                         <span className="mx-2 text-neutral-300 ">|</span>
@@ -510,7 +510,7 @@ export default function Home() {
                     ) : p.img === "atmolens-gradient" ? (
                       <div className="absolute inset-0 bg-gradient-to-br from-[#0f1419] via-[#1e9df1]/20 to-[#00b87a]/10 opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out flex w-full h-full justify-center items-center overflow-hidden">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--shadow-color)_0,transparent_60%)]" />
-                        <div className="text-primary/10 font-mono text-7xl md:text-9xl font-black rotate-[-5deg] scale-125 whitespace-nowrap blur-[2px]">WEBGL / REACT</div>
+                        <div className="text-primary/10 font-mono text-4xl sm:text-6xl md:text-9xl font-black rotate-[-5deg] scale-125 whitespace-nowrap blur-[2px]">WEBGL / REACT</div>
                       </div>
                     ) : (
                       <Image 
