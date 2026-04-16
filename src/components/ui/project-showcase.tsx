@@ -91,7 +91,7 @@ export function ProjectShowcase() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full max-w-2xl mx-auto px-6 py-16"
+      className="relative w-full max-w-2xl mx-auto px-6 py-16 overflow-visible"
     >
       <p className="text-sm font-mono text-primary mb-2 tracking-widest uppercase flex items-center gap-3">
         <span className="w-8 h-px bg-primary" /> Portfolio
@@ -105,15 +105,14 @@ export function ProjectShowcase() {
 
       {/* Floating image preview that follows cursor */}
       <div
-        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl"
+        className="pointer-events-none absolute z-50 overflow-hidden rounded-xl shadow-2xl"
         style={{
-          left: containerRef.current?.getBoundingClientRect().left ?? 0,
-          top: containerRef.current?.getBoundingClientRect().top ?? 0,
-          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 110}px, 0)`,
+          left: 0,
+          top: 0,
+          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 130}px, 0) scale(${isVisible ? 1 : 0.85})`,
           opacity: isVisible ? 1 : 0,
-          scale: isVisible ? "1" : "0.85",
           transition:
-            "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), scale 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         <div className="relative w-[300px] h-[190px] bg-card rounded-xl overflow-hidden border border-foreground/10">
@@ -125,7 +124,7 @@ export function ProjectShowcase() {
               className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
               style={{
                 opacity: hoveredIndex === index ? 1 : 0,
-                scale: hoveredIndex === index ? "1" : "1.08",
+                transform: `scale(${hoveredIndex === index ? 1 : 1.08})`,
                 filter: hoveredIndex === index ? "none" : "blur(8px)",
               }}
             />
