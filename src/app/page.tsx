@@ -34,6 +34,7 @@ import {
   Microscope,
 } from "lucide-react";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
+import { ProjectShowcase } from "@/components/ui/project-showcase";
 
 /* ─── SKILLS DATA ─────────────────────────────────────────────── */
 const skillCategories = [
@@ -446,102 +447,8 @@ export default function Home() {
       </section>
 
       {/* ===== FEATURED WORK SECTION ===== */}
-      <section id="projects" className="w-full relative z-10 py-16 md:py-28 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 gap-6 px-2">
-            <div className="max-w-3xl">
-              <p className="text-sm font-mono text-primary mb-4 tracking-widest uppercase flex items-center gap-3">
-                <span className="w-8 h-px bg-primary"></span> Portfolio
-              </p>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tight font-display">
-                Featured Work
-              </h2>
-              <p className="text-lg md:text-xl text-foreground/70 mt-6 font-medium leading-relaxed max-w-2xl">
-                Applied spatial analysis, dynamic web mapping, and publication-quality cartography. Discover my workflow from data sourcing to final product.
-              </p>
-            </div>
-            <a href="#about" className="inline-flex items-center gap-2 text-sm font-bold text-foreground/60 hover:text-primary uppercase tracking-wider transition-colors group mb-2 md:mb-4">
-              More About Me <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 xl:gap-8 px-2">
-            {[
-              {
-                id: "bear-sighting",
-                title: "Improving Bear Sighting Data Collection",
-                desc: "A fully automated spatial data pipeline replacing manual logging with field-ready Survey123 collection and real-time ArcGIS Online dashboards.",
-                category: "Web GIS & Spatial Dashboards",
-                img: "/projects/metro-vancouver-municipalities.webp",
-                iframeUrl: "https://arcg.is/y0efn",
-                colSpan: "col-span-1 md:col-span-1 lg:col-span-7",
-              },
-              {
-                id: "metro-geology",
-                title: "Metro Vancouver Geology",
-                desc: "Publication-quality geology and location mapping for faculty-led research.",
-                category: "Cartography",
-                img: "/projects/geological-map-metro-vancouver.webp",
-                colSpan: "col-span-1 md:col-span-1 lg:col-span-5",
-              },
-              {
-                id: "atmolens",
-                title: "AtmoLens Synoptic Enhancer",
-                desc: "An automated deterministic pipeline and cloud dashboard that fetches, enhances, and catalogs real-time ECCC meteorological charts.",
-                category: "Full-Stack & Cloud Architecture",
-                img: "atmolens-gradient",
-                iframeUrl: "https://atmolens.priyanshu.world",
-                colSpan: "col-span-1 md:col-span-2 lg:col-span-12",
-              }
-            ].map((p, i) => (
-              <div key={i} className={`w-full h-full ${p.colSpan}`}>
-                <a href={`/projects/${p.id}`} className="group flex flex-col w-full h-[400px] md:h-[480px] rounded-[2rem] overflow-hidden border border-foreground/10 bg-card hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 shadow-lg hover:shadow-2xl">
-                  {/* Top Image Section */}
-                  <div className="relative w-full flex-1 overflow-hidden bg-background">
-                    {p.iframeUrl ? (
-                       <div className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-hidden">
-                          <iframe 
-                            src={p.iframeUrl} 
-                            loading="lazy" 
-                            scrolling="no"
-                            className="w-full h-full border-none opacity-90 group-hover:opacity-100 transition-opacity duration-500" 
-                          />
-                       </div>
-                    ) : p.img === "atmolens-gradient" ? (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0f1419] via-[#1e9df1]/20 to-[#00b87a]/10 opacity-90 group-hover:scale-105 transition-transform duration-700 ease-out flex w-full h-full justify-center items-center overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--shadow-color)_0,transparent_60%)]" />
-                        <div className="text-primary/10 font-mono text-4xl sm:text-6xl md:text-9xl font-black rotate-[-5deg] scale-125 whitespace-nowrap blur-[2px]">WEBGL / REACT</div>
-                      </div>
-                    ) : (
-                      <Image 
-                        src={p.img} 
-                        alt={p.title} 
-                        fill 
-                        sizes="(max-width: 768px) 100vw, 70vw"
-                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out" 
-                      />
-                    )}
-                    {/* Inner shadow to separate image from text block cleanly */}
-                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-20" />
-                  </div>
-                  
-                  {/* Bottom Text Label Section */}
-                  <div className="w-full bg-card/80 backdrop-blur-md flex-shrink-0 p-6 md:p-8 flex justify-between items-center z-20 group-hover:bg-card transition-colors duration-300">
-                    <div className="flex-1 pr-4 md:pr-10">
-                      <div className="text-[10px] md:text-xs font-mono font-bold text-primary uppercase tracking-widest mb-3">{p.category}</div>
-                      <h3 className="text-2xl md:text-3xl font-extrabold font-display text-foreground tracking-tight mb-2 group-hover:text-primary transition-colors duration-300 leading-tight">{p.title}</h3>
-                      <p className="text-sm md:text-base font-medium text-foreground/70 line-clamp-2 sm:line-clamp-3 group-hover:text-foreground/90 transition-colors">{p.desc}</p>
-                    </div>
-                    
-                    <div className="hidden sm:flex w-12 h-12 rounded-full border border-primary/20 text-primary items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 flex-shrink-0 shadow-sm">
-                      <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section id="projects" className="w-full relative z-10 py-8 md:py-16 px-4 flex justify-center">
+        <ProjectShowcase />
       </section>
 
       {/* ===== ABOUT SECTION ===== */}
