@@ -21,8 +21,7 @@ const projects: Project[] = [
       "Automated pipeline that fetches ECCC synoptic weather maps, colorizes grayscale outputs for readability, and archives 7 days of enhanced charts — updated every 30 minutes.",
     year: "2025",
     link: "https://atmolens.priyanshu.world",
-    image:
-      "https://images.unsplash.com/photo-1504608524841-42584120d285?q=80&w=2665&auto=format&fit=crop&ixlib=rb-4.1.0",
+    image: "/projects/atmolens-preview.webp",
     tags: ["Automation", "Web GIS", "Geospatial Viz", "Public Data"],
   },
   {
@@ -31,8 +30,7 @@ const projects: Project[] = [
       "Survey123-powered wildlife reporting workflow with auto-stored sightings in ArcGIS Online, feeding a real-time updating web map for community safety awareness.",
     year: "2025",
     link: "https://arcg.is/y0efn",
-    image:
-      "https://images.unsplash.com/photo-1597149305323-c6d53f9f7b0e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0",
+    image: "/projects/bear-sighting-preview.webp",
     tags: ["Survey123", "ArcGIS Online", "Field Data", "Dynamic GIS"],
   },
 ]
@@ -91,7 +89,7 @@ export function ProjectShowcase() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full max-w-2xl mx-auto px-6 py-16 overflow-visible"
+      className="relative w-full max-w-2xl mx-auto px-6 py-16"
     >
       <p className="text-sm font-mono text-primary mb-2 tracking-widest uppercase flex items-center gap-3">
         <span className="w-8 h-px bg-primary" /> Portfolio
@@ -105,14 +103,15 @@ export function ProjectShowcase() {
 
       {/* Floating image preview that follows cursor */}
       <div
-        className="pointer-events-none absolute z-50 overflow-hidden rounded-xl shadow-2xl"
+        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl"
         style={{
-          left: 0,
-          top: 0,
-          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 130}px, 0) scale(${isVisible ? 1 : 0.85})`,
+          left: containerRef.current?.getBoundingClientRect().left ?? 0,
+          top: containerRef.current?.getBoundingClientRect().top ?? 0,
+          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 110}px, 0)`,
           opacity: isVisible ? 1 : 0,
+          scale: isVisible ? "1" : "0.85",
           transition:
-            "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            "opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), scale 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         <div className="relative w-[300px] h-[190px] bg-card rounded-xl overflow-hidden border border-foreground/10">
@@ -124,7 +123,7 @@ export function ProjectShowcase() {
               className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
               style={{
                 opacity: hoveredIndex === index ? 1 : 0,
-                transform: `scale(${hoveredIndex === index ? 1 : 1.08})`,
+                scale: hoveredIndex === index ? "1" : "1.08",
                 filter: hoveredIndex === index ? "none" : "blur(8px)",
               }}
             />
