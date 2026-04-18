@@ -308,18 +308,18 @@ export default function Home() {
           <ContainerScroll
             titleComponent={
               <>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground font-display tracking-tight leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground font-display tracking-tight leading-tight">
                   Junior GIS Analyst & <br />
-                  <span className="text-[2.75rem] sm:text-5xl md:text-[5.5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent transform">
+                  <span className="text-[2rem] sm:text-[2.75rem] md:text-5xl lg:text-[5.5rem] font-bold mt-1 leading-none bg-gradient-to-r from-primary via-primary to-foreground/80 bg-clip-text text-transparent transform">
                     Geospatial Researcher
                   </span>
                 </h1>
-                <p className="mt-6 pb-8 text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto font-medium leading-relaxed">
+                <p className="mt-4 pb-6 md:pb-8 text-sm sm:text-base md:text-lg text-foreground/80 max-w-4xl mx-auto font-medium leading-relaxed">
                   I create publication-quality maps, spatial analysis workflows, and web-based GIS systems for academic research and applied geospatial projects.<br className="hidden md:block" /><span className="text-primary/90">Co-author of an upcoming academic book on Metro Vancouver geology.</span>
                 </p>
 
                 {/* CTA Buttons */}
-                <div className="pb-12 md:pb-20 flex flex-wrap justify-center items-center gap-4">
+                <div className="pb-8 md:pb-20 flex flex-wrap justify-center items-center gap-2 sm:gap-4">
                   <a href="#projects">
                     <ButtonWithIcon
                       label="VIEW PROJECTS"
@@ -347,8 +347,9 @@ export default function Home() {
           >
             <div className="h-full w-full flex items-center justify-center relative overflow-hidden transition-colors duration-300">
               {/* Center content */}
-              <div className="relative z-10 flex flex-col items-center gap-6 p-8">
-                <div className="flex gap-4 items-center">
+              <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6 p-3 sm:p-8">
+                {/* Icon row — hide last 2 on very small screens */}
+                <div className="flex gap-3 sm:gap-4 items-center">
                   {[Globe, Layers, Satellite, Database, Map, Code].map(
                     (Icon, idx) => (
                       <motion.div
@@ -357,10 +358,16 @@ export default function Home() {
                           scale: 1.3,
                           rotate: idx % 2 === 0 ? 15 : -15,
                         }}
-                        className="cursor-pointer"
+                        className={`cursor-pointer ${
+                          idx >= 4 ? "hidden sm:block" : ""
+                        }`}
                       >
                         <Icon
-                          className={`w-8 h-8 ${idx % 2 === 0 ? "text-primary animate-pulse" : "text-primary"}`}
+                          className={`w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 ${
+                            idx % 2 === 0
+                              ? "text-primary animate-pulse"
+                              : "text-primary"
+                          }`}
                         />
                       </motion.div>
                     )
@@ -374,40 +381,32 @@ export default function Home() {
                   className="flex flex-col items-center mt-2 relative z-50"
                 >
                   <div className="relative group cursor-pointer">
-                    {/* Glowing animated border via framer-motion */}
+                    {/* Glowing animated border */}
                     <motion.div
                       animate={{
-                        backgroundPosition: [
-                          "0% 50%",
-                          "100% 50%",
-                          "0% 50%",
-                        ],
+                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                       }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                       className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-primary via-background to-primary opacity-40 group-hover:opacity-100 blur-sm group-hover:blur-md bg-[length:200%_auto] transition-all duration-500"
                     />
 
-                    <div className="relative flex flex-col sm:flex-row items-center gap-2 sm:gap-3 px-6 py-3 bg-gradient-to-b from-card to-background border border-foreground/20 rounded-3xl sm:rounded-full leading-none overflow-hidden backdrop-blur-md shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300">
+                    <div className="relative flex flex-row items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-b from-card to-background border border-foreground/20 rounded-full leading-none overflow-hidden backdrop-blur-md shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-all duration-300">
                       <div className="flex items-center gap-2">
-                        <span className="relative flex h-2.5 w-2.5">
+                        <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-primary"></span>
                         </span>
-                        <p className="font-mono text-xs md:text-sm font-semibold tracking-wider text-foreground ">
+                        <p className="font-mono text-[10px] sm:text-xs md:text-sm font-semibold tracking-wider text-foreground">
                           AVAILABLE
                         </p>
                       </div>
 
-                      <div className="hidden sm:block w-px h-4 bg-neutral-300 "></div>
+                      <div className="w-px h-3 sm:h-4 bg-neutral-300" />
 
-                      <p className="text-[10px] sm:text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap mt-1 sm:mt-0">
+                      <p className="text-[9px] sm:text-xs md:text-sm font-mono text-foreground/70 whitespace-nowrap">
                         <span className="text-primary font-bold">LAT:</span>{" "}
                         49.28&deg; N
-                        <span className="mx-2 text-neutral-300 ">|</span>
+                        <span className="mx-1.5 sm:mx-2 text-neutral-300">|</span>
                         <span className="text-primary font-bold">LON:</span>{" "}
                         123.12&deg; W
                       </p>
@@ -419,20 +418,18 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 1 }}
-                    className="text-[10px] md:text-xs font-mono text-foreground/70 mt-6 tracking-widest uppercase text-center"
+                    className="text-[9px] sm:text-[10px] md:text-xs font-mono text-foreground/70 mt-4 sm:mt-6 tracking-widest uppercase text-center"
                   >
-                    <span className="text-primary mr-2 animate-pulse">
-                      &gt;
-                    </span>
+                    <span className="text-primary mr-2 animate-pulse">&gt;</span>
                     ArcGIS · QGIS · Python · Next.js · Data Engineering
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.3, duration: 1 }}
-                    className="text-[10px] md:text-xs font-mono text-foreground/50 mt-2 tracking-wider text-center"
+                    className="text-[9px] sm:text-[10px] md:text-xs font-mono text-foreground/50 mt-1 sm:mt-2 tracking-wider text-center max-w-[260px] sm:max-w-none"
                   >
-                    Open to GIS Analyst, Geospatial Research & Data Engineering roles
+                    Open to GIS Analyst, Geospatial Research &amp; Data Engineering roles
                     across Canada
                   </motion.p>
                 </motion.div>

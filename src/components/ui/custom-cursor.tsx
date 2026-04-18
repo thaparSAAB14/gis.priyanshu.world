@@ -10,27 +10,26 @@ export const CustomCursor = () => {
   const [isMobile, setIsMobile] = useState(true);
   const pathname = usePathname();
 
+  // Dot — snaps very fast
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
+  const dotSpring = { damping: 28, stiffness: 500, mass: 0.08 };
+  const dotX = useSpring(cursorX, dotSpring);
+  const dotY = useSpring(cursorY, dotSpring);
 
-  const springConfig = { damping: 25, stiffness: 400, mass: 0.1 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-
-  // Slower spring for the trailing glow
-  const glowSpring = { damping: 30, stiffness: 180, mass: 0.3 };
-  const glowX = useSpring(cursorX, glowSpring);
-  const glowY = useSpring(cursorY, glowSpring);
+  // Ring — lags noticeably behind the dot
+  const ringSpring = { damping: 22, stiffness: 140, mass: 0.6 };
+  const ringX = useSpring(cursorX, ringSpring);
+  const ringY = useSpring(cursorY, ringSpring);
 
   useEffect(() => {
     const mobileCheck = window.innerWidth <= 768 || "ontouchstart" in window;
     setIsMobile(mobileCheck);
-
     if (mobileCheck) return;
 
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 2);
-      cursorY.set(e.clientY - 2);
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
     };
 
@@ -39,17 +38,22 @@ export const CustomCursor = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      
-      // Suspend completely over Terminal/Ascii Engine components
-      if (target.closest("[data-terminal-cursor]") || target.closest(".terminal-layer")) {
-         setIsVisible(false);
-         return;
+
+      if (
+        target.closest("[data-terminal-cursor]") ||
+        target.closest(".terminal-layer")
+      ) {
+        setIsVisible(false);
+        return;
       }
-      
+
       if (!isVisible) setIsVisible(true);
 
-      // Scale matrix over typical interactive web nodes
-      if (target.closest("a, button, input, select, textarea, [role='button'], .cursor-pointer")) {
+      if (
+        target.closest(
+          "a, button, input, select, textarea, [role='button'], .cursor-pointer"
+        )
+      ) {
         setIsHovering(true);
       } else {
         setIsHovering(false);
@@ -79,71 +83,72 @@ export const CustomCursor = () => {
         }
       `}</style>
 
-      {/* Trailing particle glow — lags slightly behind */}
+      {/* ── Chasing ring — lags behind, gives the "particle orbit" feel ── */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998]"
         style={{
-          x: glowX,
-          y: glowY,
+          x: ringX,
+          y: ringY,
           translateX: "-50%",
           translateY: "-50%",
-          opacity: isVisible ? 1 : 0,
         }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
       >
         <motion.div
           animate={{
-            width:  isHovering ? 48 : 28,
-            height: isHovering ? 48 : 28,
-            opacity: isHovering ? 0.55 : 0.35,
+            width:  isHovering ? 34 : 16,
+            height: isHovering ? 34 : 16,
+            backgroundColor: isHovering ? "var(--primary)" : "transparent",
+            opacity: isHovering ? 0.12 : 1,
           }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
+          transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
             borderRadius: "50%",
-            background:
-              "radial-gradient(circle, color-mix(in srgb, var(--color-primary) 80%, transparent) 0%, transparent 70%)",
-            filter: "blur(6px)",
+            border: "1.5px solid var(--primary)",
+            opacity: 0.45,
           }}
         />
       </motion.div>
 
-      {/* Sharp dot — snaps precisely to cursor */}
+      {/* ── Precise dot — snaps to real position ── */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
+          x: dotX,
+          y: dotY,
           translateX: "-50%",
           translateY: "-50%",
-          opacity: isVisible ? 1 : 0,
         }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.15 }}
       >
         <motion.div
           animate={{
-            width:  isHovering ? 7 : 4,
-            height: isHovering ? 7 : 4,
-            opacity: isHovering ? 1 : 0.85,
+            width:  isHovering ? 8 : 5,
+            height: isHovering ? 8 : 5,
           }}
-          transition={{ duration: 0.15, ease: "easeOut" }}
+          transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
             borderRadius: "50%",
-            backgroundColor: "var(--color-primary)",
-            boxShadow: "0 0 6px 1px color-mix(in srgb, var(--color-primary) 60%, transparent)",
+            backgroundColor: "var(--primary)",
           }}
         />
       </motion.div>
 
-      {/* Wide ambient gradient that tracks the cursor */}
+      {/* ── Ambient page glow that follows cursor slowly ── */}
       <motion.div
-        className="fixed top-0 left-0 w-[900px] h-[900px] pointer-events-none z-[-1]"
+        className="fixed top-0 left-0 w-[700px] h-[700px] pointer-events-none z-[-1]"
         style={{
-          x: glowX,
-          y: glowY,
-          translateX: "calc(-50%)",
-          translateY: "calc(-50%)",
+          x: ringX,
+          y: ringY,
+          translateX: "-50%",
+          translateY: "-50%",
           background:
-            "radial-gradient(circle, color-mix(in srgb, var(--color-primary) 6%, transparent) 0%, color-mix(in srgb, var(--color-primary) 2%, transparent) 40%, transparent 70%)",
-          opacity: isVisible ? 1 : 0,
+            "radial-gradient(circle, oklch(from var(--primary) l c h / 0.06) 0%, transparent 65%)",
         }}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
       />
     </>
   );
