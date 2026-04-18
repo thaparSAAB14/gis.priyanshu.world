@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
 
 export const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,6 +17,11 @@ export const CustomCursor = () => {
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
+  // Slower spring for the trailing glow
+  const glowSpring = { damping: 30, stiffness: 180, mass: 0.3 };
+  const glowX = useSpring(cursorX, glowSpring);
+  const glowY = useSpring(cursorY, glowSpring);
+
   useEffect(() => {
     const mobileCheck = window.innerWidth <= 768 || "ontouchstart" in window;
     setIsMobile(mobileCheck);
@@ -25,8 +29,8 @@ export const CustomCursor = () => {
     if (mobileCheck) return;
 
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 12);
-      cursorY.set(e.clientY - 12);
+      cursorX.set(e.clientX - 2);
+      cursorY.set(e.clientY - 2);
       if (!isVisible) setIsVisible(true);
     };
 
@@ -63,7 +67,7 @@ export const CustomCursor = () => {
       document.body.removeEventListener("mouseleave", handleMouseLeave);
       document.body.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, [cursorX, cursorY, isVisible, pathname]); // Re-register on pathname change if necessary
+  }, [cursorX, cursorY, isVisible, pathname]);
 
   if (isMobile) return null;
 
@@ -74,37 +78,71 @@ export const CustomCursor = () => {
           cursor: none !important;
         }
       `}</style>
+
+      {/* Trailing particle glow — lags slightly behind */}
       <motion.div
-        className={cn(
-          "fixed top-0 left-0 w-6 h-6 rounded-full border pointer-events-none z-[10000] flex items-center justify-center mix-blend-difference transition-colors duration-150",
-          isHovering ? "bg-primary/40 border-transparent" : "bg-transparent border-primary/80"
-        )}
+        className="fixed top-0 left-0 pointer-events-none z-[9998]"
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
+          x: glowX,
+          y: glowY,
+          translateX: "-50%",
+          translateY: "-50%",
           opacity: isVisible ? 1 : 0,
         }}
-        animate={{
-          scale: isHovering ? 1.6 : 1,
-        }}
-        transition={{ duration: 0.15 }}
       >
-        <motion.div 
-          className="w-1 h-1 bg-primary rounded-full transition-opacity duration-150" 
-          animate={{ scale: isHovering ? 0 : 1, opacity: isHovering ? 0 : 1 }}
-          transition={{ duration: 0.15 }}
+        <motion.div
+          animate={{
+            width:  isHovering ? 48 : 28,
+            height: isHovering ? 48 : 28,
+            opacity: isHovering ? 0.55 : 0.35,
+          }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          style={{
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, color-mix(in srgb, var(--color-primary) 80%, transparent) 0%, transparent 70%)",
+            filter: "blur(6px)",
+          }}
         />
       </motion.div>
 
-      {/* Global Interactive Gradient Background Element */}
+      {/* Sharp dot — snaps precisely to cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-[1000px] h-[1000px] pointer-events-none z-[-1]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          translateX: "calc(-50% + 12px)",
-          translateY: "calc(-50% + 12px)",
-          background: "radial-gradient(circle, color-mix(in srgb, var(--color-primary) 7%, transparent) 0%, color-mix(in srgb, var(--color-primary) 2%, transparent) 40%, transparent 70%)",
+          translateX: "-50%",
+          translateY: "-50%",
+          opacity: isVisible ? 1 : 0,
+        }}
+      >
+        <motion.div
+          animate={{
+            width:  isHovering ? 7 : 4,
+            height: isHovering ? 7 : 4,
+            opacity: isHovering ? 1 : 0.85,
+          }}
+          transition={{ duration: 0.15, ease: "easeOut" }}
+          style={{
+            borderRadius: "50%",
+            backgroundColor: "var(--color-primary)",
+            boxShadow: "0 0 6px 1px color-mix(in srgb, var(--color-primary) 60%, transparent)",
+          }}
+        />
+      </motion.div>
+
+      {/* Wide ambient gradient that tracks the cursor */}
+      <motion.div
+        className="fixed top-0 left-0 w-[900px] h-[900px] pointer-events-none z-[-1]"
+        style={{
+          x: glowX,
+          y: glowY,
+          translateX: "calc(-50%)",
+          translateY: "calc(-50%)",
+          background:
+            "radial-gradient(circle, color-mix(in srgb, var(--color-primary) 6%, transparent) 0%, color-mix(in srgb, var(--color-primary) 2%, transparent) 40%, transparent 70%)",
+          opacity: isVisible ? 1 : 0,
         }}
       />
     </>
