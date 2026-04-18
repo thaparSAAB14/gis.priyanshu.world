@@ -4,7 +4,6 @@ import React from "react";
 import { SlideTabs } from "@/components/ui/slide-tabs";
 import { Component as TapedFooter } from "@/components/ui/footer-taped-design";
 import { motion } from "framer-motion";
-import { DottedSurface } from "@/components/ui/dotted-surface";
 import {
   Download,
   FileText,
@@ -29,8 +28,6 @@ export function ResumeDashboard() {
   return (
     <div className="relative min-h-screen overflow-x-clip bg-transparent transition-colors duration-300">
       <SlideTabs />
-      <DottedSurface className="opacity-60 fixed pointer-events-none" />
-
       <div className="relative z-10 w-full flex flex-col items-center">
 
         {/* ── Hero / Download Header ── */}

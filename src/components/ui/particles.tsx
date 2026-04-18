@@ -76,17 +76,27 @@ const Particles: React.FC<ParticlesProps> = ({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 })
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1
+  const rafId = useRef<number | null>(null)
 
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d")
     }
     initCanvas()
+    // Cancel any existing loop before starting a new one
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current)
+      rafId.current = null
+    }
     animate()
     window.addEventListener("resize", initCanvas)
 
     return () => {
       window.removeEventListener("resize", initCanvas)
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current)
+        rafId.current = null
+      }
     }
   }, [color])
 
@@ -258,15 +268,12 @@ const Particles: React.FC<ParticlesProps> = ({
         circle.y < -circle.size ||
         circle.y > canvasSize.current.h + circle.size
       ) {
-        // remove the circle from the array
         circles.current.splice(i, 1)
-        // create a new circle
         const newCircle = circleParams()
         drawCircle(newCircle)
-        // update the circle position
       }
     })
-    window.requestAnimationFrame(animate)
+    rafId.current = window.requestAnimationFrame(animate)
   }
 
   return (
